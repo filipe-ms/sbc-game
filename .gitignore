@@ -395,6 +395,14 @@ FodyWeavers.xsd
 *.msp
 
 # JetBrains Rider
-build_files
-raylib-master
+build_files/obj
+raylib-master/examples
 Makefile
+
+build/external/raylib-master/examples
+build/external/raylib-master/projects
+build/external/raylib-master/.github
+build/external/raylib-master/*.md
+
+
+!*/build/external
