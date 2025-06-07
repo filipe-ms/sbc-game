@@ -587,10 +587,10 @@
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="..\..\include\SceneManager.h" />
     <ClInclude Include="..\..\include\thread_wrapper.h" />
-    <ClInclude Include="..\..\src\Function.c" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Button.c" />
+    <ClCompile Include="..\..\src\Function.c" />
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\MainMenu.c" />
     <ClCompile Include="..\..\src\map.c" />
