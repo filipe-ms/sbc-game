@@ -576,10 +576,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\Button.h" />
+    <ClInclude Include="..\..\include\Constants.h" />
+    <ClInclude Include="..\..\include\Function.h" />
+    <ClInclude Include="..\..\include\MainMenu.h" />
+    <ClInclude Include="..\..\include\map.h" />
+    <ClInclude Include="..\..\include\request.h" />
+    <ClInclude Include="..\..\include\request_manager.h" />
+    <ClInclude Include="..\..\include\request_thread.h" />
     <ClInclude Include="..\..\include\resource_dir.h" />
+    <ClInclude Include="..\..\include\SceneManager.h" />
+    <ClInclude Include="..\..\include\thread_wrapper.h" />
+    <ClInclude Include="..\..\src\Function.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Button.c" />
     <ClCompile Include="..\..\src\main.c" />
+    <ClCompile Include="..\..\src\MainMenu.c" />
+    <ClCompile Include="..\..\src\map.c" />
+    <ClCompile Include="..\..\src\request.c" />
+    <ClCompile Include="..\..\src\request_manager.c" />
+    <ClCompile Include="..\..\src\request_thread.c" />
+    <ClCompile Include="..\..\src\SceneManager.c" />
+    <ClCompile Include="..\..\src\thread_wrapper.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\src\application.rc" />

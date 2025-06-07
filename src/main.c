@@ -1,54 +1,64 @@
-/*
-Raylib example file.
-This is an example main file for a simple raylib project.
-Use this as a starting point or replace it with your code.
+// MAIN_C
 
-by Jeffery Myers is marked with CC0 1.0. To view a copy of this license, visit https://creativecommons.org/publicdomain/zero/1.0/
-
-*/
-
+#include "stdio.h"
 #include "raylib.h"
+#include "resource_dir.h"
 
-#include "resource_dir.h"	// utility header for SearchAndSetResourceDir
+#include <SceneManager.h>
+#include <Constants.h>
+//#include "request.h"
 
-int main ()
-{
-	// Tell the window to use vsync and work on high DPI displays
-	SetConfigFlags(FLAG_VSYNC_HINT | FLAG_WINDOW_HIGHDPI);
+void Main_InitProgram(void); // Chamar tudo relativo à inicialização de arquivos necessários aqui
+void Main_Cleanup(void);     // Liberar a memória de tudo aqui
 
-	// Create the window and OpenGL context
-	InitWindow(1280, 800, "Hello Raylib");
+int main(void) {
+    Main_InitProgram();
 
-	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
-	SearchAndSetResourceDir("resources");
+    SceneManager_Init();
+    SceneManager_ChangeScene(SCENEREFERENCE_MAIN_MENU);
+    SceneManager_LoopScene();
+    
+    Main_Cleanup();
+    
+    CloseWindow();
 
-	// Load a texture from the resources directory
-	Texture wabbit = LoadTexture("wabbit_alpha.png");
-	
-	// game loop
-	while (!WindowShouldClose())		// run the loop untill the user presses ESCAPE or presses the Close button on the window
-	{
-		// drawing
-		BeginDrawing();
+    return 0;
+}
 
-		// Setup the back buffer for drawing (clear color and depth buffers)
-		ClearBackground(BLACK);
+void Main_InitProgram(void) {
+    // Inicializa o CURL
+    /*if (InitRequestSystem() != 0) {
+        fprintf(stderr, "ERRO: Falha ao inicializar o sistema de requisições.\n");
+        return 1;
+    }*/
 
-		// draw some text using the default font
-		DrawText("Hello Raylib", 200,200,20,WHITE);
+	// Inicializa a janela da Raylib
+    SetConfigFlags(
+        (FLAG_VSYNC_HINT * CONSTANTS_VIDEO_SETTINGS_ENABLE_VSYNC) |
+        (FLAG_WINDOW_HIGHDPI * CONSTANTS_VIDEO_SETTINGS_ENABLE_WINDOW_HIGHDPI) |
+        (FLAG_FULLSCREEN_MODE * CONSTANTS_VIDEO_SETTINGS_ENABLE_FULLSCREEN)
+    );
 
-		// draw our texture to the screen
-		DrawTexture(wabbit, 400, 200, WHITE);
-		
-		// end the frame and get ready for the next one  (display frame, poll input, etc...)
-		EndDrawing();
-	}
+    InitWindow(
+        CONSTANTS_VIDEO_SETTINGS_WIDTH_BUFFER,
+        CONSTANTS_VIDEO_SETTINGS_HEIGHT_BUFFER,
+        CONSTANTS_GAME_TITLE);
 
-	// cleanup
-	// unload our texture so it can be cleaned up
-	UnloadTexture(wabbit);
+    if (!IsWindowReady()) {
+        fprintf(stderr, "ERRO FATAL: Falha ao inicializar a janela Raylib.\n");
+        Main_Cleanup();
+        return 1;
+    }
 
-	// destroy the window and cleanup the OpenGL context
-	CloseWindow();
-	return 0;
+    SetTargetFPS(CONSTANTS_VIDEO_SETTINGS_TARGET_FPS);
+
+    // Inicializa assets
+    SearchAndSetResourceDir(CONSTANTS_RESOURCE_DIR);
+	//LoadGameAssets();
+}
+
+void Main_Cleanup(void) {
+    //CleanupRequestSystem();
+	//UnloadGameAssets();
+    printf("Aplicação encerrada normalmente.\n");
 }
