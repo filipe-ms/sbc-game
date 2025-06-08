@@ -7,25 +7,25 @@
 
 Texture2D tilesetField;
 
-const Map_TileMetadata ROCK_METADATA = {
-    .texture = &tilesetField,
-    .source = { 0, 96, 48, 48 },
-    .destination = { 0 },
-    .offset = { 0, 0 },
-    .rotation = 0.0f,
-    .color = { 235, 235, 235, 255 }
+const Drawable_Metadata ROCK_METADATA = {
+    .Texture = &tilesetField,
+    .Source = { 0, 96, 48, 48 },
+    .Destination = { 0 },
+    .Offset = { 0, 0 },
+    .Rotation = 0.0f,
+    .Color = { 235, 235, 235, 255 }
 };
 
 Map_Grid Map_GameMap;
 
-static Map_TileMetadata Map_GetTileMetadata(int x, int y) {
-    Map_TileMetadata GROUND_METADATA = {
-        .texture = &tilesetField,
-        .source = { 48, 0, 48, 48 },
-        .destination = { x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE },
-        .offset = { 0 },
-        .rotation = 0.0f,
-        .color = { 240, 240, 240, 225 }
+static Drawable_Metadata Map_GetTileMetadata(int x, int y) {
+    Drawable_Metadata GROUND_METADATA = {
+        .Texture = &tilesetField,
+        .Source = { 48, 0, 48, 48 },
+        .Destination = { (float)(x * TILE_SIZE), (float)(y * TILE_SIZE), TILE_SIZE, TILE_SIZE },
+        .Offset = { 0 },
+        .Rotation = 0.0f,
+        .Color = { 240, 240, 240, 225 }
     };
     
     return GROUND_METADATA;
@@ -37,7 +37,7 @@ void Map_Init() {
 
     for (int i = 0; i < MAP_WIDTH; i++) {
         for (int j = 0; j < MAP_HEIGHT; j++) {
-            Map_GameMap.grid[i][j] = (Map_Tile){
+            Map_GameMap.Grid[i][j] = (Map_Tile){
                 .Floor = Map_GetTileMetadata(i, j),
                 .Unit_OnThisTile = List_Create(sizeof(int))
             };
@@ -53,15 +53,16 @@ void Map_Update() {
 
 }
 
-static void Map_DrawTile(int x, int y) {
-    Map_TileMetadata* tile = &Map_GameMap.grid[x][y].Floor;
-    DrawTexturePro(*tile->texture, tile->source, tile->destination, tile->offset, tile->rotation, tile->color);
+void Draw_GuideLines(int x, int y) {
+    Vector2 pos = { (float)x * TILE_SIZE, (float)y * TILE_SIZE };
+    DrawRectangleLines((int)pos.x, (int)pos.y, TILE_SIZE, TILE_SIZE, Fade(BLACK, 0.2f));
 }
 
 void Map_Draw() {    
     for (int i = 0; i < MAP_WIDTH; i++) {
         for (int j = 0; j < MAP_HEIGHT; j++) {
-            Map_DrawTile(i, j);
+            Drawable_Draw(&Map_GameMap.Grid[i][j].Floor);
+            Draw_GuideLines(i, j);
         }
     }
 }

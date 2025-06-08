@@ -34,6 +34,12 @@
     <Filter Include="Source Files\Collections">
       <UniqueIdentifier>{f0957bd2-e456-4b07-b9f9-bd01bbfa4a04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Units">
+      <UniqueIdentifier>{b52b7a4b-affd-4f52-a6e7-aa79190947d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Units">
+      <UniqueIdentifier>{c03d0835-e74a-46aa-8ad5-dbc60c0e677a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
@@ -81,6 +87,21 @@
     <ClInclude Include="..\..\include\GenList.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Drawable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Barbarian.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Game.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Unit.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\AnimationState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
@@ -116,11 +137,20 @@
     <ClCompile Include="..\..\src\GenList.c">
       <Filter>Source Files\Collections</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Game.h">
-      <Filter>Header Files\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Game.c">
       <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Drawable.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Barbarian.c">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Unit.c">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\AnimationState.c">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

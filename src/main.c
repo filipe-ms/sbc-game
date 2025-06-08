@@ -17,7 +17,7 @@ int main(void) {
     Main_InitProgram();
 
     SceneManager_Init();
-    SceneManager_ChangeScene(SCENEREFERENCE_MAIN_MENU);
+    SceneManager_ChangeScene(SCENEREFERENCE_GAME);
     SceneManager_LoopScene();
     
     Main_Cleanup();
@@ -49,7 +49,7 @@ void Main_InitProgram(void) {
     if (!IsWindowReady()) {
         fprintf(stderr, "ERRO FATAL: Falha ao inicializar a janela Raylib.\n");
         Main_Cleanup();
-        return 1;
+        return;
     }
 
     SetTargetFPS(CONSTANTS_VIDEO_SETTINGS_TARGET_FPS);

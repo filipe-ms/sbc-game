@@ -2,27 +2,19 @@
 
 #include "raylib.h"
 #include "GenList.h"
+#include <Drawable.h>
 
 #define TILE_SIZE 128
 #define MAP_WIDTH 50
 #define MAP_HEIGHT 50
 
-typedef struct Map_TileMetadata {
-    Texture2D* texture;
-    Rectangle source;
-    Rectangle destination;
-    Vector2 offset;
-    float rotation;
-    Color color;
-} Map_TileMetadata;
-
 typedef struct Map_Tile {
-    Map_TileMetadata Floor;
+    Drawable_Metadata Floor;
     List* Unit_OnThisTile;
 } Map_Tile;
 
 typedef struct {
-    Map_Tile grid[MAP_WIDTH][MAP_HEIGHT];
+    Map_Tile Grid[MAP_WIDTH][MAP_HEIGHT];
 } Map_Grid;
 
 extern Map_Grid Map_GameMap;
