@@ -1,14 +1,12 @@
-// map.c
+// MAP_C
 /*
-#include "map.h"
+#include "Map.h"
 #include "stdio.h"
 #include "raymath.h"
 #include "definitions.h"
 #include "unit.h"
 #include "draw.h"
-
-static inline int min(int a, int b) { return (a < b) ? a : b; }
-static inline int max(int a, int b) { return (a > b) ? a : b; }
+#include "MathUtils.h"
 
 void InitMap(GameMap* map) {
     if (!map) {
@@ -23,8 +21,8 @@ void InitMap(GameMap* map) {
             map->position[x][y].isValid = true;
             map->position[x][y].tile = GROUND;
 
-            map->unit_occupancy_grid[x][y] = NONE;
-            map->tile_reservation_grid[x][y] = NONE;
+            map->unit_occupancy_grid[x][y] = -1;
+            map->tile_reservation_grid[x][y] = -1;
         }
     }
 
@@ -50,7 +48,7 @@ void UpdateUnitOccupancyGrid(GameMap* map, UnitNode* units_head) {
 
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
-            map->unit_occupancy_grid[x][y] = NONE;
+            map->unit_occupancy_grid[x][y] = -1;
         }
     }
 
@@ -93,13 +91,13 @@ void UpdateUnitOccupancyGrid(GameMap* map, UnitNode* units_head) {
     }
 }
 
-void SetTile(GameMap* map, int x, int y, Tile tile) {
+void SetTile(GameMap* map, int x, int y, TileType tile) {
     if (map && x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
         map->position[x][y].tile = tile;
     }
 }
 
-Tile GetTile(GameMap* map, int x, int y) {
+TileType GetTile(GameMap* map, int x, int y) {
     if (map && x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
         return map->position[x][y].tile;
     }
@@ -112,7 +110,7 @@ bool IsTileObstacle(GameMap* map, int x, int y) {
         return true;
     }
 
-    Tile type = map->position[x][y].tile;
+    TileType type = map->position[x][y].tile;
     return type == ROCK || type == WALL;
 }
 
@@ -128,12 +126,12 @@ bool IsPositionWalkable(GameMap* map, int x, int y, int asking_unit_id) {
     }
 
     int occupying_unit_id = map->unit_occupancy_grid[x][y];
-    if (occupying_unit_id != NONE && occupying_unit_id != asking_unit_id) {
+    if (occupying_unit_id != -1 && occupying_unit_id != asking_unit_id) {
         return false;
     }
 
     int reservation_owner_id = map->tile_reservation_grid[x][y];
-    if (reservation_owner_id != NONE && reservation_owner_id != asking_unit_id) {
+    if (reservation_owner_id != -1 && reservation_owner_id != asking_unit_id) {
         return false;
     }
 
@@ -184,7 +182,7 @@ void DrawMap(GameMap* map) {
     for (int y = 0; y < MAP_HEIGHT; y++) {
         for (int x = 0; x < MAP_WIDTH; x++) {
             Vector2 tile_world_pos = { (float)x * TILE_SIZE, (float)y * TILE_SIZE };
-            Tile tile_type = map->position[x][y].tile;
+            TileType tile_type = map->position[x][y].tile;
 
             switch (tile_type) {
             case GROUND:
@@ -237,7 +235,7 @@ GridPosition GetTileAtPosition(GameMap* map, Vector2 world_position) {
 
 void ClearTileReservation(GameMap* map, GridPosition tile_pos) {
     if (map && tile_pos.isValid && IsValidGridPosition(tile_pos)) {
-        map->tile_reservation_grid[tile_pos.x][tile_pos.y] = NONE;
+        map->tile_reservation_grid[tile_pos.x][tile_pos.y] = -1;
     }
 }
 
@@ -251,5 +249,5 @@ int GetTileReservationOwner(GameMap* map, GridPosition tile_pos) {
     if (map && tile_pos.isValid && IsValidGridPosition(tile_pos)) {
         return map->tile_reservation_grid[tile_pos.x][tile_pos.y];
     }
-    return NONE;
+    return -1;
 }*/

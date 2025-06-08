@@ -1,17 +1,18 @@
 // MAIN_C
 
-#include "stdio.h"
+#include <stdio.h>
 #include "raylib.h"
 #include "resource_dir.h"
 
-#include <SceneManager.h>
-#include <Constants.h>
+#include "SceneManager.h"
+#include "Constants.h"
 //#include "request.h"
+#include "List.h"
 
 void Main_InitProgram(void); // Chamar tudo relativo à inicialização de arquivos necessários aqui
 void Main_Cleanup(void);     // Liberar a memória de tudo aqui
 
-int main(void) {
+/*int main(void) {
     Main_InitProgram();
 
     SceneManager_Init();
@@ -23,6 +24,14 @@ int main(void) {
     CloseWindow();
 
     return 0;
+}*/
+
+int dataFreen(void* algo) {
+
+}
+
+int main(void) {
+    List* a = List_Create(dataFreen);
 }
 
 void Main_InitProgram(void) {

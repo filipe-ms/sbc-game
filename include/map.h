@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MAP_H
-#define MAP_H
 
 #include "raylib.h"
 
@@ -8,18 +6,29 @@
 #define MAP_WIDTH 50
 #define MAP_HEIGHT 50
 
+/// <summary>
+/// [[ Tile ], [ Tile ]]
+/// List<coisas> [Ground, Ornaments]
+/// List<pessoas que estão aqui>
+/// </summary>
+
+/*
 typedef enum Tile {
-    GROUND,
-    ROCK,
-    WALL,
-    TILE_INVALID
+    bool can_be_built_upon;
 } Tile;
+
+typedef enum TileType {
+    TILE_NONE = -1,
+    TILE_GROUND,
+    TILE_ROCK,
+    TILE_WALL
+} TileType;
 
 typedef struct GridPosition {
     int x;
     int y;
     bool isValid;
-    Tile tile;
+    TileType tile;
 } GridPosition;
 
 typedef struct GameMap {
@@ -35,8 +44,8 @@ void UnloadMap(GameMap* map);
 struct UnitNode;
 void UpdateUnitOccupancyGrid(GameMap* map, struct UnitNode* units_head);
 
-void SetTile(GameMap* map, int x, int y, Tile tile);
-Tile GetTile(GameMap* map, int x, int y);
+void SetTile(GameMap* map, int x, int y, TileType tile);
+TileType GetTile(GameMap* map, int x, int y);
 bool IsTileObstacle(GameMap* map, int x, int y);
 bool IsPositionWalkable(GameMap* map, int x, int y, int asking_unit_id);
 bool IsValidGridPosition(GridPosition pos);
@@ -45,5 +54,4 @@ GridPosition GetTileAtPosition(GameMap* map, Vector2 world_position);
 void ClearTileReservation(GameMap* map, GridPosition tile_pos);
 void SetTileReservation(GameMap* map, GridPosition tile_pos, int unit_id);
 int GetTileReservationOwner(GameMap* map, GridPosition tile_pos);
-
-#endif // MAP_H
+*/

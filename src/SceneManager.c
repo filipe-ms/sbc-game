@@ -14,7 +14,6 @@ static void UpdateCurrentScene(void);
 static void DrawCurrentScene(void);
 static void UnloadScene(Scene scene);
 static void CheckAndReplaceExistingScene();
-static char* SceneReferenceToString(SceneReference ref); // Conversão de enum p/ string p/ debug
 
 // Public
 void SceneManager_Init() {
@@ -82,15 +81,5 @@ static void CheckAndReplaceExistingScene() {
         scene = new_scene;
         new_scene.SceneRef = SCENEREFERENCE_NONE;
         InitCurrentScene();
-    }
-}
-
-static char* SceneReferenceToString(SceneReference ref) {
-    switch (ref) {
-        case SCENEREFERENCE_MAIN_MENU: return "Main Menu";
-        case SCENEREFERENCE_CREDITS: return "Credits";
-        case SCENEREFERENCE_GAME: return "Game";
-        case SCENEREFERENCE_EXIT: return "Exit";
-        default: return "Unknown Scene";
     }
 }

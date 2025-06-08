@@ -10,12 +10,36 @@
     <Filter Include="Widows Resource Files">
       <UniqueIdentifier>{BDDE2351-294B-DF4B-F23E-77A95E6A01B4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Interface">
+      <UniqueIdentifier>{2d6a41ce-e15f-4de6-9d16-62685c1a0400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene">
+      <UniqueIdentifier>{f761dd8a-7359-44c4-a0b7-4be1a1cb28ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface">
+      <UniqueIdentifier>{a3047332-6d03-421d-a53e-d8db3a53a28a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{2ee0d410-4d66-466c-a626-e61e428b3248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{35e0461c-0a72-43c9-a1e5-5959463e62bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{6732dd45-b32d-4f8a-93a3-7c374a6180c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Collections">
+      <UniqueIdentifier>{104ec824-617c-461b-92e6-6796dea997b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Collections">
+      <UniqueIdentifier>{f0957bd2-e456-4b07-b9f9-bd01bbfa4a04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\map.h">
+    <ClInclude Include="..\..\include\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\request.h">
@@ -27,30 +51,36 @@
     <ClInclude Include="..\..\include\request_thread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\SceneManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\thread_wrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\resource_dir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\MainMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Button.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\SceneManager.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MainMenu.h">
+      <Filter>Header Files\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Function.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MathUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\List.h">
+      <Filter>Header Files\Collections</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\map.c">
+    <ClCompile Include="..\..\src\Map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\request.c">
@@ -62,20 +92,23 @@
     <ClCompile Include="..\..\src\request_thread.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\SceneManager.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\thread_wrapper.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\MainMenu.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Button.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MainMenu.c">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\SceneManager.c">
+      <Filter>Source Files\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Function.c">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\List.c">
+      <Filter>Source Files\Collections</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
