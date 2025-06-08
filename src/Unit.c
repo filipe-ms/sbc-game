@@ -1,6 +1,6 @@
 #include "Unit.h"
 #include "Drawable.h"
-//#include "SpecificLists.h"
+#include "SpecificLists.h"
 
 static void Barbarian_Load(void);
 static void Barbarian_Unload(void);
@@ -13,32 +13,14 @@ Texture2D barbarian_attack;
 Texture2D barbarian_faint;
 Texture2D barbarian_idle;
 
-//typedef struct Unit_Metadata {
-    //List_Texture2D Textures;
-    //List_AnimationInstance AnimationInstance[4];
-//} Unit_Metadata;
+typedef struct Unit_Metadata {
+    Texture2D Texture;
+    List_AnimationInstance* AnimationInstanceList;
+} Unit_Metadata;
 
-//Unit_Metadata metadata;
-
-const AnimationInstance BarbarianAnimationInstance_Idle[4] = {
-    {
-        .StartingFrame = 0,
-        .EndingFrame = 3,
-        .Index = DIRECTION_DOWN,
-    }, {
-        .StartingFrame = 4,
-        .EndingFrame = 7,
-        .Index = DIRECTION_LEFT,
-    }, {
-        .StartingFrame = 8,
-        .EndingFrame = 11,
-        .Index = DIRECTION_RIGHT,
-    }, {
-        .StartingFrame = 12,
-        .EndingFrame = 15,
-        .Index = DIRECTION_UP,
-    }
-};
+Unit_Metadata Metadata_Idle;
+Unit_Metadata Metadata_Attack;
+Unit_Metadata Metadata_Walk;
 
 const AnimationInstance BarbarianAnimationInstance_Walk[4] = {
     {
@@ -106,7 +88,9 @@ static AnimationState BuildAnimationState(Texture2D* texture, AnimationInstance 
 // Barbarian
 void Unit_Init(Unit* unit) {
     unit->Id = id++;    
-    AnimationState_ChangeState(&unit->Animation, BuildAnimationState(&barbarian_idle, BarbarianAnimationInstance_Idle[0]));
+    
+    AnimationInstance* instance = List_AnimationInstance_GetByIndex(Metadata_Walk.AnimationInstanceList, DIRECTION_DOWN);
+    AnimationState_ChangeState(&unit->Animation, BuildAnimationState(&barbarian_idle, *instance));
 }
 
 void Unit_Load() {
@@ -148,25 +132,48 @@ void Unit_Draw(Unit* unit) {
 static void Unit_ChangeDirection(Unit* unit, Direction direction) {
     unit->Direction = direction;
 
+    AnimationInstance* instance = List_AnimationInstance_GetByIndex(Metadata_Walk.AnimationInstanceList, direction);
+
     AnimationState_ChangeState(
         &unit->Animation,
         BuildAnimationState(
-            unit->Animation.Drawable.Texture, BarbarianAnimationInstance_Walk[direction]
+            unit->Animation.Drawable.Texture,
+            //BarbarianAnimationInstance_Walk[direction]
+            *instance
         )
     );
 }
 
 static void Unit_ChangeAnimation(Unit* unit, AnimationState animation) {
+    AnimationInstance* instance = List_AnimationInstance_GetByIndex(Metadata_Walk.AnimationInstanceList, DIRECTION_DOWN);
+
     AnimationState_ChangeState(
         &unit->Animation,
         BuildAnimationState(
-            &barbarian_idle,
-            BarbarianAnimationInstance_Idle[DIRECTION_DOWN]
+            &Metadata_Idle.Texture,
+            *instance
         )
     );
 }
 
+static AnimationInstance BuildAnimationInstance(int startingFrame, int endingFrame, int index) {
+    AnimationInstance instance;
+    instance.StartingFrame = startingFrame;
+    instance.EndingFrame = endingFrame;
+    instance.Index = index;
+    return instance;
+}
+
 static void Barbarian_Load(void) {
+    // Walk
+    Metadata_Walk.Texture = LoadTexture("heroes/barbarian_walk.png");
+    Metadata_Walk.AnimationInstanceList = List_AnimationInstance_Create();
+
+    List_AnimationInstance_AddToEnd(Metadata_Walk.AnimationInstanceList, BuildAnimationInstance(0, 3, DIRECTION_DOWN));
+    List_AnimationInstance_AddToEnd(Metadata_Walk.AnimationInstanceList, BuildAnimationInstance(4, 7, DIRECTION_DOWN));
+    List_AnimationInstance_AddToEnd(Metadata_Walk.AnimationInstanceList, BuildAnimationInstance(8, 11, DIRECTION_DOWN));
+    List_AnimationInstance_AddToEnd(Metadata_Walk.AnimationInstanceList, BuildAnimationInstance(12, 15, DIRECTION_DOWN));
+    
     barbarian_walk = LoadTexture("heroes/barbarian_walk.png");
     barbarian_attack = LoadTexture("heroes/barbarian_attack.png");
     barbarian_faint = LoadTexture("heroes/barbarian_faint.png");

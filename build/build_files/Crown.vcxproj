@@ -612,6 +612,7 @@
     <ClCompile Include="..\..\src\request_manager.c" />
     <ClCompile Include="..\..\src\request_thread.c" />
     <ClCompile Include="..\..\src\SceneManager.c" />
+    <ClCompile Include="..\..\src\SpecificLists.c" />
     <ClCompile Include="..\..\src\thread_wrapper.c" />
     <ClCompile Include="..\..\src\Unit.c" />
   </ItemGroup>

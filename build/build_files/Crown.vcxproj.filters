@@ -152,6 +152,9 @@
     <ClCompile Include="..\..\src\AnimationState.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\SpecificLists.c">
+      <Filter>Source Files\Collections</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\src\application.rc">
