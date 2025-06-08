@@ -1,45 +1,45 @@
+// List.h - ONLY template macros
 #pragma once
-
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>  // For memcmp in generic comparison
+#include <string.h>
 
 #ifndef ERROR
 #define ERROR -1
 #endif
 
-// Macro to create a type-specific list
-#define CREATE_LIST(T) \
-\
+// Structure declaration macro
+#define LIST_DECLARE(T) \
 typedef struct List_Node_##T { \
     T data; \
     struct List_Node_##T* next; \
 } List_Node_##T; \
-\
 typedef struct List_##T { \
     List_Node_##T* head; \
     List_Node_##T* tail; \
     size_t count; \
-} List_##T; \
-\
-/* Function declarations */ \
-List_##T* List_Create_##T(); \
-int List_Add_##T(List_##T* list, T data); \
-int List_AddToEnd_##T(List_##T* list, T data); \
-T* List_GetByIndex_##T(List_##T* list, int index); \
-int List_Remove_##T(List_##T* list, T data, int (*compare)(const T*, const T*)); \
-void List_Destroy_##T(List_##T* list); \
-\
-/* Function implementations */ \
-List_##T* List_Create_##T() { \
+} List_##T;
+
+// Function declaration macro
+#define LIST_DECLARE_FUNCTIONS(T) \
+List_##T* List_##T##_Create(void); \
+int List_##T##_Add(List_##T* list, T data); \
+int List_##T##_AddToEnd(List_##T* list, T data); \
+T* List_##T##_GetByIndex(List_##T* list, int index); \
+int List_##T##_Remove(List_##T* list, T data, int (*compare)(const T*, const T*)); \
+void List_##T##_Destroy(List_##T* list); \
+T* List_##T##_Find(List_##T* list, int (*predicate)(const T*));
+
+// Full implementation macro
+#define LIST_IMPLEMENT(T) \
+List_##T* List_##T##_Create(void) { \
     List_##T* list = (List_##T*)malloc(sizeof(List_##T)); \
     if (!list) return NULL; \
     list->head = list->tail = NULL; \
     list->count = 0; \
     return list; \
 } \
-\
-int List_Add_##T(List_##T* list, T data) { \
+int List_##T##_Add(List_##T* list, T data) { \
     if (!list) return ERROR; \
     List_Node_##T* node = (List_Node_##T*)malloc(sizeof(List_Node_##T)); \
     if (!node) return ERROR; \
@@ -50,8 +50,7 @@ int List_Add_##T(List_##T* list, T data) { \
     list->count++; \
     return 0; \
 } \
-\
-int List_AddToEnd_##T(List_##T* list, T data) { \
+int List_##T##_AddToEnd(List_##T* list, T data) { \
     if (!list) return ERROR; \
     List_Node_##T* node = (List_Node_##T*)malloc(sizeof(List_Node_##T)); \
     if (!node) return ERROR; \
@@ -66,8 +65,7 @@ int List_AddToEnd_##T(List_##T* list, T data) { \
     list->count++; \
     return 0; \
 } \
-\
-T* List_GetByIndex_##T(List_##T* list, int index) { \
+T* List_##T##_GetByIndex(List_##T* list, int index) { \
     if (!list || index < 0 || (size_t)index >= list->count) return NULL; \
     List_Node_##T* current = list->head; \
     for (int i = 0; i < index && current; i++) { \
@@ -75,8 +73,7 @@ T* List_GetByIndex_##T(List_##T* list, int index) { \
     } \
     return current ? &(current->data) : NULL; \
 } \
-\
-int List_Remove_##T(List_##T* list, T data, int (*compare)(const T*, const T*)) { \
+int List_##T##_Remove(List_##T* list, T data, int (*compare)(const T*, const T*)) { \
     if (!list || !list->head) return ERROR; \
     List_Node_##T* prev = NULL; \
     List_Node_##T* current = list->head; \
@@ -99,8 +96,7 @@ int List_Remove_##T(List_##T* list, T data, int (*compare)(const T*, const T*)) 
     } \
     return ERROR; \
 } \
-\
-void List_Destroy_##T(List_##T* list) { \
+void List_##T##_Destroy(List_##T* list) { \
     if (!list) return; \
     List_Node_##T* current = list->head; \
     while (current) { \
@@ -109,4 +105,15 @@ void List_Destroy_##T(List_##T* list) { \
         current = next; \
     } \
     free(list); \
+} \
+T* List_##T##_Find(List_##T* list, int (*predicate)(const T*)) { \
+    if (!list || !predicate) return NULL; \
+    List_Node_##T* current = list->head; \
+    while (current) { \
+        if (predicate(&current->data)) { \
+            return &current->data; \
+        } \
+        current = current->next; \
+    } \
+    return NULL; \
 }

@@ -11,6 +11,8 @@ void Game_Init(void) {
 
 void Game_Update(void) {
 	Map_Update();
+
+	Unit_Update(&unit);
 }
 
 void Game_Draw(void) {

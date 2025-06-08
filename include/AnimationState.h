@@ -1,21 +1,25 @@
 #pragma once
 #include <Drawable.h>
+//#include <SpecificLists.h>
 
-typedef enum Direction {
-    DIRECTION_NONE = -1,
-    DIRECTION_DOWN = 0,
-    DIRECTION_LEFT = 1,
-    DIRECTION_RIGHT = 2,
-    DIRECTION_UP = 3
-} Direction;
+typedef struct AnimationInstance {
+    int StartingFrame;
+    int EndingFrame;
+    int Index;
+} AnimationInstance;
 
 typedef struct AnimationState {
     int CurrentFrame;
     float ElapsedTime;
     float TimePerFrame;
     Drawable_Metadata Drawable;
+    AnimationInstance AnimationInstance;
 } AnimationState;
 
-void AnimationState_GetNextFrame(AnimationState* animation);
+void AnimationState_ChangeAnimationInstance(AnimationState* animation, AnimationInstance instance);
+void AnimationState_ChangeState(AnimationState* animation, AnimationState state);
 void AnimationState_Update(AnimationState* animation);
 void AnimationState_Draw(AnimationState* animation);
+
+
+//AnimationInstance AnimationInstance_GetByIndex(List_AnimationInstance* list, int index);

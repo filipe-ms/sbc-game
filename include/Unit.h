@@ -2,10 +2,19 @@
 
 #include "raylib.h"
 #include "Drawable.h"
-#include <AnimationState.h>
+#include "AnimationState.h"
+
+typedef enum Direction {
+    DIRECTION_NONE = -1,
+    DIRECTION_DOWN = 0,
+    DIRECTION_LEFT = 1,
+    DIRECTION_RIGHT = 2,
+    DIRECTION_UP = 3
+} Direction;
 
 typedef struct Unit {
-    int id;
+    int Id;
+    Direction Direction;
     AnimationState Animation;
 } Unit;
 

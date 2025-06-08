@@ -1,16 +1,86 @@
-#include <AnimationState.h>
+#include "AnimationState.h"
+//#include <SpecificLists.h>
+#include "MathUtils.h"
 
-void AnimationState_GetNextFrame(AnimationState* animation){
+static int GetNextFrame(AnimationState* animation);
 
+// Public Methods
+void AnimationState_ChangeAnimationInstance(AnimationState* animation, AnimationInstance instance) {
+    animation->AnimationInstance = instance;
+    animation->CurrentFrame = instance.StartingFrame;
+    animation->ElapsedTime = 0.0f;
+}
+
+void AnimationState_ChangeState(AnimationState* animation, AnimationState state) {
+    AnimationState_ChangeAnimationInstance(animation, state.AnimationInstance);
+    animation->Drawable = state.Drawable;
+    animation->TimePerFrame = state.TimePerFrame;
 }
 
 void AnimationState_Update(AnimationState* animation) {
-	animation->ElapsedTime += GetFrameTime();
+    bool hasReachedMax;
+
+    animation->ElapsedTime = MathUtils_ClampFlagsF(
+        animation->ElapsedTime + GetFrameTime(),
+        0, animation->TimePerFrame,
+        NULL, &hasReachedMax);
+
+    if (hasReachedMax) {
+        animation->ElapsedTime = 0;
+        animation->CurrentFrame = GetNextFrame(animation);
+    }
 }
 
 void AnimationState_Draw(AnimationState* animation) {
+    int x = animation->Drawable.Texture->width / (int)animation->Drawable.Source.width;
+    int y = animation->Drawable.Texture->height / (int)animation->Drawable.Source.height;
+
+    int column = (int)animation->CurrentFrame / x;
+    int line = (int)animation->CurrentFrame % y; 
+
+    int sourceWidth = animation->Drawable.Source.width;
+    int sourceHeight = animation->Drawable.Source.height;
+
+    animation->Drawable.Source = (Rectangle){
+        line * sourceWidth,
+        column * sourceHeight,
+        sourceWidth,
+        sourceHeight
+    };
+
 	Drawable_Draw(&animation->Drawable);
 }
+
+// Private
+static int GetNextFrame(AnimationState* animation) {
+    int nextFrame = animation->CurrentFrame + 1;
+    if (nextFrame > animation->AnimationInstance.EndingFrame) {
+        return animation->AnimationInstance.StartingFrame;
+    }
+
+    return nextFrame;
+}
+
+/*
+
+AnimationInstance AnimationInstance_GetByIndex(List_AnimationInstance* list, int index) {
+    return List_AnimationInstance_Find(list, IndexMatches);
+}
+
+int IndexMatches(AnimationInstance* instance, int* index) {
+    return *index == instance->Index;
+}*/
+
+/*static Texture2D* GetBarbarianAction(Unit* unit) {
+    switch (unit->state) {
+    case MOVING: return &barbarian_walk;
+    case ATTACKING: return &barbarian_attack;
+    case IDLE: return &barbarian_idle;
+    case PONDERING: return &barbarian_idle;
+    default: return NULL;
+    }
+}*/
+
 
 /*void DrawHero(Unit* unit) {
     if (!unit || unit->type != HERO || unit->stats.health.current <= 0) {

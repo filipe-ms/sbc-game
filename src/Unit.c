@@ -1,14 +1,170 @@
-#pragma once
-
 #include "Unit.h"
 #include "Drawable.h"
+//#include "SpecificLists.h"
+
+static void Barbarian_Load(void);
+static void Barbarian_Unload(void);
+static void Unit_ChangeDirection(Unit* unit, Direction direction);
+
+static int id = 0;
 
 Texture2D barbarian_walk;
 Texture2D barbarian_attack;
 Texture2D barbarian_faint;
 Texture2D barbarian_idle;
 
-static int id = 0;
+//typedef struct Unit_Metadata {
+    //List_Texture2D Textures;
+    //List_AnimationInstance AnimationInstance[4];
+//} Unit_Metadata;
+
+//Unit_Metadata metadata;
+
+const AnimationInstance BarbarianAnimationInstance_Idle[4] = {
+    {
+        .StartingFrame = 0,
+        .EndingFrame = 3,
+        .Index = DIRECTION_DOWN,
+    }, {
+        .StartingFrame = 4,
+        .EndingFrame = 7,
+        .Index = DIRECTION_LEFT,
+    }, {
+        .StartingFrame = 8,
+        .EndingFrame = 11,
+        .Index = DIRECTION_RIGHT,
+    }, {
+        .StartingFrame = 12,
+        .EndingFrame = 15,
+        .Index = DIRECTION_UP,
+    }
+};
+
+const AnimationInstance BarbarianAnimationInstance_Walk[4] = {
+    {
+        .StartingFrame = 0,
+        .EndingFrame = 3,
+        .Index = DIRECTION_DOWN,
+    }, {
+        .StartingFrame = 4,
+        .EndingFrame = 7,
+        .Index = DIRECTION_LEFT,
+    }, {
+        .StartingFrame = 8,
+        .EndingFrame = 11,
+        .Index = DIRECTION_RIGHT,
+    }, {
+        .StartingFrame = 12,
+        .EndingFrame = 15,
+        .Index = DIRECTION_UP,
+    }
+};
+
+const AnimationInstance BarbarianAnimationInstance_Attacking[4] = {
+    {
+        .StartingFrame = 0,
+        .EndingFrame = 3,
+        .Index = DIRECTION_DOWN,
+    }, {
+        .StartingFrame = 4,
+        .EndingFrame = 7,
+        .Index = DIRECTION_LEFT,
+    }, {
+        .StartingFrame = 8,
+        .EndingFrame = 11,
+        .Index = DIRECTION_RIGHT,
+    }, {
+        .StartingFrame = 12,
+        .EndingFrame = 15,
+        .Index = DIRECTION_UP,
+    }
+};
+
+const tile_size = 128;
+
+static Drawable_Metadata BuildDrawableMetadata(Texture2D* texture) {
+    return (Drawable_Metadata) {
+        .Color = WHITE,
+            .Offset = (Vector2){ 0 },
+            .Destination = (Rectangle){ 0, 0, 128.0f, 128.0f },
+            .Rotation = 0.0f,
+            .Source = (Rectangle){ 0, 0, 96.0f, 96.0f },
+            .Texture = texture,
+    };
+}
+
+static AnimationState BuildAnimationState(Texture2D* texture, AnimationInstance instance) {
+    return (AnimationState) {
+        .AnimationInstance = instance,
+            .CurrentFrame = instance.StartingFrame,
+            .ElapsedTime = 0.0f,
+            .TimePerFrame = 0.25f,
+            .Drawable = BuildDrawableMetadata(texture)
+    };
+}
+
+// Barbarian
+void Unit_Init(Unit* unit) {
+    unit->Id = id++;    
+    AnimationState_ChangeState(&unit->Animation, BuildAnimationState(&barbarian_idle, BarbarianAnimationInstance_Idle[0]));
+}
+
+void Unit_Load() {
+    Barbarian_Load();
+}
+
+void Unit_Update(Unit* unit) {
+    AnimationState_Update(&unit->Animation);
+
+    if (IsKeyPressed(KEY_W)) {
+        Unit_ChangeDirection(unit, DIRECTION_UP);
+    }
+    else if (IsKeyPressed(KEY_A)) {
+        Unit_ChangeDirection(unit, DIRECTION_LEFT);
+    }
+    else if (IsKeyPressed(KEY_S)) {
+        Unit_ChangeDirection(unit, DIRECTION_DOWN);
+    }
+    else if (IsKeyPressed(KEY_D)) {
+        Unit_ChangeDirection(unit, DIRECTION_RIGHT);
+    }
+    else if (IsKeyPressed(KEY_F1)) {
+
+    }
+    else if (IsKeyPressed(KEY_F2)) {
+
+    }
+}
+
+void Unit_Unload() {
+    Barbarian_Unload();
+}
+
+void Unit_Draw(Unit* unit) {
+    AnimationState_Draw(&unit->Animation);
+    DrawRectangleLinesEx(unit->Animation.Drawable.Destination, 5.0f, RED);
+}
+
+static void Unit_ChangeDirection(Unit* unit, Direction direction) {
+    unit->Direction = direction;
+
+    AnimationState_ChangeState(
+        &unit->Animation,
+        BuildAnimationState(
+            unit->Animation.Drawable.Texture, BarbarianAnimationInstance_Walk[direction]
+        )
+    );
+}
+
+static void Unit_ChangeAnimation(Unit* unit, AnimationState animation) {
+    AnimationState_ChangeState(
+        &unit->Animation,
+        BuildAnimationState(
+            &barbarian_idle,
+            BarbarianAnimationInstance_Idle[DIRECTION_DOWN]
+        )
+    );
+}
 
 static void Barbarian_Load(void) {
     barbarian_walk = LoadTexture("heroes/barbarian_walk.png");
@@ -22,61 +178,6 @@ static void Barbarian_Unload(void) {
     UnloadTexture(barbarian_attack);
     UnloadTexture(barbarian_faint);
     UnloadTexture(barbarian_idle);
-}
-
-const tile_size = 128;
-
-static void Drawable_Metadata_Init(Drawable_Metadata* drawable) {
-    drawable->Color = WHITE;
-    drawable->Offset = (Vector2){ 0 };
-    drawable->Destination = (Rectangle){ 0, 0, 128.0f, 128.0f };
-    drawable->Rotation = 0.0f;
-    drawable->Source = (Rectangle){ 0, 0, 96.0f, 96.0f };
-    drawable->Texture = &barbarian_walk;
-}
-
-static void Animation_Init(AnimationState* animationState) {
-    animationState->CurrentFrame = 0;
-    animationState->ElapsedTime = 0;
-    Drawable_Metadata_Init(&animationState->Drawable);
-}
-
-// Barbarian
-void Unit_Init(Unit* unit) {
-    unit->id = id++;
-    Animation_Init(&unit->Animation);
-
-    return unit;
-}
-
-void Unit_Load() {
-    Barbarian_Load();
-}
-
-void Unit_Update(Unit* unit) {
-    AnimationState_Update(&unit->Animation);
-}
-
-void Unit_Unload() {
-    Barbarian_Unload();
-}
-
-void Unit_Draw(Unit* unit) {
-    AnimationState_Draw(&unit->Animation);
-    DrawRectangleLinesEx(unit->Animation.Drawable.Destination, 5.0f, RED);
-}
-
-static void DrawUnitSprite(Texture2D* texture, Rectangle source_rect, Rectangle display_box, float target_visual_height, Color tint) {
-    if (texture == NULL || texture->id == 0 || source_rect.width <= 0 || source_rect.height <= 0) {
-        TraceLog(LOG_WARNING, "DrawUnitSprite: Invalid texture or zero-size source_rect.");
-        return;
-    }
-    if (target_visual_height <= 0) {
-        TraceLog(LOG_WARNING, "Invalid height.");
-        return;
-    }
-    Rectangle exact_dest_rect = display_box;
-    DrawTexturePro(*texture, source_rect, exact_dest_rect, (Vector2) { 0, 0 }, 0.0f, tint);
 }
 
 /*
