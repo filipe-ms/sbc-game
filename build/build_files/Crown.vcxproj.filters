@@ -75,6 +75,12 @@
     <ClInclude Include="..\..\include\List.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\SpecificLists.h">
+      <Filter>Header Files\Collections</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GenList.h">
+      <Filter>Header Files\Collections</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
@@ -107,8 +113,14 @@
     <ClCompile Include="..\..\src\Function.c">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\List.c">
+    <ClCompile Include="..\..\src\GenList.c">
       <Filter>Source Files\Collections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game.c">
+      <Filter>Source Files\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

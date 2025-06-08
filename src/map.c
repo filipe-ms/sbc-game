@@ -1,6 +1,73 @@
 // MAP_C
-/*
 #include "Map.h"
+
+#include "raylib.h"
+#include "GenList.h"
+#include <string.h>
+
+Texture2D tilesetField;
+
+const Map_TileMetadata ROCK_METADATA = {
+    .texture = &tilesetField,
+    .source = { 0, 96, 48, 48 },
+    .destination = { 0 },
+    .offset = { 0, 0 },
+    .rotation = 0.0f,
+    .color = { 235, 235, 235, 255 }
+};
+
+Map_Grid Map_GameMap;
+
+static Map_TileMetadata Map_GetTileMetadata(int x, int y) {
+    Map_TileMetadata GROUND_METADATA = {
+        .texture = &tilesetField,
+        .source = { 48, 0, 48, 48 },
+        .destination = { x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE },
+        .offset = { 0 },
+        .rotation = 0.0f,
+        .color = { 240, 240, 240, 225 }
+    };
+    
+    return GROUND_METADATA;
+};
+
+
+void Map_Init() {
+    tilesetField = LoadTexture("tileset/field.png");
+
+    for (int i = 0; i < MAP_WIDTH; i++) {
+        for (int j = 0; j < MAP_HEIGHT; j++) {
+            Map_GameMap.grid[i][j] = (Map_Tile){
+                .Floor = Map_GetTileMetadata(i, j),
+                .Unit_OnThisTile = List_Create(sizeof(int))
+            };
+        }
+    }
+}
+
+void Map_Unload() {
+    UnloadTexture(tilesetField);
+}
+
+void Map_Update() {
+
+}
+
+static void Map_DrawTile(int x, int y) {
+    Map_TileMetadata* tile = &Map_GameMap.grid[x][y].Floor;
+    DrawTexturePro(*tile->texture, tile->source, tile->destination, tile->offset, tile->rotation, tile->color);
+}
+
+void Map_Draw() {    
+    for (int i = 0; i < MAP_WIDTH; i++) {
+        for (int j = 0; j < MAP_HEIGHT; j++) {
+            Map_DrawTile(i, j);
+        }
+    }
+}
+
+/*
+
 #include "stdio.h"
 #include "raymath.h"
 #include "definitions.h"

@@ -7,12 +7,13 @@
 #include "SceneManager.h"
 #include "Constants.h"
 //#include "request.h"
-#include "List.h"
+#include "SpecificLists.h"
+#include "GenList.h"
 
 void Main_InitProgram(void); // Chamar tudo relativo à inicialização de arquivos necessários aqui
 void Main_Cleanup(void);     // Liberar a memória de tudo aqui
 
-/*int main(void) {
+int main(void) {
     Main_InitProgram();
 
     SceneManager_Init();
@@ -24,14 +25,6 @@ void Main_Cleanup(void);     // Liberar a memória de tudo aqui
     CloseWindow();
 
     return 0;
-}*/
-
-int dataFreen(void* algo) {
-
-}
-
-int main(void) {
-    List* a = List_Create(dataFreen);
 }
 
 void Main_InitProgram(void) {

@@ -579,6 +579,7 @@
     <ClInclude Include="..\..\include\Button.h" />
     <ClInclude Include="..\..\include\Constants.h" />
     <ClInclude Include="..\..\include\Function.h" />
+    <ClInclude Include="..\..\include\GenList.h" />
     <ClInclude Include="..\..\include\List.h" />
     <ClInclude Include="..\..\include\MainMenu.h" />
     <ClInclude Include="..\..\include\Map.h" />
@@ -588,12 +589,17 @@
     <ClInclude Include="..\..\include\request_thread.h" />
     <ClInclude Include="..\..\include\resource_dir.h" />
     <ClInclude Include="..\..\include\SceneManager.h" />
+    <ClInclude Include="..\..\include\SpecificLists.h" />
     <ClInclude Include="..\..\include\thread_wrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Button.c" />
     <ClCompile Include="..\..\src\Function.c" />
-    <ClCompile Include="..\..\src\List.c" />
+    <ClCompile Include="..\..\src\Game.c" />
+    <ClCompile Include="..\..\src\Game.h">
+      <FileType>CppHeader</FileType>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GenList.c" />
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\MainMenu.c" />
     <ClCompile Include="..\..\src\Map.c" />

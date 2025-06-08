@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include "Button.h"
 #include "Constants.h"
+#include "SceneManager.h"
 
 // Características do texto
 const int TITLE_FONT_SIZE = 60;
@@ -84,7 +85,7 @@ void MainMenu_Update(void) {
     bool credits = CheckCollisionPointRec(GetMousePosition(), creditsButton.bounds);
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        //if (game) ChangeScene(GAME);
+        if (game) SceneManager_ChangeScene(SCENEREFERENCE_GAME);
         //else if (exit) ChangeScene(EXIT);
         //else if (credits) ChangeScene(CREDITS);
     }

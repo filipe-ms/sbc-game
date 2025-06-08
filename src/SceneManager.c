@@ -2,6 +2,7 @@
 
 #include "SceneManager.h"
 #include "MainMenu.h"
+#include "Game.h"
 #include <Function.h>
 
 // Menus
@@ -34,14 +35,20 @@ void SceneManager_ChangeScene(SceneReference nextSceneReference) {
             .Draw = MainMenu_Draw,
             .Unload = MainMenu_Unload
         };
-        break;
+        return;
 
     case SCENEREFERENCE_CREDITS:
         break;
 
     case SCENEREFERENCE_GAME:
-        //InitGame();
-        break;
+        new_scene = (Scene){
+            .SceneRef = SCENEREFERENCE_GAME,
+            .Init = Game_Init,
+            .Update = Game_Update,
+            .Draw = Game_Draw,
+            .Unload = Game_Unload,
+        };
+        return;
     }
 }
 

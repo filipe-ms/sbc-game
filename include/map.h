@@ -1,20 +1,68 @@
 #pragma once
 
 #include "raylib.h"
+#include "GenList.h"
 
 #define TILE_SIZE 128
 #define MAP_WIDTH 50
 #define MAP_HEIGHT 50
 
-/// <summary>
-/// [[ Tile ], [ Tile ]]
-/// List<coisas> [Ground, Ornaments]
-/// List<pessoas que estão aqui>
-/// </summary>
+typedef struct Map_TileMetadata {
+    Texture2D* texture;
+    Rectangle source;
+    Rectangle destination;
+    Vector2 offset;
+    float rotation;
+    Color color;
+} Map_TileMetadata;
+
+typedef struct Map_Tile {
+    Map_TileMetadata Floor;
+    List* Unit_OnThisTile;
+} Map_Tile;
+
+typedef struct {
+    Map_Tile grid[MAP_WIDTH][MAP_HEIGHT];
+} Map_Grid;
+
+extern Map_Grid Map_GameMap;
+
+void Map_Init(void);
+void Map_Unload(void);
+void Map_Update(void);
+void Map_Draw(void);
 
 /*
+Texture2D field;
+field = LoadTexture("tileset/field.png");
+UnloadTexture(field);
+void DrawTile(Vector2 position, int tile_type, int variant) {
+
+    Vector2 offset = { 0 };
+    if (tile_type == GROUND) {
+        Rectangle source = { 48, 0, 48, 48 };
+        Rectangle destination = { position.x, position.y, TILE_SIZE, TILE_SIZE };
+        Color c = { 240, 240, 240, 225 };
+        DrawTexturePro(field, source, destination, offset, 0.0f, c);
+
+    }
+    if (tile_type == ROCK) {
+        // Rock variants = 10
+        if (variant > 9) variant = 9;
+        if (variant < 0) variant = 0;
+        float center_x = position.x + TILE_SIZE / 2;
+        float center_y = position.y + TILE_SIZE / 2;
+        float size = TILE_SIZE / 2;
+        Rectangle source = { (float)(288 + 48 * variant), 96, 48, 48 };
+        Rectangle destination = { center_x - size / 2, center_y - size / 2, size, size };
+        Color color = { 235, 235, 235, 255 };
+        DrawTexturePro(field, source, destination, offset, 0.0f, color);
+    }
+}
+
+
 typedef enum Tile {
-    bool can_be_built_upon;
+    
 } Tile;
 
 typedef enum TileType {
