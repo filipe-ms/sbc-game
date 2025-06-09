@@ -7,4 +7,3 @@
 LIST_IMPLEMENT(int)
 LIST_IMPLEMENT(float)
 LIST_IMPLEMENT(Texture2D)
-LIST_IMPLEMENT(Unit_AnimationInstanceMetadata)

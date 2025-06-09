@@ -4,8 +4,6 @@
 #include "Drawable.h"
 #include "Animation.h"
 
-typedef struct List_Animation List_Animation;
-
 typedef enum Unit_Direction {
     UNIT_DIRECTION_NONE = -1,
     UNIT_DIRECTION_DOWN = 0,
@@ -23,19 +21,20 @@ typedef enum Unit_Action {
 } Unit_Action;
 
 typedef struct Unit {
-    int Id;
     Unit_Action Action;
     Unit_Direction Direction;
     Animation Animation;
 } Unit;
 
-typedef struct Unit_AnimationInstanceMetadata {
-    Texture2D Texture;
-    List_Animation* AnimationInstanceList;
-} Unit_AnimationInstanceMetadata;
+// Generic Unit Methods
 
+// Rendering / Initializing
 void Unit_Init(Unit* unit);
 void Unit_Load(void);
 void Unit_Update(Unit* unit);
 void Unit_Unload(void);
 void Unit_Draw(Unit* unit);
+
+// Action / Direction
+void Unit_ChangeAction(Unit* unit, Unit_Action action);
+void Unit_ChangeDirection(Unit* unit, Unit_Direction direction);

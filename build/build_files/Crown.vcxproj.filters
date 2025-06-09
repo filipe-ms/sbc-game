@@ -108,6 +108,9 @@
     <ClInclude Include="..\..\include\Animation.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\AnimationMetadata.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
@@ -159,6 +162,9 @@
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Animation.c">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\AnimationMetadata.c">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
   </ItemGroup>
