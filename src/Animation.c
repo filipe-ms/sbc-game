@@ -2,20 +2,35 @@
 //#include <SpecificLists.h>
 #include "MathUtils.h"
 #include "stdio.h"
+#include "List.h"
+
+LIST_IMPLEMENT(Animation)
 
 static int GetNextFrame(Animation* animation);
 
 // Public Methods
-void Animation_ChangeAnimationInstance(Animation* animation, AnimationInstance instance) {
-    animation->AnimationInstance = instance;
-    animation->CurrentFrame = instance.StartingFrame;
-    animation->ElapsedTime = 0.0f;
+Animation Animation_Build(
+    int current_frame, float elapsed_time, float time_per_frame,
+    int starting_frame, int ending_frame, Drawable Drawable)
+{
+    Animation animation;
+    animation.CurrentFrame = current_frame;
+    animation.ElapsedTime = elapsed_time;
+    animation.TimePerFrame = time_per_frame;
+    animation.StartingFrame = starting_frame;
+    animation.EndingFrame = ending_frame;
+    animation.Drawable = Drawable;
+
+    return animation;
 }
 
-void Animation_ChangeState(Animation* animation, Animation state) {
-    Animation_ChangeAnimationInstance(animation, state.AnimationInstance);
-    animation->Drawable = state.Drawable;
-    animation->TimePerFrame = state.TimePerFrame;
+void Animation_Change(Animation* current_animation, Animation animation) {
+    current_animation->Drawable = animation.Drawable;
+    current_animation->TimePerFrame = animation.TimePerFrame;
+    current_animation->CurrentFrame = animation.StartingFrame;
+    current_animation->StartingFrame = animation.StartingFrame;
+    current_animation->EndingFrame = animation.EndingFrame;
+    current_animation->ElapsedTime = 0.0f;
 }
 
 void Animation_Update(Animation* animation) {
@@ -55,8 +70,8 @@ void Animation_Draw(Animation* animation) {
 // Private
 static int GetNextFrame(Animation* animation) {
     int nextFrame = animation->CurrentFrame + 1;
-    if (nextFrame > animation->AnimationInstance.EndingFrame) {
-        return animation->AnimationInstance.StartingFrame;
+    if (nextFrame > animation->EndingFrame) {
+        return animation->StartingFrame;
     }
 
     return nextFrame;

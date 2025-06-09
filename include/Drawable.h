@@ -11,4 +11,8 @@ typedef struct Drawable {
     Color Color;
 } Drawable;
 
+Drawable Drawable_Build(
+    Texture2D* texture, Rectangle source, Rectangle destination,
+    Vector2 offset, float rotation, Color color);
+
 void Drawable_Draw(Drawable* drawable);

@@ -4,7 +4,7 @@
 #include "Drawable.h"
 #include "Animation.h"
 
-typedef struct List_AnimationInstance List_AnimationInstance;
+typedef struct List_Animation List_Animation;
 
 typedef enum Unit_Direction {
     UNIT_DIRECTION_NONE = -1,
@@ -31,7 +31,7 @@ typedef struct Unit {
 
 typedef struct Unit_AnimationInstanceMetadata {
     Texture2D Texture;
-    List_AnimationInstance* AnimationInstanceList;
+    List_Animation* AnimationInstanceList;
 } Unit_AnimationInstanceMetadata;
 
 void Unit_Init(Unit* unit);

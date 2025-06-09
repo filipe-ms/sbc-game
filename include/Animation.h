@@ -1,21 +1,23 @@
 #pragma once
-#include <Drawable.h>
-
-typedef struct AnimationInstance {
-    int StartingFrame;
-    int EndingFrame;
-    int Index;
-} AnimationInstance;
+#include "Drawable.h"
+#include "List.h"
 
 typedef struct Animation {
     int CurrentFrame;
     float ElapsedTime;
     float TimePerFrame;
+    int StartingFrame;
+    int EndingFrame;
     Drawable Drawable;
-    AnimationInstance AnimationInstance;
 } Animation;
 
-void Animation_ChangeAnimationInstance(Animation* animation, AnimationInstance instance);
-void Animation_ChangeState(Animation* animation, Animation state);
-void Animation_Update(Animation* animation);
-void Animation_Draw(Animation* animation);
+LIST_DECLARE(Animation)
+LIST_DECLARE_FUNCTIONS(Animation)
+
+Animation Animation_Build(
+    int current_rame, float elapsed_time, float time_per_frame,
+    int starting_frame, int ending_frame, Drawable Drawable);
+
+void Animation_Change(Animation* current_animation, Animation animation);
+void Animation_Update(Animation* current_animation);
+void Animation_Draw(Animation* current_animation);
