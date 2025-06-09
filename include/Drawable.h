@@ -2,13 +2,13 @@
 
 #include <raylib.h>
 
-typedef struct Drawable_Metadata {
+typedef struct Drawable {
     Texture2D* Texture;
     Rectangle Source;
     Rectangle Destination;
     Vector2 Offset;
     float Rotation;
     Color Color;
-} Drawable_Metadata;
+} Drawable;
 
-void Drawable_Draw(Drawable_Metadata* drawable);
+void Drawable_Draw(Drawable* drawable);

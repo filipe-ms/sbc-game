@@ -7,7 +7,7 @@
 
 Texture2D tilesetField;
 
-const Drawable_Metadata ROCK_METADATA = {
+const Drawable ROCK_METADATA = {
     .Texture = &tilesetField,
     .Source = { 0, 96, 48, 48 },
     .Destination = { 0 },
@@ -18,8 +18,8 @@ const Drawable_Metadata ROCK_METADATA = {
 
 Map_Grid Map_GameMap;
 
-static Drawable_Metadata Map_GetTileMetadata(int x, int y) {
-    Drawable_Metadata GROUND_METADATA = {
+static Drawable Map_GetTileMetadata(int x, int y) {
+    Drawable GROUND_METADATA = {
         .Texture = &tilesetField,
         .Source = { 48, 0, 48, 48 },
         .Destination = { (float)(x * TILE_SIZE), (float)(y * TILE_SIZE), TILE_SIZE, TILE_SIZE },

@@ -40,6 +40,12 @@
     <Filter Include="Source Files\Units">
       <UniqueIdentifier>{c03d0835-e74a-46aa-8ad5-dbc60c0e677a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Animation">
+      <UniqueIdentifier>{932aa51f-6647-4760-b92f-8f3f9d4d76d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{33f812f8-3282-4bc8-86da-e46f36beee65}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
@@ -87,9 +93,6 @@
     <ClInclude Include="..\..\include\GenList.h">
       <Filter>Header Files\Collections</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Drawable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Barbarian.h">
       <Filter>Header Files\Units</Filter>
     </ClInclude>
@@ -99,8 +102,11 @@
     <ClInclude Include="..\..\include\Unit.h">
       <Filter>Header Files\Units</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\AnimationState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="..\..\include\Drawable.h">
+      <Filter>Header Files\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Animation.h">
+      <Filter>Header Files\Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -140,20 +146,20 @@
     <ClCompile Include="..\..\src\Game.c">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Drawable.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Barbarian.c">
       <Filter>Source Files\Units</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Unit.c">
       <Filter>Source Files\Units</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\AnimationState.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\SpecificLists.c">
       <Filter>Source Files\Collections</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Drawable.c">
+      <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Animation.c">
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

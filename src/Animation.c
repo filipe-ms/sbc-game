@@ -1,23 +1,24 @@
-#include "AnimationState.h"
+#include "Animation.h"
 //#include <SpecificLists.h>
 #include "MathUtils.h"
+#include "stdio.h"
 
-static int GetNextFrame(AnimationState* animation);
+static int GetNextFrame(Animation* animation);
 
 // Public Methods
-void AnimationState_ChangeAnimationInstance(AnimationState* animation, AnimationInstance instance) {
+void Animation_ChangeAnimationInstance(Animation* animation, AnimationInstance instance) {
     animation->AnimationInstance = instance;
     animation->CurrentFrame = instance.StartingFrame;
     animation->ElapsedTime = 0.0f;
 }
 
-void AnimationState_ChangeState(AnimationState* animation, AnimationState state) {
-    AnimationState_ChangeAnimationInstance(animation, state.AnimationInstance);
+void Animation_ChangeState(Animation* animation, Animation state) {
+    Animation_ChangeAnimationInstance(animation, state.AnimationInstance);
     animation->Drawable = state.Drawable;
     animation->TimePerFrame = state.TimePerFrame;
 }
 
-void AnimationState_Update(AnimationState* animation) {
+void Animation_Update(Animation* animation) {
     bool hasReachedMax;
 
     animation->ElapsedTime = MathUtils_ClampFlagsF(
@@ -31,19 +32,19 @@ void AnimationState_Update(AnimationState* animation) {
     }
 }
 
-void AnimationState_Draw(AnimationState* animation) {
-    int x = animation->Drawable.Texture->width / (int)animation->Drawable.Source.width;
-    int y = animation->Drawable.Texture->height / (int)animation->Drawable.Source.height;
 
-    int column = (int)animation->CurrentFrame / x;
-    int line = (int)animation->CurrentFrame % y; 
+void Animation_Draw(Animation* animation) {
+    int x = animation->Drawable.Texture->width / (int)animation->Drawable.Source.width;
+
+    int column = (int)animation->CurrentFrame % x;
+    int line = (int)animation->CurrentFrame / x; 
 
     int sourceWidth = animation->Drawable.Source.width;
     int sourceHeight = animation->Drawable.Source.height;
 
     animation->Drawable.Source = (Rectangle){
-        line * sourceWidth,
-        column * sourceHeight,
+        column * sourceWidth,
+        line* sourceHeight,
         sourceWidth,
         sourceHeight
     };
@@ -52,7 +53,7 @@ void AnimationState_Draw(AnimationState* animation) {
 }
 
 // Private
-static int GetNextFrame(AnimationState* animation) {
+static int GetNextFrame(Animation* animation) {
     int nextFrame = animation->CurrentFrame + 1;
     if (nextFrame > animation->AnimationInstance.EndingFrame) {
         return animation->AnimationInstance.StartingFrame;

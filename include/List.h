@@ -28,7 +28,8 @@ int List_##T##_AddToEnd(List_##T* list, T data); \
 T* List_##T##_GetByIndex(List_##T* list, int index); \
 int List_##T##_Remove(List_##T* list, T data, int (*compare)(const T*, const T*)); \
 void List_##T##_Destroy(List_##T* list); \
-T* List_##T##_Find(List_##T* list, int (*predicate)(const T*));
+T* List_##T##_Find(List_##T* list, int (*predicate)(const T*)); \
+void List_##T##_Free(List_##T* list);
 
 // Full implementations (to be used in ONE .c file)
 #define LIST_IMPLEMENT(T) \
@@ -109,4 +110,14 @@ T* List_##T##_Find(List_##T* list, int (*predicate)(const T*)) { \
         current = current->next; \
     } \
     return NULL; \
+} \
+void List_##T##_Free(List_##T* list) { \
+    if (!list) return; \
+    List_Node_##T* current = list->head; \
+    while (current) { \
+        List_Node_##T* next = current->next; \
+        free(current); \
+        current = next; \
+    } \
+    free(list); \
 }

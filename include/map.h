@@ -9,7 +9,7 @@
 #define MAP_HEIGHT 50
 
 typedef struct Map_Tile {
-    Drawable_Metadata Floor;
+    Drawable Floor;
     List* Unit_OnThisTile;
 } Map_Tile;
 
