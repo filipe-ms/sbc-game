@@ -18,6 +18,13 @@ Animation Animation_Build(
     int current_rame, float elapsed_time, float time_per_frame,
     int starting_frame, int ending_frame, Drawable Drawable);
 
+Animation Animation_BuildAnimation(
+    Texture2D* texture, Animation* animation);
+
+Animation Animation_BuildWithReference(
+    Texture2D* texture, int starting_frame, int ending_frame);
+
+
 void Animation_Change(Animation* current_animation, Animation animation);
 void Animation_Update(Animation* current_animation);
 void Animation_Draw(Animation* current_animation);

@@ -2,14 +2,7 @@
 #include "Drawable.h"
 #include "SpecificLists.h"
 #include "AnimationMetadata.h"
-
-static Animation BuildFreshAnimationState(Texture2D* texture, int starting_frame, int ending_frame);
-static Animation BuildFreshAnimationWithReference(Texture2D* texture, Animation* animation);
-
-static void Barbarian_Metadata_Load(void);
-static void Barbarian_Metadata_Unload(void);
-
-List_AnimationMetadata* G_BarbarianAnimationMetadataList;
+#include "UnitMetadata.h"
 
 // Public
 void Unit_Init(Unit* unit) {
@@ -19,15 +12,12 @@ void Unit_Init(Unit* unit) {
     AnimationMetadata* animationInstanceMetadata = List_AnimationMetadata_GetByIndex(G_BarbarianAnimationMetadataList, UNIT_ACTION_IDLE);
     Animation* animationInstance = List_Animation_GetByIndex(animationInstanceMetadata->AnimationInstanceList, UNIT_DIRECTION_DOWN);
 
-    Animation_Change(&unit->Animation,
-        BuildFreshAnimationState(
-            &((*animationInstanceMetadata).Texture),
-            animationInstance->StartingFrame,
-            animationInstance->EndingFrame));
+    Animation newAnimation = Animation_BuildAnimation(&((*animationInstanceMetadata).Texture), animationInstance);
+    Animation_Change(&unit->Animation, newAnimation);
 }
 
 void Unit_Load() {
-    Barbarian_Metadata_Load();
+
 }
 
 void Unit_Update(Unit* unit) {
@@ -54,7 +44,7 @@ void Unit_Update(Unit* unit) {
 }
 
 void Unit_Unload() {
-    Barbarian_Metadata_Unload();
+
 }
 
 void Unit_Draw(Unit* unit) {
@@ -68,11 +58,9 @@ void Unit_ChangeDirection(Unit* unit, Unit_Direction direction) {
     AnimationMetadata* animationInstanceMetadata = List_AnimationMetadata_GetByIndex(G_BarbarianAnimationMetadataList, unit->Action);
     Animation* animationInstance = List_Animation_GetByIndex(animationInstanceMetadata->AnimationInstanceList, unit->Direction);
 
-    Animation_Change(
-        &unit->Animation,
-        BuildFreshAnimationWithReference(
-            unit->Animation.Drawable.Texture,
-            animationInstance));
+    Animation newAnimation = Animation_BuildAnimation(&((*animationInstanceMetadata).Texture), animationInstance);
+
+    Animation_Change(&unit->Animation, newAnimation);
 }
 
 void Unit_ChangeAction(Unit* unit, Unit_Action action) {
@@ -80,79 +68,10 @@ void Unit_ChangeAction(Unit* unit, Unit_Action action) {
 
     AnimationMetadata* animationInstanceMetadata = List_AnimationMetadata_GetByIndex(G_BarbarianAnimationMetadataList, unit->Action);
     Animation* animationInstance = List_Animation_GetByIndex(animationInstanceMetadata->AnimationInstanceList, unit->Direction);
+    
+    Animation newAnimation = Animation_BuildAnimation(&((*animationInstanceMetadata).Texture), animationInstance);
 
-    Animation_Change(
-        &unit->Animation,
-        BuildFreshAnimationWithReference(
-            &((*animationInstanceMetadata).Texture),
-            animationInstance));
-}
-
-// Private
-static Animation BuildFreshAnimationWithReference(Texture2D* texture, Animation* animation) {
-    return BuildFreshAnimationState(texture, animation->StartingFrame, animation->EndingFrame);
-}
-
-static Animation BuildFreshAnimationState(Texture2D* texture, int starting_frame, int ending_frame) {
-    Rectangle source = { 0, 0, 96.0f, 96.0f };
-    Rectangle destination = { 0, 0, 128.0f, 128.0f };
-    Vector2 offset = { 0 };
-
-    Drawable drawable = Drawable_Build(texture, source, destination, offset, 0.0f, WHITE);
-    Animation animation = Animation_Build(starting_frame, 0.0f, 0.25f, starting_frame, ending_frame, drawable);
-
-    return animation;
-}
-
-static void Barbarian_Metadata_Load(void) {
-    G_BarbarianAnimationMetadataList = List_AnimationMetadata_Create();
-
-    // Idle
-    AnimationMetadata barbarianIdle;
-    barbarianIdle.Texture = LoadTexture("heroes/barbarian_idle.png");
-    barbarianIdle.AnimationInstanceList = List_Animation_Create();
-
-    List_Animation_AddToEnd(barbarianIdle.AnimationInstanceList, BuildFreshAnimationState(&barbarianIdle.Texture, 0, 3)); // Up
-    List_Animation_AddToEnd(barbarianIdle.AnimationInstanceList, BuildFreshAnimationState(&barbarianIdle.Texture, 4, 7)); // Left
-    List_Animation_AddToEnd(barbarianIdle.AnimationInstanceList, BuildFreshAnimationState(&barbarianIdle.Texture, 8, 11)); // Right
-    List_Animation_AddToEnd(barbarianIdle.AnimationInstanceList, BuildFreshAnimationState(&barbarianIdle.Texture, 12, 15)); // Down
-
-    List_AnimationMetadata_AddToEnd(G_BarbarianAnimationMetadataList, barbarianIdle);
-
-    // Walk
-    AnimationMetadata barbarianWalk;
-    barbarianWalk.Texture = LoadTexture("heroes/barbarian_walk.png");
-    barbarianWalk.AnimationInstanceList = List_Animation_Create();
-
-    List_Animation_AddToEnd(barbarianWalk.AnimationInstanceList, BuildFreshAnimationState(&barbarianWalk.Texture, 0, 3));
-    List_Animation_AddToEnd(barbarianWalk.AnimationInstanceList, BuildFreshAnimationState(&barbarianWalk.Texture, 4, 7));
-    List_Animation_AddToEnd(barbarianWalk.AnimationInstanceList, BuildFreshAnimationState(&barbarianWalk.Texture, 8, 11));
-    List_Animation_AddToEnd(barbarianWalk.AnimationInstanceList, BuildFreshAnimationState(&barbarianWalk.Texture, 12, 15));
-
-    List_AnimationMetadata_AddToEnd(G_BarbarianAnimationMetadataList, barbarianWalk);
-
-    // Attack 
-    AnimationMetadata barbarianAttack;
-    barbarianAttack.Texture = LoadTexture("heroes/barbarian_attack.png");
-    barbarianAttack.AnimationInstanceList = List_Animation_Create();
-
-    List_Animation_AddToEnd(barbarianAttack.AnimationInstanceList, BuildFreshAnimationState(&barbarianAttack.Texture, 0, 4));
-    List_Animation_AddToEnd(barbarianAttack.AnimationInstanceList, BuildFreshAnimationState(&barbarianAttack.Texture, 5, 9));
-    List_Animation_AddToEnd(barbarianAttack.AnimationInstanceList, BuildFreshAnimationState(&barbarianAttack.Texture, 10, 14));
-    List_Animation_AddToEnd(barbarianAttack.AnimationInstanceList, BuildFreshAnimationState(&barbarianAttack.Texture, 15, 19));
-
-    List_AnimationMetadata_AddToEnd(G_BarbarianAnimationMetadataList, barbarianAttack);
-}
-
-static void Barbarian_Metadata_Unload(void) {
-    List_Node_AnimationMetadata* node = G_BarbarianAnimationMetadataList->head;
-
-    for (; node != NULL; node = node->next) {
-        UnloadTexture(node->data.Texture);
-        List_Animation_Free(node->data.AnimationInstanceList);
-    }
-
-    List_AnimationMetadata_Free(G_BarbarianAnimationMetadataList);
+    Animation_Change(&unit->Animation, newAnimation);
 }
 
 /*

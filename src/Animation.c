@@ -24,6 +24,24 @@ Animation Animation_Build(
     return animation;
 }
 
+Animation Animation_BuildAnimation(
+    Texture2D* texture, Animation* animation) {
+    return Animation_BuildWithReference(texture, animation->StartingFrame, animation->EndingFrame);
+}
+
+Animation Animation_BuildWithReference(
+    Texture2D* texture, int starting_frame, int ending_frame) {
+
+    Rectangle source = { 0, 0, 96.0f, 96.0f };
+    Rectangle destination = { 0, 0, 128.0f, 128.0f };
+    Vector2 offset = { 0 };
+
+    Drawable drawable = Drawable_Build(texture, source, destination, offset, 0.0f, WHITE);
+    Animation animation = Animation_Build(starting_frame, 0.0f, 0.25f, starting_frame, ending_frame, drawable);
+
+    return animation;
+}
+
 void Animation_Change(Animation* current_animation, Animation animation) {
     current_animation->Drawable = animation.Drawable;
     current_animation->TimePerFrame = animation.TimePerFrame;
@@ -49,17 +67,17 @@ void Animation_Update(Animation* animation) {
 
 
 void Animation_Draw(Animation* animation) {
-    int x = animation->Drawable.Texture->width / (int)animation->Drawable.Source.width;
+    int framesPerRow = (int)animation->Drawable.Texture->width / (int)animation->Drawable.Source.width;
 
-    int column = (int)animation->CurrentFrame % x;
-    int line = (int)animation->CurrentFrame / x; 
+    int column = animation->CurrentFrame % framesPerRow;
+    int line = animation->CurrentFrame / framesPerRow; 
 
-    int sourceWidth = animation->Drawable.Source.width;
-    int sourceHeight = animation->Drawable.Source.height;
+    float sourceWidth = animation->Drawable.Source.width;
+    float sourceHeight = animation->Drawable.Source.height;
 
     animation->Drawable.Source = (Rectangle){
-        column * sourceWidth,
-        line* sourceHeight,
+        (float)column * sourceWidth,
+        (float)line * sourceHeight,
         sourceWidth,
         sourceHeight
     };

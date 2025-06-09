@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Animation">
       <UniqueIdentifier>{33f812f8-3282-4bc8-86da-e46f36beee65}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Metadata">
+      <UniqueIdentifier>{72d3802e-b78d-4c57-a83f-8caef7bc7bc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Metadata">
+      <UniqueIdentifier>{666ec2e0-4b5b-49b0-b93c-130f280a9abe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
@@ -111,6 +117,9 @@
     <ClInclude Include="..\..\include\AnimationMetadata.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\UnitMetadata.h">
+      <Filter>Header Files\Metadata</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
@@ -166,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\AnimationMetadata.c">
       <Filter>Source Files\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\UnitMetadata.c">
+      <Filter>Source Files\Metadata</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
