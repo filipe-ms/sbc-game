@@ -17,7 +17,7 @@ int main(void) {
     Main_InitProgram();
 
     SceneManager_Init();
-    SceneManager_ChangeScene(SCENEREFERENCE_GAME);
+    SceneManager_ChangeScene(SCENEREFERENCE_MAIN_MENU);
     SceneManager_LoopScene();
     
     Main_Cleanup();

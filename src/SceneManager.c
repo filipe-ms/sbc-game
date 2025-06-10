@@ -84,9 +84,11 @@ static void UnloadScene(Scene scene) {
 
 static void CheckAndReplaceExistingScene() {
     if (new_scene.SceneRef != scene.SceneRef) {
-        UnloadScene(scene);
+        if (scene.SceneRef != SCENEREFERENCE_NONE) {
+            UnloadScene(scene);
+        }
+
         scene = new_scene;
-        new_scene.SceneRef = SCENEREFERENCE_NONE;
         InitCurrentScene();
     }
 }

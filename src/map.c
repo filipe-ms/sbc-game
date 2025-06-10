@@ -4,13 +4,15 @@
 #include "raylib.h"
 #include "GenList.h"
 #include <string.h>
+#include "Constants.h"
 
 Texture2D tilesetField;
 
 const Drawable ROCK_METADATA = {
     .Texture = &tilesetField,
     .Source = { 0, 96, 48, 48 },
-    .Destination = { 0 },
+	.Position = { 0, 0 },
+	.Scale = { 0, 0 },
     .Offset = { 0, 0 },
     .Rotation = 0.0f,
     .Color = { 235, 235, 235, 255 }
@@ -22,7 +24,8 @@ static Drawable Map_GetTileMetadata(int x, int y) {
     Drawable GROUND_METADATA = {
         .Texture = &tilesetField,
         .Source = { 48, 0, 48, 48 },
-        .Destination = { (float)(x * TILE_SIZE), (float)(y * TILE_SIZE), TILE_SIZE, TILE_SIZE },
+		.Position = { (float)(x * CONSTANTS_TILE_SIZE_F), (float)(y * CONSTANTS_TILE_SIZE_F) },
+		.Scale = { CONSTANTS_TILE_SIZE_F / 48, CONSTANTS_TILE_SIZE_F / 48 },
         .Offset = { 0 },
         .Rotation = 0.0f,
         .Color = { 240, 240, 240, 225 }

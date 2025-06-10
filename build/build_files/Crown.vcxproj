@@ -577,13 +577,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Animation.h" />
-    <ClInclude Include="..\..\include\AnimationMetadata.h" />
     <ClInclude Include="..\..\include\Barbarian.h" />
     <ClInclude Include="..\..\include\Button.h" />
     <ClInclude Include="..\..\include\Constants.h" />
     <ClInclude Include="..\..\include\Drawable.h" />
     <ClInclude Include="..\..\include\Function.h" />
     <ClInclude Include="..\..\include\Game.h" />
+    <ClInclude Include="..\..\include\GameUnit.h" />
     <ClInclude Include="..\..\include\GenList.h" />
     <ClInclude Include="..\..\include\List.h" />
     <ClInclude Include="..\..\include\MainMenu.h" />
@@ -601,12 +601,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Animation.c" />
-    <ClCompile Include="..\..\src\AnimationMetadata.c" />
     <ClCompile Include="..\..\src\Barbarian.c" />
     <ClCompile Include="..\..\src\Button.c" />
     <ClCompile Include="..\..\src\Drawable.c" />
     <ClCompile Include="..\..\src\Function.c" />
     <ClCompile Include="..\..\src\Game.c" />
+    <ClCompile Include="..\..\src\GameUnit.c" />
     <ClCompile Include="..\..\src\GenList.c" />
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\MainMenu.c" />

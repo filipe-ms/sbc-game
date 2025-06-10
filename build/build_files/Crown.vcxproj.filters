@@ -114,11 +114,11 @@
     <ClInclude Include="..\..\include\Animation.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\AnimationMetadata.h">
-      <Filter>Header Files\Animation</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\UnitMetadata.h">
       <Filter>Header Files\Metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameUnit.h">
+      <Filter>Header Files\Units</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,11 +173,11 @@
     <ClCompile Include="..\..\src\Animation.c">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\AnimationMetadata.c">
-      <Filter>Source Files\Animation</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\UnitMetadata.c">
       <Filter>Source Files\Metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameUnit.c">
+      <Filter>Source Files\Units</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

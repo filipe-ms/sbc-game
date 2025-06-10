@@ -1,12 +1,13 @@
-#include <raylib.h>
-#include <Drawable.h>
+#include "raylib.h"
+#include "Drawable.h"
 
-Drawable Drawable_Build(Texture2D* texture, Rectangle source, Rectangle destination, Vector2 offset, float rotation, Color color)
+Drawable Drawable_Build(Texture2D* texture, Rectangle source, Vector2 position, Vector2 scale, Vector2 offset, float rotation, Color color)
 {
     Drawable drawable;
     drawable.Texture = texture;
     drawable.Source = source;
-    drawable.Destination = destination;
+    drawable.Position = position;
+	drawable.Scale = scale;
     drawable.Offset = offset;
     drawable.Rotation = rotation;
     drawable.Color = color;
@@ -14,10 +15,12 @@ Drawable Drawable_Build(Texture2D* texture, Rectangle source, Rectangle destinat
 }
 
 void Drawable_Draw(Drawable* drawable) {
+	Rectangle destination = { drawable->Position.x, drawable->Position.y, drawable->Source.width * drawable->Scale.x, drawable->Source.height * drawable->Scale.y };
+
     DrawTexturePro(
         *drawable->Texture,
         drawable->Source,
-        drawable->Destination,
+		destination,
         drawable->Offset,
         drawable->Rotation,
         drawable->Color);

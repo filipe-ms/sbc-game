@@ -1,7 +1,5 @@
 #pragma once
-#include "AnimationMetadata.h"
 
-extern List_AnimationMetadata* G_BarbarianAnimationMetadataList;
-
+Animation UnitMetadata_GetMetadataIndex(int action, int direction);
 void UnitMetadata_Load(void);
 void UnitMetadata_Unload(void);

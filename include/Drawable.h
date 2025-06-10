@@ -1,18 +1,19 @@
 #pragma once
 
-#include <raylib.h>
+#include "raylib.h"
 
-typedef struct Drawable {
+typedef struct Drawable { // Requerimentos do DrawTexturePRO
     Texture2D* Texture;
     Rectangle Source;
-    Rectangle Destination;
+	Vector2 Position;
+    Vector2 Scale;
     Vector2 Offset;
     float Rotation;
     Color Color;
 } Drawable;
 
 Drawable Drawable_Build(
-    Texture2D* texture, Rectangle source, Rectangle destination,
+    Texture2D* texture, Rectangle source, Vector2 position, Vector2 Scale,
     Vector2 offset, float rotation, Color color);
 
 void Drawable_Draw(Drawable* drawable);

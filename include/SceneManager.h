@@ -24,6 +24,6 @@ typedef struct Scene {
     Scene_Function Unload;
 } Scene;
 
-void SceneManager_Init();
+void SceneManager_Init(void);
 void SceneManager_ChangeScene(SceneReference scene);
 void SceneManager_LoopScene(void);

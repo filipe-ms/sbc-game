@@ -1,64 +1,17 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-        "version": "0.2.0",
-        "configurations": [
-          {
-            "name": "Debug",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}/bin/Debug/${workspaceFolderBasename}.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-              {
-                "description": "Enable pretty-printing for gdb",
-                "text": "-enable-pretty-printing",
-                "ignoreFailures": false
-              }
-            ],
-            "windows": {
-              "miDebuggerPath": "gdb.exe",
-            },
-            "osx": {
-              "program": "${workspaceFolder}/bin/Debug/${workspaceFolderBasename}",
-              "MIMode": "lldb"
-            },
-            "linux": {
-              "program": "${workspaceFolder}/bin/Debug/${workspaceFolderBasename}",
-              "miDebuggerPath": "/usr/bin/gdb",
-            },
-            "preLaunchTask": "build debug"
-          },
-          {
-            "name": "Run",
-            "type": "cppdbg",
-            "request": "launch",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "program": "${workspaceFolder}/bin/Release/${workspaceFolderBasename}.exe",
-            "MIMode": "gdb",
-            "windows": {
-              "program": "${workspaceFolder}/bin/Release/${workspaceFolderBasename}.exe",
-              "miDebuggerPath": "gdb.exe"
-            },
-            "osx": {
-              "program": "${workspaceFolder}/bin/Release/${workspaceFolderBasename}",
-              "MIMode": "lldb"
-            },
-            "linux": {
-              "program": "${workspaceFolder}/bin/Release/${workspaceFolderBasename}",
-              "miDebuggerPath": "/usr/bin/gdb"
-            },
-            "preLaunchTask": "build release",
-          }
-        ]
-      }
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "vslsRemoteLaunch",
+            "name": "Crown",
+            "request": "attach",
+            "projectID": "0ed5fb0c-7ae9-23be-436b-c71daf3e20ef"
+        },
+        {
+            "type": "vslsRemoteLaunch",
+            "name": "raylib",
+            "request": "attach",
+            "projectID": "8898ea18-743a-15ef-5df5-284349369c3f"
+        }
+    ]
+}
