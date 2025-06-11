@@ -2,12 +2,10 @@
 
 #include "GameCamera.h"
 
-#include "Map.h"
+#include "GameMap.h"
 #include "Constants.h"
 
 #include "raylib.h"
-
-#include <stdbool.h>
 
 Camera2D GameCamera;
 

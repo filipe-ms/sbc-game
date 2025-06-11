@@ -1,5 +1,4 @@
-// CAMERA_H
-
+// File: GameCamera.h
 #pragma once
 
 #include "raylib.h"

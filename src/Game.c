@@ -1,9 +1,14 @@
-#include "Map.h"
+// File: Game.c
+
+#include "Game.h"
+#include "GameMap.h"
 #include "Unit.h"
 #include "UnitMetadata.h"
 #include "GameUnit.h"
 #include "GameCamera.h"
+#include "GameUI.h"
 
+// DEBUG UNIT
 GameUnit gameUnit;
 
 void Game_Init(void) {
@@ -31,6 +36,8 @@ void Game_Draw(void) {
 		GameUnit_Draw(&gameUnit);
 	}
 	EndMode2D();
+
+	GameUI_Update();
 	
     EndDrawing();
 }

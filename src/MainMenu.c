@@ -6,22 +6,22 @@
 #include "Constants.h"
 #include "SceneManager.h"
 
-// Características do texto
-const int TITLE_FONT_SIZE = 60;
+// Características do Texto
+const int TITLE_FontSize = 60;
 
 // Variáveis dos botões
-Button playButton;
-Button exitButton;
-Button creditsButton;
+MenuButton playButton;
+MenuButton exitButton;
+MenuButton creditsButton;
 
 // Características dos botões
 const float BUTTON_WIDTH = 200;
 const float BUTTON_HEIGHT = 50;
 const float BUTTON_SPACING = 20;
-const int FONT_SIZE = 30;
+const int FontSize = 30;
 
-Color btn_color = { 255, 255, 255, 60 };
-Color btn_hover_color = { 255, 255, 255, 255 };
+Color btn_Color = { 255, 255, 255, 60 };
+Color btn_HoverColor = { 255, 255, 255, 255 };
 
 Texture2D main_menu;
 
@@ -36,53 +36,53 @@ void MainMenu_Init(void) {
     float startY = (screenHeight - totalHeight) / 2;
 
     // Inicializa o botão Play
-    playButton = (Button){
-        .bounds = {
+    playButton = (MenuButton){
+        .Bounds = {
             .x = (screenWidth - BUTTON_WIDTH) / 2,
             .y = startY,
             .width = BUTTON_WIDTH,
             .height = BUTTON_HEIGHT
         },
-        .text = "JOGAR",
-        .font_size = FONT_SIZE,
-        .color = btn_color,
-        .hover_color = btn_hover_color
+        .Text = "JOGAR",
+        .FontSize = FontSize,
+        .Color = btn_Color,
+        .HoverColor = btn_HoverColor
     };
 
     // Inicializa o botão Exit
-    exitButton = (Button){
-        .bounds = {
+    exitButton = (MenuButton){
+        .Bounds = {
             .x = (screenWidth - BUTTON_WIDTH) / 2,
             .y = startY + 4* (BUTTON_HEIGHT + BUTTON_SPACING),
             .width = BUTTON_WIDTH,
             .height = BUTTON_HEIGHT
         },
-        .text = "SAIR",
-        .font_size = FONT_SIZE,
-        .color = btn_color,
-        .hover_color = btn_hover_color
+        .Text = "SAIR",
+        .FontSize = FontSize,
+        .Color = btn_Color,
+        .HoverColor = btn_HoverColor
     };
 
-    creditsButton = (Button) {
-    .bounds = {
+    creditsButton = (MenuButton) {
+    .Bounds = {
         .x = (screenWidth - BUTTON_WIDTH) / 2,
         .y = startY + 1 * (BUTTON_HEIGHT + BUTTON_SPACING),
         .width = BUTTON_WIDTH,
         .height = BUTTON_HEIGHT
     },
-    .text = "CREDITOS",
-    .font_size = FONT_SIZE,
-    .color = btn_color,
-    .hover_color = btn_hover_color
+    .Text = "CREDITOS",
+    .FontSize = FontSize,
+    .Color = btn_Color,
+    .HoverColor = btn_HoverColor
     };
 
 }
 
 void MainMenu_Update(void) {
 
-    bool game = CheckCollisionPointRec(GetMousePosition(), playButton.bounds);
-    bool exit = CheckCollisionPointRec(GetMousePosition(), exitButton.bounds);
-    bool credits = CheckCollisionPointRec(GetMousePosition(), creditsButton.bounds);
+    bool game = CheckCollisionPointRec(GetMousePosition(), playButton.Bounds);
+    bool exit = CheckCollisionPointRec(GetMousePosition(), exitButton.Bounds);
+    bool credits = CheckCollisionPointRec(GetMousePosition(), creditsButton.Bounds);
 
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         if (game) SceneManager_ChangeScene(SCENEREFERENCE_GAME);
@@ -96,17 +96,17 @@ void DrawMainMenuBackground(void) {
     Rectangle destination = { 0.0f, 0.0f, (float)GetScreenWidth(), (float)GetScreenHeight() };
     Vector2 offset = { 0 };
     float rotation = 0.0f;
-    Color color = { 255, 255, 255, 90 };
-    DrawTexturePro(main_menu, source, destination, offset, rotation, color);
+    Color Color = { 255, 255, 255, 90 };
+    DrawTexturePro(main_menu, source, destination, offset, rotation, Color);
 }
 
 void MainMenu_Draw(void) {
     BeginDrawing();
     ClearBackground(BLACK);
     DrawMainMenuBackground();
-    int titleWidth = MeasureText(CONSTANTS_GAME_TITLE, TITLE_FONT_SIZE);
+    int titleWidth = MeasureText(CONSTANTS_GAME_TITLE, TITLE_FontSize);
     
-    DrawText(CONSTANTS_GAME_TITLE, (GetScreenWidth() - titleWidth) / 2, 100, FONT_SIZE * 2, WHITE);
+    DrawText(CONSTANTS_GAME_TITLE, (GetScreenWidth() - titleWidth) / 2, 100, FontSize * 2, WHITE);
     Button_Draw(&playButton);
 	Button_Draw(&exitButton);
     Button_Draw(&creditsButton);

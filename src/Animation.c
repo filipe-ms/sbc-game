@@ -1,8 +1,10 @@
+// File: Animation.c
 #include "Animation.h"
-//#include <SpecificLists.h>
+
 #include "MathUtils.h"
-#include "stdio.h"
 #include "List.h"
+
+#include "stdio.h"
 
 static int GetNextFrame(Animation* animation);
 
@@ -21,7 +23,18 @@ Animation Animation_Build(float time_per_frame, int starting_frame, int ending_f
 }
 
 void Animation_Change(Animation* current_animation, Animation animation) {
-    current_animation->Drawable = animation.Drawable;
+    
+    /* AQUI NÃO MEXE NA DRAWABLE->POSITION DE PROPÓSITO */
+
+    // Drawable
+	current_animation->Drawable.Color = animation.Drawable.Color;
+	current_animation->Drawable.Source = animation.Drawable.Source;
+	current_animation->Drawable.Scale = animation.Drawable.Scale;
+	current_animation->Drawable.Offset = animation.Drawable.Offset;
+	current_animation->Drawable.Rotation = animation.Drawable.Rotation;
+	current_animation->Drawable.Texture = animation.Drawable.Texture;
+    
+    // Animation
     current_animation->TimePerFrame = animation.TimePerFrame;
     current_animation->CurrentFrame = animation.StartingFrame;
     current_animation->StartingFrame = animation.StartingFrame;

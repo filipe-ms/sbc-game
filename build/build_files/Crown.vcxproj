@@ -577,11 +577,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Animation.h" />
+    <ClInclude Include="..\..\include\Buttons.h" />
     <ClInclude Include="..\..\include\GameCamera.h" />
     <ClInclude Include="..\..\include\GameInputManager.h" />
+    <ClInclude Include="..\..\include\GameUI.h" />
+    <ClInclude Include="..\..\include\GameUnitMovement.h" />
+    <ClInclude Include="..\..\include\GameUnitSelection.h" />
     <ClInclude Include="..\..\include\UnitAnimationMetadata.h" />
     <ClInclude Include="..\..\include\Barbarian.h" />
-    <ClInclude Include="..\..\include\Button.h" />
     <ClInclude Include="..\..\include\Constants.h" />
     <ClInclude Include="..\..\include\Drawable.h" />
     <ClInclude Include="..\..\include\Function.h" />
@@ -590,7 +593,7 @@
     <ClInclude Include="..\..\include\GenList.h" />
     <ClInclude Include="..\..\include\List.h" />
     <ClInclude Include="..\..\include\MainMenu.h" />
-    <ClInclude Include="..\..\include\Map.h" />
+    <ClInclude Include="..\..\include\GameMap.h" />
     <ClInclude Include="..\..\include\MathUtils.h" />
     <ClInclude Include="..\..\include\request.h" />
     <ClInclude Include="..\..\include\request_manager.h" />
@@ -605,17 +608,20 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\Animation.c" />
     <ClCompile Include="..\..\src\Barbarian.c" />
-    <ClCompile Include="..\..\src\Button.c" />
+    <ClCompile Include="..\..\src\Buttons.c" />
     <ClCompile Include="..\..\src\GameCamera.c" />
     <ClCompile Include="..\..\src\Drawable.c" />
     <ClCompile Include="..\..\src\Function.c" />
     <ClCompile Include="..\..\src\Game.c" />
+    <ClCompile Include="..\..\src\GameUI.c" />
     <ClCompile Include="..\..\src\GameUnit.c" />
+    <ClCompile Include="..\..\src\GameUnitMovement.c" />
+    <ClCompile Include="..\..\src\GameUnitSelection.c" />
     <ClCompile Include="..\..\src\GenList.c" />
     <ClCompile Include="..\..\src\GameInputManager.c" />
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\MainMenu.c" />
-    <ClCompile Include="..\..\src\Map.c" />
+    <ClCompile Include="..\..\src\GameMap.c" />
     <ClCompile Include="..\..\src\request.c" />
     <ClCompile Include="..\..\src\request_manager.c" />
     <ClCompile Include="..\..\src\request_thread.c" />

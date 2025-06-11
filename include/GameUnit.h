@@ -34,6 +34,9 @@ typedef struct GameUnit {
 	bool IsClickable;
     bool IsBeingHovered;
 	Unit Unit;
+
+	Vector2* Position;
+    Vector2 Destination;
 } GameUnit;
 
 void GameUnit_Init(GameUnit* unit, Unit_Type type);

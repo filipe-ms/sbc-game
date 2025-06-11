@@ -16,8 +16,6 @@ typedef struct Unit {
     int Direction;
     Animation Animation;
 
-    Unit_Type unitAnimationMetadata;
-
     UnitAnimationMetadata UnitAnimationMetadata;
     Animation* Metadata;
 } Unit;

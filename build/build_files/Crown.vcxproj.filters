@@ -52,27 +52,24 @@
     <Filter Include="Source Files\Metadata">
       <UniqueIdentifier>{666ec2e0-4b5b-49b0-b93c-130f280a9abe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Camera">
-      <UniqueIdentifier>{707e1862-7e71-45ba-a09b-5de54f66b286}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\IO">
-      <UniqueIdentifier>{6045d752-70bc-4f32-be14-27416dcbca19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\IO">
-      <UniqueIdentifier>{eb12785f-78c7-4330-8192-f838989af888}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Scene\Game">
       <UniqueIdentifier>{1e71c44a-912b-4e19-812e-8a30db96f863}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Scene\Game">
       <UniqueIdentifier>{6a7e7900-e841-4509-93aa-d742a65044ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scene\Game\IO">
+      <UniqueIdentifier>{6045d752-70bc-4f32-be14-27416dcbca19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Game\Unit">
+      <UniqueIdentifier>{554ccbab-9afe-4c86-8110-cff717921661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene\Game\Unit">
+      <UniqueIdentifier>{b62b7966-bf76-4344-b802-b99db11f4995}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\request.h">
@@ -89,9 +86,6 @@
     </ClInclude>
     <ClInclude Include="..\..\include\resource_dir.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\Button.h">
-      <Filter>Header Files\Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\SceneManager.h">
       <Filter>Header Files\Scene</Filter>
@@ -132,24 +126,36 @@
     <ClInclude Include="..\..\include\UnitAnimationMetadata.h">
       <Filter>Header Files\Metadata</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\GameInputManager.h">
-      <Filter>Header Files\IO</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Game.h">
       <Filter>Header Files\Scene\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\GameCamera.h">
       <Filter>Header Files\Scene\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\GameUnit.h">
+    <ClInclude Include="..\..\include\GameUI.h">
       <Filter>Header Files\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameInputManager.h">
+      <Filter>Header Files\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameMap.h">
+      <Filter>Header Files\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameUnit.h">
+      <Filter>Header Files\Scene\Game\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameUnitMovement.h">
+      <Filter>Header Files\Scene\Game\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Buttons.h">
+      <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameUnitSelection.h">
+      <Filter>Header Files\Scene\Game\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\request.c">
@@ -163,9 +169,6 @@
     </ClCompile>
     <ClCompile Include="..\..\src\thread_wrapper.c">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Button.c">
-      <Filter>Source Files\Interface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MainMenu.c">
       <Filter>Source Files\Scene</Filter>
@@ -200,17 +203,32 @@
     <ClCompile Include="..\..\src\UnitAnimationMetadata.c">
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\GameInputManager.c">
-      <Filter>Source Files\IO</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Game.c">
       <Filter>Source Files\Scene\Game</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\GameCamera.c">
       <Filter>Source Files\Scene\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\GameUnit.c">
+    <ClCompile Include="..\..\src\GameUI.c">
       <Filter>Source Files\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameInputManager.c">
+      <Filter>Source Files\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameMap.c">
+      <Filter>Source Files\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameUnitMovement.c">
+      <Filter>Source Files\Scene\Game\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameUnit.c">
+      <Filter>Source Files\Scene\Game\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Buttons.c">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameUnitSelection.c">
+      <Filter>Source Files\Scene\Game\Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

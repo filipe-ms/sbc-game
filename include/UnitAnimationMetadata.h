@@ -1,4 +1,5 @@
 #pragma once
+
 typedef struct UnitAnimationMetadata {
     int Actions;
     int Directions;

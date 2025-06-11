@@ -1,4 +1,4 @@
-// GAMEINPUTMANAGER_C
+// File: GameInputManager.c
 
 #include "GameInputManager.h"
 
@@ -6,8 +6,13 @@
 
 #include "raylib.h"
 
-bool GameInputManager_IsMouseIntersectingWith(Rectangle world2dRectangle) {
+Vector2 GameInputManager_GetMouseToWorld2D() {
 	Vector2 mousePos = GetMousePosition();
-	Vector2 worldMousePos = GetScreenToWorld2D(mousePos, GameCamera);
-	return CheckCollisionPointRec(worldMousePos, world2dRectangle);
+	Vector2 worldPos = GetScreenToWorld2D(mousePos, GameCamera);
+	return worldPos;
+}
+
+bool GameInputManager_IsMouseIntersectingWith(Rectangle world2dRectangle) {
+	Vector2 worldPos = GameInputManager_GetMouseToWorld2D();
+	return CheckCollisionPointRec(worldPos, world2dRectangle);
 }

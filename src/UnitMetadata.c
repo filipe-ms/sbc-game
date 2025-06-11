@@ -17,10 +17,6 @@ static Texture2D barbarian_faint_texture;
 Animation* Barbarian = NULL;
 UnitAnimationMetadata UnitAnimationmetadata[1];
 
-UnitAnimationMetadata UnitMetadata_GetUnitAnimationMetadataByUnitType(Unit_Type type) {
-    return UnitAnimationmetadata[type];
-}
-
 Animation* UnitMetadata_GetMetadataByUnitMetadataType(Unit_Type type)
 {
     switch (type) {
@@ -30,6 +26,12 @@ Animation* UnitMetadata_GetMetadataByUnitMetadataType(Unit_Type type)
 
     return NULL;
 }
+
+UnitAnimationMetadata UnitMetadata_GetUnitAnimationMetadataByUnitType(Unit_Type type) {
+    return UnitAnimationmetadata[type];
+}
+
+
 
 static void BarbarianMetadataLoad(void) {
     UnitAnimationmetadata[BARBARIAN] = UnitAnimationMetadata_Build(4, 4);
