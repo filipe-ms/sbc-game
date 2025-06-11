@@ -29,18 +29,11 @@ typedef enum GameUnit_SubType {
 }GameUnit_SubType;
 
 typedef struct GameUnit {
-	GameUnit_Type Type;
-	GameUnit_SubType SubType;
-
-	GameUnit_Action Action;
-
 	bool IsClickable;
-
+    bool IsBeingHovered;
 	Unit Unit;
-
 } GameUnit;
 
-void GameUnit_Init(GameUnit* game_unit);
-void GameUnit_Load(GameUnit* game_unit);
-void GameUnit_Update(GameUnit* game_unit);
-void GameUnit_Draw(GameUnit* game_unit);
+void GameUnit_Init(GameUnit* unit, Unit_Type type);
+void GameUnit_Update(GameUnit* unit);
+void GameUnit_Draw(GameUnit* unit);

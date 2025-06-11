@@ -4,13 +4,6 @@
 
 static Animation GetAnimation(Unit* unit, int animation, int direction);
 
-void Unit_Load() {
-
-}
-
-void Unit_Unload() {
-}
-
 void Unit_Init(Unit* unit, Unit_Type type) {
 	unit->Action = 0;
 	unit->Direction = 0;
@@ -22,22 +15,8 @@ void Unit_Init(Unit* unit, Unit_Type type) {
     Animation_Change(&unit->Animation, GetAnimation(unit, 0, 0));
 }
 
-
 void Unit_Update(Unit* unit) {
     Animation_Update(&unit->Animation);
-
-    if (IsKeyPressed(KEY_W)) {
-        Unit_ChangeDirection(unit, 3);
-    }
-    else if (IsKeyPressed(KEY_A)) {
-        Unit_ChangeDirection(unit, 1);
-    }
-    else if (IsKeyPressed(KEY_S)) {
-        Unit_ChangeDirection(unit, 0);
-    }
-    else if (IsKeyPressed(KEY_D)) {
-        Unit_ChangeDirection(unit, 2);
-    }
 }
 
 void Unit_Draw(Unit* unit) {

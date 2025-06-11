@@ -52,6 +52,15 @@
     <Filter Include="Source Files\Metadata">
       <UniqueIdentifier>{666ec2e0-4b5b-49b0-b93c-130f280a9abe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Camera">
+      <UniqueIdentifier>{707e1862-7e71-45ba-a09b-5de54f66b286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IO">
+      <UniqueIdentifier>{6045d752-70bc-4f32-be14-27416dcbca19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IO">
+      <UniqueIdentifier>{eb12785f-78c7-4330-8192-f838989af888}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
@@ -123,6 +132,12 @@
     <ClInclude Include="..\..\include\UnitAnimationMetadata.h">
       <Filter>Header Files\Metadata</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Camera.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameInputManager.h">
+      <Filter>Header Files\IO</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
@@ -184,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\UnitAnimationMetadata.c">
       <Filter>Source Files\Metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Camera.c">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameInputManager.c">
+      <Filter>Source Files\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

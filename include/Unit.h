@@ -28,8 +28,6 @@ typedef struct Unit {
 void Unit_Init(Unit* unit, Unit_Type type);
 void Unit_Update(Unit* unit);
 void Unit_Draw(Unit* unit);
-void Unit_Load(void);
-void Unit_Unload(void);
 
 // Action / Direction
 void Unit_ChangeAction(Unit* unit, int action);

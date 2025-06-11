@@ -1,21 +1,23 @@
 #include "Map.h"
 #include "Unit.h"
 #include "UnitMetadata.h"
+#include <GameUnit.h>
+#include <Camera.h>
 
-Unit unit;
+GameUnit gameUnit;
 
 void Game_Init(void) {
 	UnitMetadata_Load();
 
 	Map_Init();
-	Unit_Load();
-	Unit_Init(&unit, BARBARIAN);
+	Camera_Init();
+	GameUnit_Init(&gameUnit, BARBARIAN);
 }
 
 void Game_Update(void) {
 	Map_Update();
 
-	Unit_Update(&unit);
+	GameUnit_Update(&gameUnit);
 }
 
 void Game_Draw(void) {
@@ -23,7 +25,7 @@ void Game_Draw(void) {
     ClearBackground(BLACK);
 
 	Map_Draw();
-	Unit_Draw(&unit);
+	GameUnit_Draw(&gameUnit);
 
     EndDrawing();
 }
@@ -32,5 +34,4 @@ void Game_Unload(void) {
 	UnitMetadata_Unload();
 
 	Map_Unload();
-	Unit_Unload();
 }
