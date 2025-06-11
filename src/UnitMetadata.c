@@ -1,9 +1,14 @@
-#include "Animation.h"
-#include <Constants.h>
-#include "UnitMetadata.h"
-#include <Unit.h>
+// UNITMETADATA_C
 
-// [ACTION][DIRECTION]
+#include "UnitMetadata.h"
+
+#include "Animation.h"
+#include "Constants.h"
+#include "Unit.h"
+
+#include <stdlib.h>
+
+
 static Texture2D barbarian_idle_texture;
 static Texture2D barbarian_walk_texture;
 static Texture2D barbarian_attack_texture;

@@ -61,6 +61,12 @@
     <Filter Include="Source Files\IO">
       <UniqueIdentifier>{eb12785f-78c7-4330-8192-f838989af888}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scene\Game">
+      <UniqueIdentifier>{1e71c44a-912b-4e19-812e-8a30db96f863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Game">
+      <UniqueIdentifier>{6a7e7900-e841-4509-93aa-d742a65044ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
@@ -111,9 +117,6 @@
     <ClInclude Include="..\..\include\Barbarian.h">
       <Filter>Header Files\Units</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Game.h">
-      <Filter>Header Files\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Drawable.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
@@ -123,20 +126,23 @@
     <ClInclude Include="..\..\include\UnitMetadata.h">
       <Filter>Header Files\Metadata</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\GameUnit.h">
-      <Filter>Header Files\Units</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Unit.h">
       <Filter>Header Files\Units</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\UnitAnimationMetadata.h">
       <Filter>Header Files\Metadata</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Camera.h">
-      <Filter>Header Files\Scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\GameInputManager.h">
       <Filter>Header Files\IO</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Game.h">
+      <Filter>Header Files\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameCamera.h">
+      <Filter>Header Files\Scene\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameUnit.h">
+      <Filter>Header Files\Scene\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +179,6 @@
     <ClCompile Include="..\..\src\GenList.c">
       <Filter>Source Files\Collections</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Game.c">
-      <Filter>Source Files\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Barbarian.c">
       <Filter>Source Files\Units</Filter>
     </ClCompile>
@@ -191,20 +194,23 @@
     <ClCompile Include="..\..\src\UnitMetadata.c">
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\GameUnit.c">
-      <Filter>Source Files\Units</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Unit.c">
       <Filter>Source Files\Units</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\UnitAnimationMetadata.c">
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Camera.c">
-      <Filter>Source Files\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\GameInputManager.c">
       <Filter>Source Files\IO</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game.c">
+      <Filter>Source Files\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameCamera.c">
+      <Filter>Source Files\Scene\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameUnit.c">
+      <Filter>Source Files\Scene\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

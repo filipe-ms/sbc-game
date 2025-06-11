@@ -1,6 +1,8 @@
+// ANIMATION_H
+
 #pragma once
+
 #include "Drawable.h"
-#include "List.h"
 
 typedef struct Animation {
     int CurrentFrame;

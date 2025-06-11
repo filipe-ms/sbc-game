@@ -1,7 +1,11 @@
+// GAMEUNIT_C
+
 #include "GameUnit.h"
-#include <UnitMetadata.h>
-#include <raylib.h>
-#include <GameInputManager.h>
+
+#include "raylib.h"
+
+#include "UnitMetadata.h"
+#include "GameInputManager.h"
 
 void DrawSelectionHint(GameUnit* unit) {
     Rectangle rect =

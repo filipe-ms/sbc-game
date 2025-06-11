@@ -2,9 +2,11 @@
 #include "Map.h"
 
 #include "raylib.h"
+
 #include "GenList.h"
-#include <string.h>
 #include "Constants.h"
+
+#include <string.h>
 
 Texture2D tilesetField;
 

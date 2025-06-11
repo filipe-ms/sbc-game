@@ -1,8 +1,8 @@
 #include "Map.h"
 #include "Unit.h"
 #include "UnitMetadata.h"
-#include <GameUnit.h>
-#include <Camera.h>
+#include "GameUnit.h"
+#include "GameCamera.h"
 
 GameUnit gameUnit;
 
@@ -10,7 +10,7 @@ void Game_Init(void) {
 	UnitMetadata_Load();
 
 	Map_Init();
-	Camera_Init();
+	GameCamera_Init();
 	GameUnit_Init(&gameUnit, BARBARIAN);
 }
 
@@ -18,15 +18,20 @@ void Game_Update(void) {
 	Map_Update();
 
 	GameUnit_Update(&gameUnit);
+	GameCamera_Update();
 }
 
 void Game_Draw(void) {
-    BeginDrawing();
-    ClearBackground(BLACK);
-
-	Map_Draw();
-	GameUnit_Draw(&gameUnit);
-
+	BeginDrawing();
+	ClearBackground(BLACK);
+	
+	BeginMode2D(GameCamera);
+	{	// Elementos do jogo sensíveis à posição da câmera
+		Map_Draw();
+		GameUnit_Draw(&gameUnit);
+	}
+	EndMode2D();
+	
     EndDrawing();
 }
 

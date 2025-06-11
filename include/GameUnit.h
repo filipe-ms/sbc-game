@@ -1,3 +1,5 @@
+// GAMEUNIT_H
+
 #pragma once
 
 #include "stdbool.h"

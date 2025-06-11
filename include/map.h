@@ -5,8 +5,8 @@
 #include <Drawable.h>
 
 #define TILE_SIZE 128
-#define MAP_WIDTH 50
-#define MAP_HEIGHT 50
+#define MAP_WIDTH 20
+#define MAP_HEIGHT 20
 
 typedef struct Map_Tile {
     Drawable Floor;
