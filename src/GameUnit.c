@@ -1,5 +1,4 @@
-// GAMEUNIT_C
-
+// File: GameUnit.c
 #include "GameUnit.h"
 
 #include "UnitMetadata.h"
