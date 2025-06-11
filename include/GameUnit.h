@@ -4,7 +4,7 @@
 
 #include "Unit.h"
 
-typedef enum GameUnit_Direction {
+typedef enum UnitAnimationMetadata_Direction {
     GAMEUNIT_DIRECTION_NONE = -1,
     GAMEUNIT_DIRECTION_DOWN = 0,
     GAMEUNIT_DIRECTION_LEFT = 1,
@@ -12,7 +12,7 @@ typedef enum GameUnit_Direction {
     GAMEUNIT_DIRECTION_UP = 3
 } Unit_Direction;
 
-typedef enum GameUnit_Action {
+typedef enum UnitAnimationMetadata_Action {
     GAMEUNIT_ACTION_NONE = -1,
     GAMEUNIT_ACTION_IDLE = 0,
     GAMEUNIT_ACTION_WALK = 1,
@@ -39,3 +39,8 @@ typedef struct GameUnit {
 	Unit Unit;
 
 } GameUnit;
+
+void GameUnit_Init(GameUnit* game_unit);
+void GameUnit_Load(GameUnit* game_unit);
+void GameUnit_Update(GameUnit* game_unit);
+void GameUnit_Draw(GameUnit* game_unit);

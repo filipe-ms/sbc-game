@@ -1,4 +1,5 @@
 #include "GameUnit.h"
+#include <UnitMetadata.h>
 
 GameUnit* SelectedUnit;
 
@@ -22,4 +23,20 @@ GameUnit* GameUnit_GetSelected() {
 
 void UpdateGameUnit() {
     DrawSelectionHint();
+}
+
+void GameUnit_Init(GameUnit* game_unit) {
+    Unit_Init(&game_unit->Unit, BARBARIAN);
+}
+
+void GameUnit_Load(GameUnit* game_unit)
+{
+}
+
+void GameUnit_Update(GameUnit* game_unit)
+{
+}
+
+void GameUnit_Draw(GameUnit* game_unit)
+{
 }

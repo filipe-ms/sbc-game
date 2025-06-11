@@ -105,9 +105,6 @@
     <ClInclude Include="..\..\include\Game.h">
       <Filter>Header Files\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Unit.h">
-      <Filter>Header Files\Units</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\Drawable.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
@@ -119,6 +116,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\GameUnit.h">
       <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Unit.h">
+      <Filter>Header Files\Units</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\UnitAnimationMetadata.h">
+      <Filter>Header Files\Metadata</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +164,6 @@
     <ClCompile Include="..\..\src\Barbarian.c">
       <Filter>Source Files\Units</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Unit.c">
-      <Filter>Source Files\Units</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\SpecificLists.c">
       <Filter>Source Files\Collections</Filter>
     </ClCompile>
@@ -178,6 +178,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\GameUnit.c">
       <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Unit.c">
+      <Filter>Source Files\Units</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\UnitAnimationMetadata.c">
+      <Filter>Source Files\Metadata</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -577,6 +577,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Animation.h" />
+    <ClInclude Include="..\..\include\UnitAnimationMetadata.h" />
     <ClInclude Include="..\..\include\Barbarian.h" />
     <ClInclude Include="..\..\include\Button.h" />
     <ClInclude Include="..\..\include\Constants.h" />
@@ -618,6 +619,7 @@
     <ClCompile Include="..\..\src\SpecificLists.c" />
     <ClCompile Include="..\..\src\thread_wrapper.c" />
     <ClCompile Include="..\..\src\Unit.c" />
+    <ClCompile Include="..\..\src\UnitAnimationMetadata.c" />
     <ClCompile Include="..\..\src\UnitMetadata.c" />
   </ItemGroup>
   <ItemGroup>

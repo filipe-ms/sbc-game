@@ -4,7 +4,6 @@
 #include "Barbarian.h"
 #include "GameUnit.h"
 #include "Animation.h"
-#include "AnimationMetadata.h"
 
 Texture2D BarbarianIdle;
 Texture2D BarbarianWalk;

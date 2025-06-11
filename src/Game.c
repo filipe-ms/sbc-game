@@ -9,7 +9,7 @@ void Game_Init(void) {
 
 	Map_Init();
 	Unit_Load();
-	Unit_Init(&unit);
+	Unit_Init(&unit, BARBARIAN);
 }
 
 void Game_Update(void) {
