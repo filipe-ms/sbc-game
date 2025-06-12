@@ -14,6 +14,8 @@ typedef enum SceneReference {
     SCENEREFERENCE_CREDITS,
     SCENEREFERENCE_YOU_WON,
     SCENEREFERENCE_YOU_LOST,
+
+    SCENEREFERENCE_DEBUG,
 } SceneReference;
 
 typedef struct Scene {

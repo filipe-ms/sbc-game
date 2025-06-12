@@ -5,19 +5,13 @@
 #include "GameInputManager.h"
 #include "GameUnitMovement.h"
 #include "GameUnitSelection.h"
+#include "Button.h"
 
 #include "raylib.h"
 
-static Rectangle GetUnitBox(GameUnit* unit) {
-    Rectangle rect =
-        (Rectangle){
-            unit->Unit.Animation.Drawable.Position.x,
-            unit->Unit.Animation.Drawable.Position.y,
-            unit->Unit.Animation.Drawable.Scale.x * unit->Unit.Animation.Drawable.Source.width,
-            unit->Unit.Animation.Drawable.Scale.y * unit->Unit.Animation.Drawable.Source.height
-    };
-    return rect;
-}
+static void OnClick(GameUnit* unit);
+static void OnHoverBegin(GameUnit* unit);
+static void OnHoverEnds(GameUnit* unit);
 
 static void DrawHoverHint(GameUnit* unit) {
     Rectangle rect =
@@ -33,10 +27,29 @@ static void DrawHoverHint(GameUnit* unit) {
 void GameUnit_Init(GameUnit* unit, Unit_Type type) {
     Unit_Init(&unit->Unit, type);
 	unit->Position = &unit->Unit.Animation.Drawable.Position;
+    TransparentButton_Init(&unit->TransparentButton, &unit, true);
+    TransparentButton_AddHoverEvents(&unit->TransparentButton, OnHoverBegin, OnHoverEnds);
+    TransparentButton_AddClickEvents(&unit->TransparentButton, OnClick);
+}
+
+void OnClick(GameUnit* unit) {
+    TraceLog(LOG_INFO, "| Click Event: %d |", unit);
+}
+
+void OnHoverBegin(GameUnit* unit) {
+    TraceLog(LOG_INFO, "| Hover Begins: %d |", unit);
+}
+
+void OnHoverEnds(GameUnit* unit) {
+    TraceLog(LOG_INFO, "| Hover Ends: %d |", unit);
 }
 
 void GameUnit_Update(GameUnit* unit) {
-    Rectangle interactionRectangle = GetUnitBox(unit);
+    unit->TransparentButton.Bounds = GameUnit_CalculateCollisionBounds(unit);
+
+    TransparentButton_Update(&unit->TransparentButton);
+
+    Rectangle interactionRectangle = GameUnit_CalculateCollisionBounds(unit);
         
     unit->IsBeingHovered = GameInputManager_IsMouseIntersectingWith(interactionRectangle);
 
@@ -61,4 +74,9 @@ void GameUnit_Draw(GameUnit* unit)
     }
 
     GameUnitSelection_Draw();
+}
+
+Rectangle GameUnit_CalculateCollisionBounds(GameUnit* unit)
+{
+    return Drawable_CalculateDestination(&unit->Unit.Animation.Drawable);
 }

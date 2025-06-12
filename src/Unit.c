@@ -9,7 +9,9 @@ static Animation GetExpectedAnimation(Unit* unit, int action, int direction) {
 void Unit_Init(Unit* unit, Unit_Type type) {
 	unit->Action = 0;
 	unit->Direction = 0;
+
 	unit->Position = &unit->Animation.Drawable.Position;
+    unit->Scale = &unit->Animation.Drawable.Scale;
 
     unit->UnitAnimationMetadata = UnitMetadata_GetUnitAnimationMetadataByUnitType(type);    
     unit->Metadata = UnitMetadata_GetMetadataByUnitMetadataType(type);

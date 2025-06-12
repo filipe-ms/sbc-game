@@ -578,6 +578,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\Animation.h" />
     <ClInclude Include="..\..\include\Button.h" />
+    <ClInclude Include="..\..\include\DebugScene.h" />
     <ClInclude Include="..\..\include\GameCamera.h" />
     <ClInclude Include="..\..\include\GameInputManager.h" />
     <ClInclude Include="..\..\include\GameUI.h" />
@@ -609,6 +610,7 @@
     <ClCompile Include="..\..\src\Animation.c" />
     <ClCompile Include="..\..\src\Barbarian.c" />
     <ClCompile Include="..\..\src\Button.c" />
+    <ClCompile Include="..\..\src\DebugScene.c" />
     <ClCompile Include="..\..\src\GameCamera.c" />
     <ClCompile Include="..\..\src\Drawable.c" />
     <ClCompile Include="..\..\src\Function.c" />
