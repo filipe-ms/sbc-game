@@ -14,29 +14,49 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include <float.h>
-#include <time.h>
+#include <stdio.h>
 
-//=====================================
-// Estruturas e variáveis do Pathfinding A*
-//=====================================
+
+// Estrutura e variáveis usadas pelo algoritmo A*
 
 typedef struct PathNode {
     Vector2 position;
-    float g_cost;
-    float h_cost;
-    float f_cost;
+    int g_cost;
+    int h_cost;
+    int f_cost;
     struct PathNode* parent;
 } PathNode;
 
+const int heuristicNoise = 5;
+const int tiebreakerNoise = 10;
+
 List* PathList = NULL;
+
 static Vector2 currentWaypoint;
 
-//=====================================
-// Funções Auxiliares (Grid, A*, Listas)
-//=====================================
 
-static Vector2 GetMouseToGameGrid() {
+// Funções de comparação
+
+static int FindByPositionFn(void* context, void* data) {
+    Vector2* targetPosition = (Vector2*)context;
+    PathNode* node = (PathNode*)data;
+    return (node->position.x == targetPosition->x && node->position.y == targetPosition->y);
+}
+
+static int CompareByFCostFn(void* data1, void* data2) {
+    PathNode* node1 = (PathNode*)data1;
+    PathNode* node2 = (PathNode*)data2;
+
+    if (node1->f_cost < node2->f_cost) return -1;
+    if (node1->f_cost > node2->f_cost) return 1;
+    return 0;
+}
+
+
+// Outras funções auxiliares
+
+// TODO: matar isso aqui quando as unidades ganharem autonomia.
+static Vector2 GetMouseToGameGrid() { 
     Vector2 mousePos = GetMousePosition();
     Vector2 worldPos = GetScreenToWorld2D(mousePos, GameCamera);
     return (Vector2) {
@@ -45,71 +65,50 @@ static Vector2 GetMouseToGameGrid() {
     };
 }
 
-static Vector2 GetGameGridToWorld(Vector2 gridPos) {
+// TODO: Mapa deve cuidar de todos esses tipos de conversão.
+static Vector2 GetGameGridToWorld(Vector2 gridPos) { 
     return (Vector2) {
         gridPos.x* CONSTANTS_TILE_SIZE_F,
             gridPos.y* CONSTANTS_TILE_SIZE_F
     };
 }
 
+// TODO: Essa função se encaixa melhor no Map.
 static bool IsValidGridPosition(Vector2 pos) {
-    if (pos.x >= 0 && pos.x < MAP_WIDTH && pos.y >= 0 && pos.y < MAP_HEIGHT) {
+    if (pos.x >= 0 && pos.x < MAP_WIDTH && 
+        pos.y >= 0 && pos.y < MAP_HEIGHT) {
         return GameMap.Grid[(int)pos.x][(int)pos.y].isWalkable;
     }
     return false;
 }
 
-// Adicionada uma pequena variação aleatória para tornar os caminhos menos previsíveis.
-static float CalculateHeuristic(Vector2 a, Vector2 b) {
-    float random_factor = (float)rand() / (float)RAND_MAX * 5.0f;
-    return fabsf(a.x - b.x) + fabsf(a.y - b.y) + random_factor;
+static int CalculateHeuristic(Vector2 a, Vector2 b) {
+    return abs(a.x - b.x) + abs(a.y - b.y) + GetRandomValue(0, tiebreakerNoise);
 }
 
+// Encontra um nó em uma lista usando a função de predicado, passando a posição como contexto.
 static PathNode* FindNodeInList(List* list, Vector2 position) {
     if (!list) return NULL;
-    Node* current = list->head;
-    while (current) {
-        PathNode* p_node = (PathNode*)current->data;
-        if (p_node->position.x == position.x && p_node->position.y == position.y) {
-            return p_node;
-        }
-        current = current->next;
-    }
-    return NULL;
+    return (PathNode*)List_FindWithFn(list, &position, FindByPositionFn);
 }
 
-// Reconstrói o caminho final a partir do nó de destino
+// Reconstrói o caminho final a partir do nó de destino, revertendo a ordem.
 static void ReconstructPath(PathNode* endNode) {
-    if (PathList) {
-        List_Destroy(PathList);
-    }
+    if (PathList) List_Destroy(PathList);
     PathList = List_Create(sizeof(Vector2));
 
     PathNode* current = endNode;
     while (current != NULL) {
-        // Adiciona no início da lista para inverter a ordem
-        Node* new_node = (Node*)malloc(sizeof(Node));
-        if (!new_node) return; // Falha na alocação
-        new_node->data = malloc(sizeof(Vector2));
-        if (!new_node->data) { free(new_node); return; } // Falha na alocação
-
-        *(Vector2*)new_node->data = current->position;
-        new_node->next = PathList->head;
-        PathList->head = new_node;
-        if (!PathList->tail) {
-            PathList->tail = new_node;
-        }
-        PathList->size++;
-
+        if (!List_Add(PathList, &current->position)) return;
         current = current->parent;
     }
 }
 
-// IMPLEMENTADO: Função para embaralhar um array de vizinhos (Fisher-Yates shuffle)
+// Embaralha um array de vizinhos para criar caminhos diferentes (Fisher-Yates shuffle).
 static void ShuffleNeighbors(Vector2 array[], int n) {
     if (n > 1) {
         for (int i = n - 1; i > 0; i--) {
-            int j = rand() % (i + 1);
+            int j = GetRandomValue(0, i);
             Vector2 temp = array[i];
             array[i] = array[j];
             array[j] = temp;
@@ -117,71 +116,43 @@ static void ShuffleNeighbors(Vector2 array[], int n) {
     }
 }
 
-//=====================================
-// Lógica Principal do A*
-//=====================================
 
+
+// Implementação do A*
 void GameUnitMovement_BuildPath(Vector2 start, Vector2 end) {
-    // IMPORTANTE: Para uma aleatoriedade melhor, a função srand() deve ser chamada
-    // apenas uma vez no início do seu programa (ex: na função main).
-    // Estou deixando aqui para garantir que a funcionalidade do TODO seja atendida
-    // de forma auto-contida neste arquivo.
-    srand(time(NULL));
-
     if (PathList) {
         List_Destroy(PathList);
         PathList = NULL;
     }
 
-    if (!IsValidGridPosition(start) || !IsValidGridPosition(end)) {
-        return;
-    }
-
-    // MODIFICADO: O valor da heurística agora é uma variável local.
-    // Você pode alterar este valor para testar diferentes comportamentos.
-    // Valores mais altos farão o A* se comportar mais como uma busca gulosa (mais rápido, menos preciso).
-    // Valores mais baixos o farão se comportar mais como Dijkstra (mais lento, mais preciso).
-    // Exemplo com aleatoriedade: float heuristic_epsilon = 5.0f + ((float)rand() / (float)RAND_MAX * 2.0f); // Varia de 5.0 a 7.0
-    float heuristic_epsilon = 5.0f + ((float)rand() / (float)RAND_MAX * 2.0f);
+    if (!IsValidGridPosition(start) || !IsValidGridPosition(end)) return;
 
     List* openList = List_Create(sizeof(PathNode));
     List* closedList = List_Create(sizeof(PathNode));
 
-    PathNode* startNode = (PathNode*)malloc(sizeof(PathNode));
-    if (!startNode) return;
+    // Configura o nó inicial
+    PathNode startNode;
 
-    startNode->position = start;
-    startNode->g_cost = 0;
-    startNode->h_cost = CalculateHeuristic(start, end);
-    startNode->f_cost = startNode->g_cost + (startNode->h_cost * heuristic_epsilon);
-    startNode->parent = NULL;
+    startNode.position = start;
+    startNode.g_cost = 0;
+    startNode.h_cost = CalculateHeuristic(start, end);
+    startNode.f_cost = startNode.g_cost + (startNode.h_cost * heuristicNoise);
+    startNode.parent = NULL;
 
-    List_Add(openList, startNode);
-    free(startNode);
+    List_AddWithFn(openList, &startNode, CompareByFCostFn);
 
     while (openList->size > 0) {
-        Node* bestNodeLink = openList->head;
-        PathNode* bestNode = (PathNode*)bestNodeLink->data;
-        Node* currentLink = openList->head->next;
+        // O melhor nó é sempre o primeiro, pois a lista está ordenada
+        PathNode bestNodeData = *(PathNode*)List_GetByIndex(openList, 0);
+        List_RemoveFirst(openList);
 
-        while (currentLink) {
-            PathNode* currentNode = (PathNode*)currentLink->data;
-            if (currentNode->f_cost < bestNode->f_cost) {
-                bestNode = currentNode;
-                bestNodeLink = currentLink;
-            }
-            currentLink = currentLink->next;
-        }
+        // Move o melhor nó da lista aberta para a fechada
+        List_AddLast(closedList, &bestNodeData);
 
-        // Adiciona uma cópia do melhor nó para a lista fechada.
-        List_Add(closedList, bestNode);
-        // Pega um ponteiro estável para o nó que acabamos de adicionar na lista fechada.
+        // Obtém um ponteiro estável para o nó que acabamos de adicionar na lista fechada
         PathNode* currentNodeInClosedList = (PathNode*)closedList->tail->data;
 
-        // Remove o nó original da lista aberta.
-        List_Remove(openList, bestNode);
-
-        // Verifica se chegou ao destino.
+        // Se chegamos ao destino, reconstrói o caminho e finaliza
         if (currentNodeInClosedList->position.x == end.x && currentNodeInClosedList->position.y == end.y) {
             ReconstructPath(currentNodeInClosedList);
             List_Destroy(openList);
@@ -191,54 +162,56 @@ void GameUnitMovement_BuildPath(Vector2 start, Vector2 end) {
 
         // Analisa os vizinhos
         Vector2 neighbors[4] = {
-            {currentNodeInClosedList->position.x, currentNodeInClosedList->position.y - 1},
-            {currentNodeInClosedList->position.x, currentNodeInClosedList->position.y + 1},
-            {currentNodeInClosedList->position.x - 1, currentNodeInClosedList->position.y},
-            {currentNodeInClosedList->position.x + 1, currentNodeInClosedList->position.y}
+            {currentNodeInClosedList->position.x, currentNodeInClosedList->position.y - 1}, // Up
+            {currentNodeInClosedList->position.x, currentNodeInClosedList->position.y + 1}, // Down
+            {currentNodeInClosedList->position.x - 1, currentNodeInClosedList->position.y}, // Left
+            {currentNodeInClosedList->position.x + 1, currentNodeInClosedList->position.y}  // Right
         };
 
-        // IMPLEMENTADO: Embaralha a ordem dos vizinhos para criar caminhos diferentes.
         ShuffleNeighbors(neighbors, 4);
 
         for (int i = 0; i < 4; i++) {
             Vector2 neighborPos = neighbors[i];
 
-            if (!IsValidGridPosition(neighborPos) || FindNodeInList(closedList, neighborPos)) {
+            // Ignora vizinho inválido ou já na lista fechada
+            if (!IsValidGridPosition(neighborPos)) continue;
+            if (FindNodeInList(closedList, neighborPos)) continue; 
+
+            int tentative_g_cost = currentNodeInClosedList->g_cost + 1;
+            PathNode* neighborInOpenList = FindNodeInList(openList, neighborPos);
+
+            // Se o vizinho já está na openList com um custo maior, não faz nada
+            if (neighborInOpenList != NULL && tentative_g_cost >= neighborInOpenList->g_cost) {
                 continue;
             }
 
-            float tentative_g_cost = currentNodeInClosedList->g_cost + 1;
-            PathNode* neighborNode = FindNodeInList(openList, neighborPos);
-
-            if (neighborNode == NULL || tentative_g_cost < neighborNode->g_cost) {
-                if (neighborNode == NULL) {
-                    neighborNode = malloc(sizeof(PathNode));
-                    if (!neighborNode) return;
-
-                    neighborNode->position = neighborPos;
-                    neighborNode->h_cost = CalculateHeuristic(neighborPos, end);
-                    List_Add(openList, neighborNode);
-                    free(neighborNode);
-                    neighborNode = (PathNode*)openList->tail->data;
-                }
-
-                neighborNode->parent = currentNodeInClosedList;
-                neighborNode->g_cost = tentative_g_cost;
-                neighborNode->f_cost = neighborNode->g_cost + (neighborNode->h_cost * heuristic_epsilon);
+            // Se o vizinho estava na openList, removemos a versão antiga para adicionar a nova, com custo menor
+            if (neighborInOpenList != NULL) {
+                List_RemoveWithFn(openList, &neighborPos, FindByPositionFn);
             }
+
+            // Cria o nó vizinho atualizado e o adiciona na openList
+            PathNode newNeighborNode;
+            newNeighborNode.parent = currentNodeInClosedList;
+            newNeighborNode.position = neighborPos;
+            newNeighborNode.g_cost = tentative_g_cost;
+            newNeighborNode.h_cost = CalculateHeuristic(neighborPos, end);
+            newNeighborNode.f_cost = newNeighborNode.g_cost + (newNeighborNode.h_cost * heuristicNoise);
+
+            List_AddWithFn(openList, &newNeighborNode, CompareByFCostFn);
         }
     }
 
-    // Se o caminho não for encontrado, limpa as listas.
+    // Se a openList esvaziar e não acharmos o caminho, limpa as listas.
     List_Destroy(openList);
     List_Destroy(closedList);
 }
 
 
-//=====================================
-// Funções de Gerenciamento e Update
-//=====================================
+// Outras funções
 
+
+// TODO: Descarrega a lista de movimentos de uma GameUnit
 void GameUnitMovement_Unload(void) {
     if (PathList) {
         List_Destroy(PathList);
@@ -250,24 +223,25 @@ void GameUnitMovement_Update(void) {
     GameUnit* unit = SelectedUnit;
     if (!unit || !PathList || PathList->size == 0) return;
 
-    Vector2* nextGridPosPtr = (Vector2*)List_Get(PathList, 0);
+    // Pega o próximo ponto do caminho
+    Vector2* nextGridPosPtr = (Vector2*)List_GetByIndex(PathList, 0);
     if (!nextGridPosPtr) return;
 
-    Vector2 nextGridPosValue = *nextGridPosPtr;
-
-    currentWaypoint = GetGameGridToWorld(nextGridPosValue);
+    currentWaypoint = GetGameGridToWorld(*nextGridPosPtr);
     unit->Destination = currentWaypoint;
     float movementSpeed = 500.0f;
     float displacement = movementSpeed * GetFrameTime();
 
+    // Move a unidade em direção ao ponto
     if (Vector2Distance(*unit->Position, unit->Destination) > displacement) {
         float angle = atan2f(unit->Destination.y - unit->Position->y, unit->Destination.x - unit->Position->x);
         unit->Position->x += cosf(angle) * displacement;
         unit->Position->y += sinf(angle) * displacement;
     }
     else {
+        // Se chegou ao ponto, atualiza a posição e remove o ponto do caminho
         *unit->Position = unit->Destination;
-        List_Remove(PathList, &nextGridPosValue);
+        List_RemoveFirst(PathList); // Simplificado
     }
 }
 
