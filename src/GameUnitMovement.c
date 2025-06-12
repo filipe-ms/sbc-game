@@ -13,7 +13,6 @@
 #include "raymath.h"
 
 #include <stdbool.h>
-#include <stdlib.h>
 #include <stdio.h>
 
 
@@ -115,8 +114,6 @@ static void ShuffleNeighbors(Vector2 array[], int n) {
         }
     }
 }
-
-
 
 // Implementação do A*
 void GameUnitMovement_BuildPath(Vector2 start, Vector2 end) {
@@ -241,7 +238,7 @@ void GameUnitMovement_Update(void) {
     else {
         // Se chegou ao ponto, atualiza a posição e remove o ponto do caminho
         *unit->Position = unit->Destination;
-        List_RemoveFirst(PathList); // Simplificado
+        List_RemoveFirst(PathList);
     }
 }
 
