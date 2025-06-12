@@ -30,9 +30,16 @@ static void DrawHoverHint(GameUnit* unit) {
     DrawRectangleLinesEx(rect, 5.0f, SKYBLUE);
 }
 
+static void InitPositionalData(GameUnit* unit) {
+	unit->PositionalData.Position = &(*unit->Unit.Position); // Pegando o ponteiro da posição real da unidade.
+    unit->PositionalData.FinalDestination = (Vector2){ -1, -1 };
+    unit->PositionalData.NextWaypoint = (Vector2){ -1, -1 };
+    unit->PositionalData.Path = NULL;
+}
+
 void GameUnit_Init(GameUnit* unit, Unit_Type type) {
     Unit_Init(&unit->Unit, type);
-	unit->Position = &unit->Unit.Animation.Drawable.Position;
+	InitPositionalData(unit);
 }
 
 void GameUnit_Update(GameUnit* unit) {
@@ -48,7 +55,10 @@ void GameUnit_Update(GameUnit* unit) {
     Unit_Update(&unit->Unit);
 
     GameUnitSelection_Update();
-    DEBUG_BigUpdate(); // é do GameUnitMovement.c. Tô testando o movimento.
+
+    { // Update de movimento
+        GameUnitMovement_Update(SelectedUnit);
+    }
 }
 
 void GameUnit_Draw(GameUnit* unit)

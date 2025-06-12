@@ -31,8 +31,6 @@ UnitAnimationMetadata UnitMetadata_GetUnitAnimationMetadataByUnitType(Unit_Type 
     return UnitAnimationmetadata[type];
 }
 
-
-
 static void BarbarianMetadataLoad(void) {
     UnitAnimationmetadata[BARBARIAN] = UnitAnimationMetadata_Build(4, 4);
 

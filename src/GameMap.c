@@ -9,11 +9,20 @@
 #include <string.h>
 #include <stdbool.h>
 
-Texture2D tilesetField;
+
+typedef struct GameMap_TileVisuals {
+    Drawable Floor;
+    Drawable* Objects;
+} MapTiles;
+
+GameMap UnitGrid[MAP_WIDTH][MAP_HEIGHT]; // O extern.
+MapTiles Content[MAP_WIDTH][MAP_HEIGHT]; // Esse aqui não precisa ser conhecido por outros arquivos.
+
+static Texture2D tilesetField;
 
 const Drawable ROCK_METADATA = {
     .Texture = &tilesetField,
-    .Source = { 0, 96, 48, 48 },
+	.Source = { 288, 96, 48, 48 }, // Para outras variantes, x = 288 + 48 * variant. Total de 10 variantes.
     .Position = { 0, 0 },
     .Scale = { 0, 0 },
     .Offset = { 0, 0 },
@@ -21,10 +30,14 @@ const Drawable ROCK_METADATA = {
     .Color = { 235, 235, 235, 255 }
 };
 
-Map_Grid GameMap;
+
+// Utils
+
+
+
 
 static Drawable Map_GetTileMetadata(int x, int y) {
-    Drawable GROUND_METADATA = {
+    const Drawable GROUND_METADATA = {
         .Texture = &tilesetField,
         .Source = { 48, 0, 48, 48 },
         .Position = { (float)(x * CONSTANTS_TILE_SIZE_F), (float)(y * CONSTANTS_TILE_SIZE_F) },
@@ -37,56 +50,34 @@ static Drawable Map_GetTileMetadata(int x, int y) {
     return GROUND_METADATA;
 };
 
-
-void Map_Init() {
+static void LoadMapAssets() {
     tilesetField = LoadTexture("tileset/field.png");
+}
 
-    // Definição de obstáculos (layout movido para cá)
-#define o true  // open (caminhável)
-#define r false // restricted (obstáculo)
-    bool obstacleLayout[MAP_HEIGHT][MAP_WIDTH] = {
-        {o, o, o, o, o, o, o, o, o, o, o, o, o, r, o, o, o, o, o, o},
-        {o, o, o, o, o, o, r, r, r, r, r, r, o, r, o, r, r, r, r, o},
-        {o, o, o, o, o, o, o, o, o, o, o, r, o, r, o, o, o, o, r, o},
-        {o, o, o, o, o, r, r, r, o, r, o, o, o, o, o, o, r, o, r, o},
-        {o, o, o, o, o, o, o, o, o, r, o, o, o, o, o, o, r, o, r, o},
-        {o, o, o, o, o, o, o, o, o, r, o, o, o, o, o, o, o, o, r, o},
-        {o, r, o, o, o, o, o, o, o, r, o, o, o, o, r, o, r, o, r, o},
-        {o, r, o, o, r, r, o, o, o, o, o, o, o, o, r, o, o, o, r, o},
-        {o, r, o, r, o, o, o, o, o, o, o, o, o, o, r, o, r, o, r, o},
-        {o, r, o, r, o, o, o, o, r, r, r, o, o, o, r, o, r, o, r, o},
-        {o, o, o, r, o, r, o, o, o, o, r, o, r, o, o, o, r, o, r, o},
-        {r, r, r, r, o, r, r, r, r, o, r, o, r, r, r, o, r, o, r, o},
-        {o, o, o, o, o, o, o, o, r, o, r, o, o, o, o, o, r, o, r, o},
-        {o, r, r, r, r, r, r, o, r, o, r, r, r, r, r, o, r, o, r, o},
-        {o, r, o, o, o, o, r, o, r, o, o, o, o, o, r, o, r, o, o, o},
-        {o, r, o, r, r, o, r, o, r, r, r, r, r, o, r, o, r, r, r, o},
-        {o, r, o, r, o, o, r, o, o, o, o, o, r, o, r, o, o, o, r, o},
-        {o, r, o, r, o, r, r, r, r, r, r, o, r, o, r, r, r, o, r, o},
-        {o, r, o, o, o, o, o, o, o, o, r, o, o, o, o, o, o, o, o, o},
-        {o, o, o, r, r, r, r, r, r, o, o, o, r, r, r, r, r, r, r, o}
-    };
-#undef o
-#undef r
+void GameMap_Unload() {
+    UnloadTexture(tilesetField);
+}
+
+void GameMap_Init() {
+    LoadMapAssets();
 
     for (int i = 0; i < MAP_WIDTH; i++) { // i corresponde a x
         for (int j = 0; j < MAP_HEIGHT; j++) { // j corresponde a y
-            GameMap.Grid[i][j] = (Map_Tile){
-                .Floor = Map_GetTileMetadata(i, j),
+			Content[i][j] = (MapTiles){
+				.Floor = Map_GetTileMetadata(i, j),
+				.Objects = NULL // Iniciar com lista de drawable quando tiver o que colocar
+			};
+            UnitGrid[i][j] = (GameMap){
                 .Unit_OnThisTile = List_Create(sizeof(int)),
-                .isWalkable = obstacleLayout[j][i]
+				.isWalkable = true // Iniciar como verdadeiro e atualizar conforme as unidades, pedras, árvores etc ocupam.
             };
         }
     }
 }
 
-void Map_Unload() {
-    UnloadTexture(tilesetField);
-}
 
-void Map_Update() {
 
-}
+void Map_Update() {}
 
 static void DrawGridLines(int x, int y) {
     Vector2 pos = { (float)x * CONSTANTS_TILE_SIZE, (float)y * CONSTANTS_TILE_SIZE };
@@ -96,24 +87,7 @@ static void DrawGridLines(int x, int y) {
 void Map_Draw() {
     for (int i = 0; i < MAP_WIDTH; i++) {
         for (int j = 0; j < MAP_HEIGHT; j++) {
-            // Desenha o chão primeiro
-            Drawable_Draw(&GameMap.Grid[i][j].Floor);
-
-            if (!GameMap.Grid[i][j].isWalkable) {
-                int variant = 0;
-                Drawable rock = {
-                    .Texture = &tilesetField,
-                    .Source = { (float)(288 + 48 * variant), 96, 48, 48 },
-                    .Position = GameMap.Grid[i][j].Floor.Position,
-                    .Scale = GameMap.Grid[i][j].Floor.Scale,
-                    .Offset = { 0, 0 },
-                    .Rotation = 0.0f,
-                    .Color = WHITE
-                };
-                Drawable_Draw(&rock);
-            }
-
-            // Desenha as linhas do grid por cima
+            Drawable_Draw(&Content[i][j].Floor);
             DrawGridLines(i, j);
         }
     }

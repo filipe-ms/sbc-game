@@ -3,4 +3,4 @@
 
 #include "GameUnit.h"
 
-void DEBUG_BigUpdate(void);
+void GameUnitMovement_Update(GameUnit* unit);
