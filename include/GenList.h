@@ -22,3 +22,4 @@ int List_Remove(List* list, void* data);
 int List_Destroy(List* target);
 int List_FreeAll(void);
 void List_ForEach(List* list, Function_Arg1 function_arg1);
+void* List_Get(List* list, size_t index);

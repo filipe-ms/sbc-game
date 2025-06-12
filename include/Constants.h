@@ -18,5 +18,5 @@
 // ==== GAMEPLAY SETTINGS ===============================================
 
 // Map
-#define CONSTANTS_TILE_SIZE 128
-#define CONSTANTS_TILE_SIZE_F 128.0f
+#define CONSTANTS_TILE_SIZE 64
+#define CONSTANTS_TILE_SIZE_F 64.0f

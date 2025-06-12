@@ -4,7 +4,7 @@
 #include "MathUtils.h"
 #include "List.h"
 
-#include "stdio.h"
+#include <stdio.h>
 
 static int GetNextFrame(Animation* animation);
 

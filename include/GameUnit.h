@@ -1,5 +1,4 @@
-// GAMEUNIT_H
-
+// File: GameUnit.h
 #pragma once
 
 #include "stdbool.h"

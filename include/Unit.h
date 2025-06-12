@@ -8,6 +8,7 @@
 #include "UnitAnimationMetadata.h"
 
 typedef enum Unit_Type {
+	UNIT_TYPE_NONE = -1,
     BARBARIAN,
 } Unit_Type;
 

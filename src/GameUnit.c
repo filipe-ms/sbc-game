@@ -46,9 +46,9 @@ void GameUnit_Update(GameUnit* unit) {
     else if (IsKeyPressed(KEY_D)) Unit_ChangeDirection(&unit->Unit, 2);
 
     Unit_Update(&unit->Unit);
-    DEBUG_GameUnitMovement_Update();
 
     GameUnitSelection_Update();
+    DEBUG_BigUpdate(); // é do GameUnitMovement.c. Tô testando o movimento.
 }
 
 void GameUnit_Draw(GameUnit* unit)

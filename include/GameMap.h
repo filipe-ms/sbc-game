@@ -1,16 +1,20 @@
+// File: GameMap.h
 #pragma once
 
-#include "raylib.h"
 #include "GenList.h"
 #include "Drawable.h"
 
-#define TILE_SIZE 128
+#include "raylib.h"
+
+#include <stdbool.h>
+
 #define MAP_WIDTH 20
 #define MAP_HEIGHT 20
 
 typedef struct Map_Tile {
     Drawable Floor;
     List* Unit_OnThisTile;
+    bool isWalkable;
 } Map_Tile;
 
 typedef struct {

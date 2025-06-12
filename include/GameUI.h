@@ -1,5 +1,4 @@
-// GAMEUI_H
-
+// File: GameUI.h
 #pragma once
 
 void GameUI_Init(void);
