@@ -604,7 +604,7 @@
     <ClInclude Include="..\..\include\SpecificLists.h" />
     <ClInclude Include="..\..\include\thread_wrapper.h" />
     <ClInclude Include="..\..\include\Unit.h" />
-    <ClInclude Include="..\..\include\UnitMetadata.h" />
+    <ClInclude Include="..\..\include\AnimationMetadata.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Animation.c" />
@@ -632,7 +632,7 @@
     <ClCompile Include="..\..\src\thread_wrapper.c" />
     <ClCompile Include="..\..\src\Unit.c" />
     <ClCompile Include="..\..\src\UnitAnimationMetadata.c" />
-    <ClCompile Include="..\..\src\UnitMetadata.c" />
+    <ClCompile Include="..\..\src\AnimationMetadata.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\src\application.rc" />

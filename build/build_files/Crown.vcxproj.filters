@@ -114,7 +114,7 @@
     <ClInclude Include="..\..\include\Animation.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\UnitMetadata.h">
+    <ClInclude Include="..\..\include\AnimationMetadata.h">
       <Filter>Header Files\Metadata</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Unit.h">
@@ -194,7 +194,7 @@
     <ClCompile Include="..\..\src\Animation.c">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\UnitMetadata.c">
+    <ClCompile Include="..\..\src\AnimationMetadata.c">
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Unit.c">

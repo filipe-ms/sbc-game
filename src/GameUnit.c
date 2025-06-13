@@ -1,7 +1,7 @@
 // File: GameUnit.c
 #include "GameUnit.h"
 
-#include "UnitMetadata.h"
+#include "AnimationMetadata.h"
 #include "GameInputManager.h"
 #include "GameUnitMovement.h"
 #include "GameUnitSelection.h"

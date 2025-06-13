@@ -3,7 +3,7 @@
 #include "Function.h"
 #include "raylib.h"
 #include "GameInputManager.h"
-#include <UnitMetadata.h>
+#include <AnimationMetadata.h>
 
 void Button_Draw(MenuButton* button) {
     Vector2 TextSize = MeasureTextEx(GetFontDefault(), button->Text, (float)button->FontSize, 5.0f);
@@ -125,7 +125,7 @@ void DrawableButton_SetPosition(DrawableButton* button, Vector2 newPosition) {
 #pragma region AnimatedButton
 void AnimatedButton_Init(AnimatedButton* button, void* owner, bool isUsingGameCamera, AnimatedButton_Type type)
 {
-    button->Metadata = UnitMetadata_GetMetadataByAnimatedButtonType(ANIMATEDBUTTON_TYPE_BLOOD);
+    button->Metadata = AnimationMetadata_GetMetadataByAnimatedButtonType(ANIMATEDBUTTON_TYPE_BLOOD);
     button->CurrentAnimation = button->Metadata[ANIMATEDBUTTON_ANIMATIONSTATE_NORMAL];
     button->TransparentButton.Bounds = Drawable_CalculateDestination(&button->CurrentAnimation.Drawable);
     button->TransparentButton.IsUsingGameCamera = isUsingGameCamera;

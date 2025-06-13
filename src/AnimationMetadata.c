@@ -1,6 +1,6 @@
 // UNITMETADATA_C
 
-#include "UnitMetadata.h"
+#include "AnimationMetadata.h"
 
 #include "Animation.h"
 #include "Constants.h"
@@ -18,7 +18,7 @@ static Texture2D barbarian_faint_texture;
 Animation* Barbarian = NULL;
 UnitAnimationMetadata UnitAnimationmetadata[1];
 
-Animation* UnitMetadata_GetMetadataByUnitMetadataType(Unit_Type type)
+Animation* AnimationMetadata_GetMetadataByAnimationMetadataType(Unit_Type type)
 {
     switch (type) {
     case BARBARIAN:
@@ -32,7 +32,7 @@ Animation* UnitMetadata_GetMetadataByUnitMetadataType(Unit_Type type)
 static Texture2D AnimatedButton_Blood_Texture;
 Animation* Blood = NULL;
 
-Animation* UnitMetadata_GetMetadataByAnimatedButtonType(AnimatedButton_Type type) {
+Animation* AnimationMetadata_GetMetadataByAnimatedButtonType(AnimatedButton_Type type) {
     switch (type) {
     case ANIMATEDBUTTON_TYPE_BLOOD:
         return Blood;
@@ -41,7 +41,7 @@ Animation* UnitMetadata_GetMetadataByAnimatedButtonType(AnimatedButton_Type type
     return NULL;
 }
 
-UnitAnimationMetadata UnitMetadata_GetUnitAnimationMetadataByUnitType(Unit_Type type) {
+UnitAnimationMetadata AnimationMetadata_GetUnitAnimationMetadataByUnitType(Unit_Type type) {
     return UnitAnimationmetadata[type];
 }
 
@@ -108,7 +108,7 @@ static void BarbarianMetadataLoad(void) {
     Barbarian[15] = Animation_Build(0.15f, 12, 15, barbFaintDrawable);
 }
 
-void UnitMetadata_Unload(void) {
+void AnimationMetadata_Unload(void) {
 	UnloadTexture(barbarian_idle_texture);
 	UnloadTexture(barbarian_walk_texture);
 	UnloadTexture(barbarian_attack_texture);
@@ -121,7 +121,7 @@ void UnitMetadata_Unload(void) {
     free(Blood);
 }
 
-void UnitMetadata_Load(void) {
+void AnimationMetadata_Load(void) {
 	BarbarianMetadataLoad();
     AnimatedButton_BloodMetadataLoad();
 }

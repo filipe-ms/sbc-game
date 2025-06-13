@@ -3,7 +3,7 @@
 #include <Button.h>
 #include "DebugScene.h"
 #include "raylib.h";
-#include "UnitMetadata.h"
+#include "AnimationMetadata.h"
 
 Texture2D buttonTex;
 DrawableButton button;
@@ -25,7 +25,7 @@ static void OnHoverEnd(DrawableButton* owner) {
 
 void DebugScene_Init(void)
 {
-    UnitMetadata_Load();
+    AnimationMetadata_Load();
 
     buttonTex = LoadTexture("ui/Blood.png");
 
