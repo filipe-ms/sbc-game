@@ -3,6 +3,7 @@
 #include "Function.h"
 #include "raylib.h"
 #include "GameInputManager.h"
+#include <UnitMetadata.h>
 
 void Button_Draw(MenuButton* button) {
     Vector2 TextSize = MeasureTextEx(GetFontDefault(), button->Text, (float)button->FontSize, 5.0f);
@@ -38,6 +39,8 @@ void TransparentButton_Update(TransparentButton* button) {
         GameInputManager_GetMouseToWorld2D() : GetMousePosition();
 
     bool isBeingHovered = CheckCollisionPointRec(relativeMousePos, button->Bounds);
+    bool isMouseDown = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
+    bool isMouseBeingClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 
     // If Button is being hovered...
     if (isBeingHovered) {
@@ -47,14 +50,11 @@ void TransparentButton_Update(TransparentButton* button) {
             button->IsHovered = true;
         }
 
-        bool isMouseBeingClicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-
         if (isMouseBeingClicked) {
             if (!button->IsPressed)
                 button->IsPressed = true;
         }
         else {
-            bool isMouseDown = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
 
             if (isMouseDown) {
                 if (button->IsPressed) {
@@ -64,6 +64,7 @@ void TransparentButton_Update(TransparentButton* button) {
             else {
                 if (button->IsPressed) {
                     button->IsPressed = false;
+                    button->IsActive = !button->IsActive;
                     if (button->OnClick)
                         button->OnClick(button->Owner);
                     return;
@@ -71,10 +72,15 @@ void TransparentButton_Update(TransparentButton* button) {
             }
         }
     } else {
+        if (!isMouseDown) {
+            button->IsPressed = false;
+        }
+
         if (button->IsHovered) {
+            button->IsHovered = false;
+
             if (button->OnHoverEnd)
                 button->OnHoverEnd(button->Owner);
-            button->IsHovered = false;
         }
     }
 }
@@ -87,6 +93,7 @@ void TransparentButton_SetPosition(TransparentButton* button, Vector2 newPositio
 
 #pragma region DrawableButton
 void DrawableButton_Init(DrawableButton* button, void* owner, bool isUsingGameCamera, Drawable drawable) {
+    button->Position = &button->Drawable.Position;
     button->Drawable = drawable;
     button->TransparentButton.Bounds = Drawable_CalculateDestination(&button->Drawable);
     TransparentButton_Init(&button->TransparentButton, owner, isUsingGameCamera);
@@ -109,8 +116,62 @@ void DrawableButton_Draw(DrawableButton* button) {
 }
 
 void DrawableButton_SetPosition(DrawableButton* button, Vector2 newPosition) {
-    TransparentButton_SetPosition(button, newPosition);
-    button->Drawable.Position = newPosition;
+    TransparentButton_SetPosition(&button->TransparentButton, newPosition);
+    *button->Position = newPosition;
+    
 }
 #pragma endregion
 
+#pragma region AnimatedButton
+void AnimatedButton_Init(AnimatedButton* button, void* owner, bool isUsingGameCamera, AnimatedButton_Type type)
+{
+    button->Metadata = UnitMetadata_GetMetadataByAnimatedButtonType(ANIMATEDBUTTON_TYPE_BLOOD);
+    button->CurrentAnimation = button->Metadata[ANIMATEDBUTTON_ANIMATIONSTATE_NORMAL];
+    button->TransparentButton.Bounds = Drawable_CalculateDestination(&button->CurrentAnimation.Drawable);
+    button->TransparentButton.IsUsingGameCamera = isUsingGameCamera;
+    button->Position = &button->CurrentAnimation.Drawable.Position;
+
+    TransparentButton_Init(&button->TransparentButton, owner, isUsingGameCamera);
+}
+
+void AnimatedButton_AddClickEvents(AnimatedButton* button, Function_Arg1 onClick)
+{
+    button->TransparentButton.OnClick = onClick;
+}
+
+void AnimatedButton_AddHoverEvents(AnimatedButton* button, Function_Arg1 onHoverBegin, Function_Arg1 onHoverEnd)
+{
+    button->TransparentButton.OnHoverBegin = onHoverBegin;
+    button->TransparentButton.OnHoverEnd = onHoverEnd;
+}
+
+void AnimatedButton_Update(AnimatedButton* button)
+{
+    TransparentButton_Update(&button->TransparentButton);
+
+    if (button->TransparentButton.IsPressed && button->TransparentButton.IsHovered) {
+        Animation_Change(&button->CurrentAnimation, button->Metadata[ANIMATEDBUTTON_ANIMATIONSTATE_PRESSED]);
+    }
+    else if (button->TransparentButton.IsActive) {
+        Animation_Change(&button->CurrentAnimation, button->Metadata[ANIMATEDBUTTON_ANIMATIONSTATE_ACTIVE]);
+    }
+    else if (button->TransparentButton.IsHovered) {
+        Animation_Change(&button->CurrentAnimation, button->Metadata[ANIMATEDBUTTON_ANIMATIONSTATE_HOVERED]);
+    }
+    else {
+        Animation_Change(&button->CurrentAnimation, button->Metadata[ANIMATEDBUTTON_ANIMATIONSTATE_NORMAL]);
+    }
+
+    Animation_Update(&button->CurrentAnimation);
+}
+
+void AnimatedButton_Draw(AnimatedButton* button)
+{
+    Animation_Draw(&button->CurrentAnimation);
+}
+
+void AnimatedButton_SetPosition(AnimatedButton* button, Vector2 position) {
+    TransparentButton_SetPosition(&button->TransparentButton, position);
+    *button->Position = position;
+}
+#pragma endregion

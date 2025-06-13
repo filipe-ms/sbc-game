@@ -7,6 +7,7 @@
 #include "Unit.h"
 
 #include <stdlib.h>
+#include <Button.h>
 
 
 static Texture2D barbarian_idle_texture;
@@ -27,11 +28,43 @@ Animation* UnitMetadata_GetMetadataByUnitMetadataType(Unit_Type type)
     return NULL;
 }
 
+// Button Animations
+static Texture2D AnimatedButton_Blood_Texture;
+Animation* Blood = NULL;
+
+Animation* UnitMetadata_GetMetadataByAnimatedButtonType(AnimatedButton_Type type) {
+    switch (type) {
+    case ANIMATEDBUTTON_TYPE_BLOOD:
+        return Blood;
+    }
+
+    return NULL;
+}
+
 UnitAnimationMetadata UnitMetadata_GetUnitAnimationMetadataByUnitType(Unit_Type type) {
     return UnitAnimationmetadata[type];
 }
 
+static void AnimatedButton_BloodMetadataLoad(void) {
+    Blood = malloc(sizeof(Animation) * 4);
 
+    if (!Blood) return;
+
+    AnimatedButton_Blood_Texture = LoadTexture("ui/blood.png");
+
+    Rectangle source = (Rectangle){ 0, 0, 37, 36 };
+    Vector2 scale = (Vector2){ 1, 1 };
+
+    Drawable blood_normal = Drawable_Build(&AnimatedButton_Blood_Texture, source, (Vector2) { 0, 0 }, scale, (Vector2) { 0, 0 }, 0.0f, WHITE);
+    Drawable blood_hovered = Drawable_Build(&AnimatedButton_Blood_Texture, source, (Vector2) { 0, 0 }, scale, (Vector2) { 0, 0 }, 0.0f, WHITE);
+    Drawable blood_clicked = Drawable_Build(&AnimatedButton_Blood_Texture, source, (Vector2) { 0, 0 }, scale, (Vector2) { 0, 0 }, 0.0f, WHITE);
+    Drawable blood_active = Drawable_Build(&AnimatedButton_Blood_Texture, source, (Vector2) { 0, 0 }, scale, (Vector2) { 0, 0 }, 0.0f, WHITE);
+
+    Blood[0] = Animation_Build(0.0f, 0, 0, blood_normal);
+    Blood[1] = Animation_Build(0.0f, 1, 1, blood_hovered);
+    Blood[2] = Animation_Build(0.0f, 2, 2, blood_clicked);
+    Blood[3] = Animation_Build(0.0f, 3, 3, blood_active);
+}
 
 static void BarbarianMetadataLoad(void) {
     UnitAnimationmetadata[BARBARIAN] = UnitAnimationMetadata_Build(4, 4);
@@ -82,8 +115,13 @@ void UnitMetadata_Unload(void) {
 	UnloadTexture(barbarian_faint_texture);
 
     free(Barbarian);
+
+    // Buttons
+    UnloadTexture(AnimatedButton_Blood_Texture);
+    free(Blood);
 }
 
 void UnitMetadata_Load(void) {
 	BarbarianMetadataLoad();
+    AnimatedButton_BloodMetadataLoad();
 }

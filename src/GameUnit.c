@@ -9,9 +9,17 @@
 
 #include "raylib.h"
 
-static void OnClick(GameUnit* unit);
-static void OnHoverBegin(GameUnit* unit);
-static void OnHoverEnds(GameUnit* unit);
+static void OnClick(GameUnit* unit) {
+    TraceLog(LOG_INFO, "| Click Event: %d |", unit);
+}
+
+static void OnHoverBegin(GameUnit* unit) {
+    TraceLog(LOG_INFO, "| Hover Begins: %d |", unit);
+}
+
+static void OnHoverEnds(GameUnit* unit) {
+    TraceLog(LOG_INFO, "| Hover Ends: %d |", unit);
+}
 
 static void DrawHoverHint(GameUnit* unit) {
     Rectangle rect =
@@ -27,31 +35,19 @@ static void DrawHoverHint(GameUnit* unit) {
 void GameUnit_Init(GameUnit* unit, Unit_Type type) {
     Unit_Init(&unit->Unit, type);
 	unit->Position = &unit->Unit.Animation.Drawable.Position;
+
+    // Transparent button logic - needs improvement (?)
     TransparentButton_Init(&unit->TransparentButton, &unit, true);
     TransparentButton_AddHoverEvents(&unit->TransparentButton, OnHoverBegin, OnHoverEnds);
     TransparentButton_AddClickEvents(&unit->TransparentButton, OnClick);
 }
 
-void OnClick(GameUnit* unit) {
-    TraceLog(LOG_INFO, "| Click Event: %d |", unit);
-}
-
-void OnHoverBegin(GameUnit* unit) {
-    TraceLog(LOG_INFO, "| Hover Begins: %d |", unit);
-}
-
-void OnHoverEnds(GameUnit* unit) {
-    TraceLog(LOG_INFO, "| Hover Ends: %d |", unit);
-}
-
 void GameUnit_Update(GameUnit* unit) {
-    unit->TransparentButton.Bounds = GameUnit_CalculateCollisionBounds(unit);
-
+    Rectangle playerBounds = GameUnit_CalculateCollisionBounds(unit);
+    unit->TransparentButton.Bounds = playerBounds;
     TransparentButton_Update(&unit->TransparentButton);
-
-    Rectangle interactionRectangle = GameUnit_CalculateCollisionBounds(unit);
-        
-    unit->IsBeingHovered = GameInputManager_IsMouseIntersectingWith(interactionRectangle);
+    
+    unit->IsBeingHovered = GameInputManager_IsMouseIntersectingWith(playerBounds);
 
     if (IsKeyPressed(KEY_W)) Unit_ChangeDirection(&unit->Unit, 3);
     else if (IsKeyPressed(KEY_A)) Unit_ChangeDirection(&unit->Unit, 1);

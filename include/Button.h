@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "Function.h"
 #include "Drawable.h"
+#include <Animation.h>
 
 typedef struct MenuButton {
     Rectangle Bounds;
@@ -17,8 +18,6 @@ void Button_Draw(MenuButton* button);
 
 #pragma region TransparentButton
 typedef struct TransparentButton {
-    Vector2* Position;
-
     Rectangle Bounds;
     Function_Arg1 Function;
     bool IsUsingGameCamera;
@@ -50,7 +49,11 @@ void TransparentButton_AddHoverEvents(
 void TransparentButton_Update(TransparentButton* button);
 #pragma endregion
 
+#pragma region DrawableButton
+// Not very useful but its there anyway
 typedef struct DrawableButton {
+    Vector2* Position;
+
     TransparentButton TransparentButton;
     Drawable Drawable;
 } DrawableButton;
@@ -74,3 +77,49 @@ void DrawableButton_AddHoverEvents(
 
 void DrawableButton_Update(DrawableButton* button);
 void DrawableButton_Draw(DrawableButton* button);
+void DrawableButton_SetPosition(DrawableButton* button, Vector2 position);
+#pragma endregion
+
+#pragma region AnimatedButton
+
+typedef enum AnimatedButton_Type {
+    ANIMATEDBUTTON_TYPE_BLOOD,
+} AnimatedButton_Type;
+
+typedef enum AnimatedButton_AnimationState {
+    ANIMATEDBUTTON_ANIMATIONSTATE_NORMAL,
+    ANIMATEDBUTTON_ANIMATIONSTATE_HOVERED,
+    ANIMATEDBUTTON_ANIMATIONSTATE_PRESSED,
+    ANIMATEDBUTTON_ANIMATIONSTATE_ACTIVE,
+} AnimatedButton_AnimationState;
+
+// Not very useful but its there anyway
+typedef struct AnimatedButton {
+    Vector2* Position;
+
+    TransparentButton TransparentButton;
+    Animation CurrentAnimation;
+    Animation* Metadata;
+} AnimatedButton;
+
+void AnimatedButton_Init(
+    AnimatedButton* button,
+    void* owner,
+    bool isUsingGameCamera,
+    AnimatedButton_Type type);
+
+void AnimatedButton_AddClickEvents(
+    AnimatedButton* button,
+    Function_Arg1 onClick
+);
+
+void AnimatedButton_AddHoverEvents(
+    AnimatedButton* button,
+    Function_Arg1 onHoverBegin,
+    Function_Arg1 onHoverEnd
+);
+
+void AnimatedButton_Update(AnimatedButton* button);
+void AnimatedButton_Draw(AnimatedButton* button);
+void AnimatedButton_SetPosition(AnimatedButton* button, Vector2 position);
+#pragma endregion
