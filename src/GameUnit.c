@@ -32,14 +32,24 @@ static void DrawHoverHint(GameUnit* unit) {
     DrawRectangleLinesEx(rect, 5.0f, SKYBLUE);
 }
 
+static void InitPositionalData(GameUnit* unit) {
+	unit->PositionalData.Position = &(*unit->Unit.Position); // Pegando o ponteiro da posição real da unidade.
+    unit->PositionalData.FinalDestination = (Vector2){ -1, -1 };
+    unit->PositionalData.NextWaypoint = (Vector2){ -1, -1 };
+    unit->PositionalData.Path = NULL;
+}
+
 void GameUnit_Init(GameUnit* unit, Unit_Type type) {
     Unit_Init(&unit->Unit, type);
+
 	unit->Position = &unit->Unit.Animation.Drawable.Position;
 
     // Transparent button logic - needs improvement (?)
     TransparentButton_Init(&unit->TransparentButton, &unit, true);
     TransparentButton_AddHoverEvents(&unit->TransparentButton, OnHoverBegin, OnHoverEnds);
     TransparentButton_AddClickEvents(&unit->TransparentButton, OnClick);
+
+	InitPositionalData(unit);
 }
 
 void GameUnit_Update(GameUnit* unit) {
@@ -55,9 +65,12 @@ void GameUnit_Update(GameUnit* unit) {
     else if (IsKeyPressed(KEY_D)) Unit_ChangeDirection(&unit->Unit, 2);
 
     Unit_Update(&unit->Unit);
-    DEBUG_GameUnitMovement_Update();
 
     GameUnitSelection_Update();
+
+    { // Update de movimento
+        GameUnitMovement_Update(SelectedUnit);
+    }
 }
 
 void GameUnit_Draw(GameUnit* unit)

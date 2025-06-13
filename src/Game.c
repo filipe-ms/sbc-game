@@ -14,7 +14,7 @@ GameUnit gameUnit;
 void Game_Init(void) {
 	UnitMetadata_Load();
 
-	Map_Init();
+	GameMap_Init();
 	GameCamera_Init();
 	GameUnit_Init(&gameUnit, BARBARIAN);
 }
@@ -45,5 +45,5 @@ void Game_Draw(void) {
 void Game_Unload(void) {
 	UnitMetadata_Unload();
 
-	Map_Unload();
+	GameMap_Unload();
 }

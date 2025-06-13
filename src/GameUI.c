@@ -1,5 +1,4 @@
-// GAMEUI_C
-
+// File: GameUI.c
 #include "GameUI.h"
 
 void GameUI_Init(void) {}

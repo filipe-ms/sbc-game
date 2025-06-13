@@ -1,5 +1,4 @@
-// ANIMATION_H
-
+// File: Animation.h
 #pragma once
 
 #include "Drawable.h"

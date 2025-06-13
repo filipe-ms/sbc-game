@@ -1,3 +1,4 @@
+// File: UnitAnimationMetadata.h
 #pragma once
 
 typedef struct UnitAnimationMetadata {

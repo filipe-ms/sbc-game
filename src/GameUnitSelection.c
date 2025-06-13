@@ -1,6 +1,6 @@
 // File: GameUnitSelection.c
-
 #include "GameUnitSelection.h"
+
 #include "GameCamera.h"
 
 GameUnit* SelectedUnit = NULL;
@@ -32,6 +32,7 @@ static Vector2 GetMouseToWorld2D() {
 	Vector2 mousePos = GetMousePosition();
 	return GetScreenToWorld2D(mousePos, GameCamera);
 }
+
 void GameUnitSelection_Update(void) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         if (CheckCollisionPointRec(GetMouseToWorld2D(), GetGameUnitRectangle(&gameUnit))) {
