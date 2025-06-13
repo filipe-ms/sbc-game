@@ -1,6 +1,6 @@
 #include "Unit.h"
 #include "Drawable.h"
-#include "UnitMetadata.h"
+#include "AnimationMetadata.h"
 
 static Animation GetExpectedAnimation(Unit* unit, int action, int direction) {
     return unit->Metadata[action * unit->UnitAnimationMetadata.Actions + direction];
@@ -9,10 +9,12 @@ static Animation GetExpectedAnimation(Unit* unit, int action, int direction) {
 void Unit_Init(Unit* unit, Unit_Type type) {
 	unit->Action = 0;
 	unit->Direction = 0;
-	unit->Position = &unit->Animation.Drawable.Position;
 
-    unit->UnitAnimationMetadata = UnitMetadata_GetUnitAnimationMetadataByUnitType(type);    
-    unit->Metadata = UnitMetadata_GetMetadataByUnitMetadataType(type);
+	unit->Position = &unit->Animation.Drawable.Position;
+    unit->Scale = &unit->Animation.Drawable.Scale;
+
+    unit->UnitAnimationMetadata = AnimationMetadata_GetUnitAnimationMetadataByUnitType(type);    
+    unit->Metadata = AnimationMetadata_GetMetadataByAnimationMetadataType(type);
 
     Animation_Change(&unit->Animation, GetExpectedAnimation(unit, 0, 0));
 }

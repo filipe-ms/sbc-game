@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include "Game.h"
 #include <Function.h>
+#include "DebugScene.h"
 
 // Menus
 Scene scene;
@@ -29,24 +30,31 @@ void SceneManager_ChangeScene(SceneReference nextSceneReference) {
     switch (nextSceneReference) {
     case SCENEREFERENCE_MAIN_MENU:
         new_scene = (Scene){
-            .SceneRef = SCENEREFERENCE_MAIN_MENU,
+            .SceneRef = nextSceneReference,
             .Init = MainMenu_Init,
             .Update = MainMenu_Update,
             .Draw = MainMenu_Draw,
             .Unload = MainMenu_Unload
         };
         return;
-
     case SCENEREFERENCE_CREDITS:
         break;
-
     case SCENEREFERENCE_GAME:
         new_scene = (Scene){
-            .SceneRef = SCENEREFERENCE_GAME,
+            .SceneRef = nextSceneReference,
             .Init = Game_Init,
             .Update = Game_Update,
             .Draw = Game_Draw,
             .Unload = Game_Unload,
+        };
+        return;
+    case SCENEREFERENCE_DEBUG:
+        new_scene = (Scene){
+            .SceneRef = nextSceneReference,
+            .Init = DebugScene_Init,
+            .Update = DebugScene_Update,
+            .Draw = DebugScene_Draw,
+            .Unload = DebugScene_Unload,
         };
         return;
     }

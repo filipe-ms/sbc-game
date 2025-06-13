@@ -18,7 +18,7 @@ Drawable Drawable_Build(Texture2D* texture, Rectangle source, Vector2 position, 
 }
 
 void Drawable_Draw(Drawable* drawable) {
-	Rectangle destination = { drawable->Position.x, drawable->Position.y, drawable->Source.width * drawable->Scale.x, drawable->Source.height * drawable->Scale.y };
+    Rectangle destination = Drawable_CalculateDestination(drawable);
 
     DrawTexturePro(
         *drawable->Texture,
@@ -27,4 +27,11 @@ void Drawable_Draw(Drawable* drawable) {
         drawable->Offset,
         drawable->Rotation,
         drawable->Color);
+}
+
+Rectangle Drawable_CalculateDestination(Drawable* drawable)
+{
+    return (Rectangle) { 
+        drawable->Position.x, drawable->Position.y, 
+            drawable->Source.width* drawable->Scale.x, drawable->Source.height* drawable->Scale.y };
 }

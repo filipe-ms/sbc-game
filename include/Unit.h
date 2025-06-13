@@ -14,6 +14,8 @@ typedef enum Unit_Type {
 
 typedef struct Unit {
     Vector2* Position;
+    Vector2* Scale;
+
     int Action;
     int Direction;
     Animation Animation;

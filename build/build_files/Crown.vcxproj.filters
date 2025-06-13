@@ -114,7 +114,7 @@
     <ClInclude Include="..\..\include\Animation.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\UnitMetadata.h">
+    <ClInclude Include="..\..\include\AnimationMetadata.h">
       <Filter>Header Files\Metadata</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\Unit.h">
@@ -149,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Button.h">
       <Filter>Header Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\DebugScene.h">
+      <Filter>Header Files\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -191,7 +194,7 @@
     <ClCompile Include="..\..\src\Animation.c">
       <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\UnitMetadata.c">
+    <ClCompile Include="..\..\src\AnimationMetadata.c">
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Unit.c">
@@ -226,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Button.c">
       <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\DebugScene.c">
+      <Filter>Source Files\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

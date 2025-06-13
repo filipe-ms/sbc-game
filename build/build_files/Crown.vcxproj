@@ -578,6 +578,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\Animation.h" />
     <ClInclude Include="..\..\include\Button.h" />
+    <ClInclude Include="..\..\include\DebugScene.h" />
     <ClInclude Include="..\..\include\GameCamera.h" />
     <ClInclude Include="..\..\include\GameInputManager.h" />
     <ClInclude Include="..\..\include\GameUI.h" />
@@ -603,12 +604,13 @@
     <ClInclude Include="..\..\include\SpecificLists.h" />
     <ClInclude Include="..\..\include\thread_wrapper.h" />
     <ClInclude Include="..\..\include\Unit.h" />
-    <ClInclude Include="..\..\include\UnitMetadata.h" />
+    <ClInclude Include="..\..\include\AnimationMetadata.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Animation.c" />
     <ClCompile Include="..\..\src\Barbarian.c" />
     <ClCompile Include="..\..\src\Button.c" />
+    <ClCompile Include="..\..\src\DebugScene.c" />
     <ClCompile Include="..\..\src\GameCamera.c" />
     <ClCompile Include="..\..\src\Drawable.c" />
     <ClCompile Include="..\..\src\Function.c" />
@@ -630,7 +632,7 @@
     <ClCompile Include="..\..\src\thread_wrapper.c" />
     <ClCompile Include="..\..\src\Unit.c" />
     <ClCompile Include="..\..\src\UnitAnimationMetadata.c" />
-    <ClCompile Include="..\..\src\UnitMetadata.c" />
+    <ClCompile Include="..\..\src\AnimationMetadata.c" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\src\application.rc" />

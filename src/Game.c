@@ -3,7 +3,7 @@
 #include "Game.h"
 #include "GameMap.h"
 #include "Unit.h"
-#include "UnitMetadata.h"
+#include "AnimationMetadata.h"
 #include "GameUnit.h"
 #include "GameCamera.h"
 #include "GameUI.h"
@@ -12,7 +12,7 @@
 GameUnit gameUnit;
 
 void Game_Init(void) {
-	UnitMetadata_Load();
+	AnimationMetadata_Load();
 
 	GameMap_Init();
 	GameCamera_Init();
@@ -43,7 +43,7 @@ void Game_Draw(void) {
 }
 
 void Game_Unload(void) {
-	UnitMetadata_Unload();
+	AnimationMetadata_Unload();
 
 	GameMap_Unload();
 }

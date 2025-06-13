@@ -1,10 +1,12 @@
 // File: GameUnit.h
 #pragma once
 
+#include "stdbool.h"
+#include "Button.h"
+#include "Unit.h"
+#include "Drawable.h"
 #include "Unit.h"
 #include "GenList.h"
-
-#include <stdbool.h>
 
 typedef enum UnitAnimationMetadata_Direction {
     GAMEUNIT_DIRECTION_NONE = -1,
@@ -42,9 +44,16 @@ typedef struct GameUnit {
     bool IsBeingHovered;
 	Unit Unit;
 
+	Vector2* Position;
+    Vector2 Destination;
+    TransparentButton TransparentButton;
+
 	PositionalData PositionalData;
 } GameUnit;
+
 
 void GameUnit_Init(GameUnit* unit, Unit_Type type);
 void GameUnit_Update(GameUnit* unit);
 void GameUnit_Draw(GameUnit* unit);
+
+Rectangle GameUnit_CalculateCollisionBounds(GameUnit* unit);
