@@ -1,5 +1,4 @@
-// CAMERA_C
-
+// File: GameCamera.c
 #include "GameCamera.h"
 
 #include "GameMap.h"

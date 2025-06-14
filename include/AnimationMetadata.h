@@ -1,5 +1,4 @@
-// UNITMETADATA_H
-
+// File: AnimationMetadata.h
 #pragma once
 
 #include "Unit.h"

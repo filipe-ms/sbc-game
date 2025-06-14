@@ -1,10 +1,13 @@
-#include "raylib.h"
-#include "stdio.h"
-
+// File: MainMenu.c
 #include "MainMenu.h"
+
 #include "Button.h"
 #include "Constants.h"
 #include "SceneManager.h"
+
+#include "raylib.h"
+
+#include <stdio.h>
 
 // Características do Texto
 const int TITLE_FontSize = 60;

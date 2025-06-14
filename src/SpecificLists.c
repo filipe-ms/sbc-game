@@ -1,7 +1,9 @@
-// SpecificLists.c - Contains ALL implementations
+// File: SpecificLists.c
 #include "SpecificLists.h"
-#include "raylib.h"
+
 #include "Unit.h"
+
+#include "raylib.h"
 
 // Implement lists here (only in this file)
 LIST_IMPLEMENT(int)

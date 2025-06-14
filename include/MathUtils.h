@@ -1,5 +1,4 @@
-// MATH_UTILS_H
-
+// File: MathUtils.h
 #pragma once
 
 static inline int MathUtils_MinI(int a, int b) {

@@ -1,14 +1,15 @@
-// MAIN_C
-
-#include <stdio.h>
-#include "raylib.h"
-#include "resource_dir.h"
+// File: main.c
 
 #include "SceneManager.h"
 #include "Constants.h"
-//#include "request.h"
 #include "SpecificLists.h"
 #include "GenList.h"
+//#include "request.h"
+
+#include "raylib.h"
+#include "resource_dir.h"
+
+#include <stdio.h>
 
 void Main_InitProgram(void); // Chamar tudo relativo à inicialização de arquivos necessários aqui
 void Main_Cleanup(void);     // Liberar a memória de tudo aqui

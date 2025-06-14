@@ -1,9 +1,9 @@
-// SceneManager.c
-
+// File: SceneManager.c
 #include "SceneManager.h"
+
 #include "MainMenu.h"
 #include "Game.h"
-#include <Function.h>
+#include "Function.h"
 #include "DebugScene.h"
 
 // Menus

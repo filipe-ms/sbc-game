@@ -1,12 +1,12 @@
 // File: GameUnit.h
 #pragma once
 
-#include "stdbool.h"
 #include "Button.h"
 #include "Unit.h"
 #include "Drawable.h"
-#include "Unit.h"
 #include "GenList.h"
+
+#include <stdbool.h>
 
 typedef enum UnitAnimationMetadata_Direction {
     GAMEUNIT_DIRECTION_NONE = -1,
