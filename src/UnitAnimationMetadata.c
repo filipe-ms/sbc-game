@@ -1,3 +1,4 @@
+// File: UnitAnimationMetadata.c
 #include "UnitAnimationMetadata.h"
 
 UnitAnimationMetadata UnitAnimationMetadata_Build(int actions, int directions) {

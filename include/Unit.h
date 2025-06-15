@@ -1,12 +1,12 @@
 // File: Unit.h
 #pragma once
 
-#include "raylib.h"
-
 #include "Drawable.h"
 #include "Animation.h"
 #include "UnitAnimationMetadata.h"
 #include "Function.h"
+
+#include "raylib.h"
 
 typedef enum Unit_Type {
 	UNIT_TYPE_NONE = -1,

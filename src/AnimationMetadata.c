@@ -1,8 +1,8 @@
-// UNITMETADATA_C
-
+// File: AnimationMetadata.c
 #include "AnimationMetadata.h"
 
 #include "Animation.h"
+#include "Button.h"
 #include "Constants.h"
 #include "Unit.h"
 

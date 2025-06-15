@@ -1,8 +1,10 @@
-// SpecificLists.h - Controls which lists exist
+// SpecificLists.h
 #pragma once
+
 #include "List.h"
-#include "raylib.h"
 #include "Unit.h"
+
+#include "raylib.h"
 
 // Declare list types
 LIST_DECLARE(int)

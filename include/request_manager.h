@@ -1,5 +1,6 @@
-// REQUEST_MANAGER_H
+// File: RequestManager.h
 #pragma once
+
 #ifndef REQUEST_MANAGER_H
 #define REQUEST_MANAGER_H
 

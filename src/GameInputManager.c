@@ -1,5 +1,4 @@
 // File: GameInputManager.c
-
 #include "GameInputManager.h"
 
 #include "GameCamera.h"

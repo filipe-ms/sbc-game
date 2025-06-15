@@ -1,9 +1,10 @@
-// BARBARIAN_C
-#include "raylib.h"
-
+// File: Barbarian.c
 #include "Barbarian.h"
+
 #include "GameUnit.h"
 #include "Animation.h"
+
+#include "raylib.h"
 
 Texture2D BarbarianIdle;
 Texture2D BarbarianWalk;

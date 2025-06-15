@@ -1,12 +1,13 @@
 // File: DebugScene.c
-
-#include <Button.h>
 #include "DebugScene.h"
-#include "raylib.h";
+
 #include "AnimationMetadata.h"
 #include "GameUnit.h"
 #include "Unit.h"
 #include <Expression.h>
+#include "Button.h"
+
+#include "raylib.h"
 
 Texture2D buttonTex;
 DrawableButton button;
@@ -28,7 +29,6 @@ static void OnHoverBegin(DrawableButton* owner) {
 static void OnHoverEnd(DrawableButton* owner) {
     TraceLog(LOG_INFO, "OnHoverEnd!");
 }
-
 
 void DebugScene_Init(void)
 {

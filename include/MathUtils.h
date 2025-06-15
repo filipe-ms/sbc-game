@@ -1,4 +1,4 @@
-// MATH_UTILS_H
+// File: MathUtils.h
 #pragma once
 
 #include "stdbool.h"

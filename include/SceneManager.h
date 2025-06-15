@@ -1,8 +1,9 @@
-// SCENE_MANAGER_H
+// File: SceneManager.h
 #pragma once
 
+#include "Function.h"
+
 #include "raylib.h"
-#include <Function.h>
 
 typedef Function Scene_Function;
 

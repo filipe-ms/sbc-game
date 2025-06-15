@@ -1,5 +1,6 @@
-// List.h - ONLY contains template macros
+// List.h
 #pragma once
+
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,4 +1,4 @@
-// thread_wrapper.c
+// File: thread_wrapper.c
 #include "thread_wrapper.h"
 
 #define WIN32_LEAN_AND_MEAN // Exclui aplicativos e APIs não essenciais de windows.h
