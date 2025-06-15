@@ -584,6 +584,7 @@
     <ClInclude Include="..\..\include\GameUI.h" />
     <ClInclude Include="..\..\include\GameUnitMovement.h" />
     <ClInclude Include="..\..\include\GameUnitSelection.h" />
+    <ClInclude Include="..\..\include\TilesetTextures.h" />
     <ClInclude Include="..\..\include\UnitAnimationMetadata.h" />
     <ClInclude Include="..\..\include\Barbarian.h" />
     <ClInclude Include="..\..\include\Constants.h" />
@@ -629,6 +630,7 @@
     <ClCompile Include="..\..\src\request_thread.c" />
     <ClCompile Include="..\..\src\SceneManager.c" />
     <ClCompile Include="..\..\src\SpecificLists.c" />
+    <ClCompile Include="..\..\src\TilesetTextures.c" />
     <ClCompile Include="..\..\src\thread_wrapper.c" />
     <ClCompile Include="..\..\src\Unit.c" />
     <ClCompile Include="..\..\src\UnitAnimationMetadata.c" />

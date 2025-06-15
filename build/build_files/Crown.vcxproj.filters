@@ -153,6 +153,9 @@
     <ClInclude Include="..\..\include\DebugScene.h">
       <Filter>Header Files\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\TilesetTextures.h">
+      <Filter>Header Files\Metadata</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
@@ -232,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="..\..\src\DebugScene.c">
       <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TilesetTextures.c">
+      <Filter>Source Files\Metadata</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
