@@ -244,7 +244,7 @@
     </ClCompile>
     <ClCompile Include="..\..\src\TilesetTextures.c">
       <Filter>Source Files\Metadata</Filter>
-    </ClInclude>
+    </ClCompile>
     <ClCompile Include="..\..\src\Expression.c">
       <Filter>Source Files\Scene\Game\Expression</Filter>
     </ClCompile>
