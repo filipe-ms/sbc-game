@@ -17,13 +17,17 @@ void Game_Init(void) {
 	GameMap_Init();
 	GameCamera_Init();
 	GameUnit_Init(&gameUnit, BARBARIAN);
+	GameUI_Init();
 }
 
 void Game_Update(void) {
-	Map_Update();
+	GameMap_Update();
 
 	GameUnit_Update(&gameUnit);
 	GameCamera_Update();
+
+
+	GameUI_Update();
 }
 
 void Game_Draw(void) {
@@ -32,12 +36,12 @@ void Game_Draw(void) {
 	
 	BeginMode2D(GameCamera);
 	{	// Elementos do jogo sensíveis à posição da câmera
-		Map_Draw();
+		GameMap_Draw();
 		GameUnit_Draw(&gameUnit);
 	}
 	EndMode2D();
 
-	GameUI_Update();
+	GameUI_Draw();
 	
     EndDrawing();
 }

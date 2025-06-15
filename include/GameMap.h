@@ -20,5 +20,5 @@ extern GameMap UnitGrid[MAP_WIDTH][MAP_HEIGHT];
 
 void GameMap_Init(void);
 void GameMap_Unload(void);
-void Map_Update(void);
-void Map_Draw(void);
+void GameMap_Update(void);
+void GameMap_Draw(void);
