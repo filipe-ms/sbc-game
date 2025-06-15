@@ -64,6 +64,12 @@
     <Filter Include="Header Files\Scene\Game\Unit">
       <UniqueIdentifier>{b62b7966-bf76-4344-b802-b99db11f4995}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scene\Game\Expression">
+      <UniqueIdentifier>{4ff25801-188f-4757-bc95-40e0bd448557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Game\Expression">
+      <UniqueIdentifier>{5e5bebbc-6c8a-4ec8-a782-6c8fa49835e0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
@@ -117,9 +123,6 @@
     <ClInclude Include="..\..\include\AnimationMetadata.h">
       <Filter>Header Files\Metadata</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\Unit.h">
-      <Filter>Header Files\Units</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\UnitAnimationMetadata.h">
       <Filter>Header Files\Metadata</Filter>
     </ClInclude>
@@ -155,6 +158,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\TilesetTextures.h">
       <Filter>Header Files\Metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Expression.h">
+      <Filter>Header Files\Scene\Game\Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Unit.h">
+      <Filter>Header Files\Scene\Game\Unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -200,9 +209,6 @@
     <ClCompile Include="..\..\src\AnimationMetadata.c">
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Unit.c">
-      <Filter>Source Files\Units</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\UnitAnimationMetadata.c">
       <Filter>Source Files\Metadata</Filter>
     </ClCompile>
@@ -238,6 +244,15 @@
     </ClCompile>
     <ClCompile Include="..\..\src\TilesetTextures.c">
       <Filter>Source Files\Metadata</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\src\Expression.c">
+      <Filter>Source Files\Scene\Game\Expression</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Unit.c">
+      <Filter>Source Files\Scene\Game\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MathUtils.c">
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

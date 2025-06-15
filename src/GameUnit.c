@@ -73,13 +73,13 @@ void GameUnit_Update(GameUnit* unit) {
     }
 }
 
-void GameUnit_Draw(GameUnit* unit)
+void GameUnit_Draw(GameUnit* gameUnit)
 {
-    Unit_Draw(&unit->Unit);
+    Unit_Draw(&gameUnit->Unit);
 
-    DrawHoverHint(unit);
-    if (unit->IsBeingHovered) {
-        DrawHoverHint(unit);
+    DrawHoverHint(gameUnit);
+    if (gameUnit->IsBeingHovered) {
+        DrawHoverHint(gameUnit);
     }
 
     GameUnitSelection_Draw();

@@ -579,6 +579,7 @@
     <ClInclude Include="..\..\include\Animation.h" />
     <ClInclude Include="..\..\include\Button.h" />
     <ClInclude Include="..\..\include\DebugScene.h" />
+    <ClInclude Include="..\..\include\Expression.h" />
     <ClInclude Include="..\..\include\GameCamera.h" />
     <ClInclude Include="..\..\include\GameInputManager.h" />
     <ClInclude Include="..\..\include\GameUI.h" />
@@ -612,6 +613,7 @@
     <ClCompile Include="..\..\src\Barbarian.c" />
     <ClCompile Include="..\..\src\Button.c" />
     <ClCompile Include="..\..\src\DebugScene.c" />
+    <ClCompile Include="..\..\src\Expression.c" />
     <ClCompile Include="..\..\src\GameCamera.c" />
     <ClCompile Include="..\..\src\Drawable.c" />
     <ClCompile Include="..\..\src\Function.c" />
@@ -625,6 +627,7 @@
     <ClCompile Include="..\..\src\main.c" />
     <ClCompile Include="..\..\src\MainMenu.c" />
     <ClCompile Include="..\..\src\GameMap.c" />
+    <ClCompile Include="..\..\src\MathUtils.c" />
     <ClCompile Include="..\..\src\request.c" />
     <ClCompile Include="..\..\src\request_manager.c" />
     <ClCompile Include="..\..\src\request_thread.c" />
