@@ -2,6 +2,9 @@
 #include "DebugScene.h"
 
 #include "AnimationMetadata.h"
+#include "GameUnit.h"
+#include "Unit.h"
+#include <Expression.h>
 #include "Button.h"
 
 #include "raylib.h"
@@ -10,6 +13,10 @@ Texture2D buttonTex;
 DrawableButton button;
 
 AnimatedButton button2;
+
+GameUnit gameUnit;
+
+Expression expression;
 
 static void OnClick(DrawableButton* owner) {
     TraceLog(LOG_INFO, "Click!");
@@ -44,6 +51,16 @@ void DebugScene_Init(void)
 
     AnimatedButton_AddClickEvents(&button2, OnClick);
     AnimatedButton_AddHoverEvents(&button2, OnHoverBegin, OnHoverEnd);
+
+    GameUnit_Init(&gameUnit, BARBARIAN);
+    Unit_ChangeAction(&gameUnit.Unit, GAMEUNIT_ACTION_ATTACK);
+    
+    // Position
+    *gameUnit.Position = (Vector2){ 150, 100 };
+    gameUnit.Unit.Animation.Order = ANIMATION_ORDER_FORWARD_AND_BACK;
+
+    Expression_Init(&expression, EXPRESSION_CURIOUS);
+    *expression.Position = (Vector2){ 200, 100 };
 }
 
 void DebugScene_Unload(void)
@@ -54,6 +71,13 @@ void DebugScene_Update(void)
 {
     DrawableButton_Update(&button);
     AnimatedButton_Update(&button2);
+
+    GameUnit_Update(&gameUnit);
+    Expression_Update(&expression);
+
+    if (IsKeyPressed(KEY_A)) {
+        Expression_Change(&expression, (Expression_Type)((expression.Type + 1) % 8));
+    }
 }
 
 void DebugScene_Draw(void)
@@ -63,6 +87,9 @@ void DebugScene_Draw(void)
    
     DrawableButton_Draw(&button);
     AnimatedButton_Draw(&button2);
+
+    GameUnit_Draw(&gameUnit);
+    Expression_Draw(&expression);
 
     EndDrawing();
 }
