@@ -165,6 +165,18 @@
     <ClInclude Include="..\..\include\Unit.h">
       <Filter>Header Files\Scene\Game\Unit</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\Building.h">
+      <Filter>Header Files\Scene\Game\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\DrawableMetadata.h">
+      <Filter>Header Files\Metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\BuildingMetadata.h">
+      <Filter>Header Files\Metadata</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\BuildingHologram.h">
+      <Filter>Header Files\Scene\Game\Unit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\main.c">
@@ -253,6 +265,18 @@
     </ClCompile>
     <ClCompile Include="..\..\src\MathUtils.c">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Building.c">
+      <Filter>Source Files\Scene\Game\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\DrawableMetadata.c">
+      <Filter>Source Files\Metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\BuildingMetadata.c">
+      <Filter>Source Files\Metadata</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\BuildingHologram.c">
+      <Filter>Source Files\Scene\Game\Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

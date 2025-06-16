@@ -577,8 +577,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Animation.h" />
+    <ClInclude Include="..\..\include\Building.h" />
+    <ClInclude Include="..\..\include\BuildingHologram.h" />
+    <ClInclude Include="..\..\include\BuildingMetadata.h" />
     <ClInclude Include="..\..\include\Button.h" />
     <ClInclude Include="..\..\include\DebugScene.h" />
+    <ClInclude Include="..\..\include\DrawableMetadata.h" />
     <ClInclude Include="..\..\include\Expression.h" />
     <ClInclude Include="..\..\include\GameCamera.h" />
     <ClInclude Include="..\..\include\GameInputManager.h" />
@@ -611,8 +615,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\src\Animation.c" />
     <ClCompile Include="..\..\src\Barbarian.c" />
+    <ClCompile Include="..\..\src\Building.c" />
+    <ClCompile Include="..\..\src\BuildingHologram.c" />
+    <ClCompile Include="..\..\src\BuildingMetadata.c" />
     <ClCompile Include="..\..\src\Button.c" />
     <ClCompile Include="..\..\src\DebugScene.c" />
+    <ClCompile Include="..\..\src\DrawableMetadata.c" />
     <ClCompile Include="..\..\src\Expression.c" />
     <ClCompile Include="..\..\src\GameCamera.c" />
     <ClCompile Include="..\..\src\Drawable.c" />

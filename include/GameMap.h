@@ -7,16 +7,14 @@
 #include "raylib.h"
 
 #include <stdbool.h>
-
-#define MAP_WIDTH 20
-#define MAP_HEIGHT 20
+#include <Constants.h>
 
 typedef struct GameMap_TileOccupancy {
     List* Unit_OnThisTile;
     bool isWalkable;
 } GameMap; // Alias
 
-extern GameMap UnitGrid[MAP_WIDTH][MAP_HEIGHT];
+extern GameMap UnitGrid[CONSTANTS_MAP_WIDTH][CONSTANTS_MAP_HEIGHT];
 
 void GameMap_Init(void);
 void GameMap_Unload(void);

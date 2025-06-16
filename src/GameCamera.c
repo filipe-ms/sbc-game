@@ -1,7 +1,6 @@
 // File: GameCamera.c
 #include "GameCamera.h"
 
-#include "GameMap.h"
 #include "Constants.h"
 
 #include "raylib.h"
@@ -21,8 +20,8 @@ void GameCamera_Init(void)
 	};
 }
 
-static inline float GetCameraMaxX(void) { return (float)(MAP_WIDTH * CONSTANTS_TILE_SIZE_F) - GetScreenWidth(); }
-static inline float GetCameraMaxY(void) { return (float)(MAP_HEIGHT * CONSTANTS_TILE_SIZE_F) - GetScreenHeight(); }
+static inline float GetCameraMaxX(void) { return (float)(CONSTANTS_MAP_WIDTH * CONSTANTS_TILE_SIZE_F) - GetScreenWidth(); }
+static inline float GetCameraMaxY(void) { return (float)(CONSTANTS_MAP_HEIGHT * CONSTANTS_TILE_SIZE_F) - GetScreenHeight(); }
 
 void GameCamera_Update(void) {
 

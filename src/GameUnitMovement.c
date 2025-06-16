@@ -83,8 +83,8 @@ static Vector2 GetGameGridToWorld(Vector2 gridPos) {
 
 // TODO: Essa função se encaixa melhor no Map.
 static bool IsValidGridPosition(Vector2 pos) {
-	if (pos.x >= 0 && pos.x < MAP_WIDTH && 
-		pos.y >= 0 && pos.y < MAP_HEIGHT) {
+	if (pos.x >= 0 && pos.x < CONSTANTS_MAP_WIDTH && 
+		pos.y >= 0 && pos.y < CONSTANTS_MAP_HEIGHT) {
 		return UnitGrid[(int)pos.x][(int)pos.y].isWalkable;
 	}
 	return false;

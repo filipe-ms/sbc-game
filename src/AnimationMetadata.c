@@ -14,15 +14,32 @@ static void AnimatedButton_BloodMetadataLoad(void);
 static void GameUnit_BarbarianMetadataLoad(void);
 static void Expressions_MetadataLoad(void);
 
+// Barbarian
 static Texture2D barbarian_idle_texture;
 static Texture2D barbarian_walk_texture;
 static Texture2D barbarian_attack_texture;
 static Texture2D barbarian_faint_texture;
 
 Animation* Barbarian = NULL;
+
 UnitAnimationMetadata UnitAnimationmetadata[1];
 
+// Expression
+static Texture2D expression_angry_texture;
+static Texture2D expression_curious_texture;
+static Texture2D expression_yes_texture;
+static Texture2D expression_happy_texutre;
+static Texture2D expression_nervous_texture;
+static Texture2D expression_sad_texture;
+static Texture2D expression_surprised_texture;
+static Texture2D expression_thinking_texture;
+
+Animation AnimationMetadata_ExpressionMetadata[8] = { 0 };
+
+// Buttons
 static Texture2D AnimatedButton_Blood_Texture;
+
+Animation* Blood = NULL;
 
 // Public
 Animation* AnimationMetadata_GetMetadataByAnimationMetadataType(Unit_Type type)
@@ -34,8 +51,6 @@ Animation* AnimationMetadata_GetMetadataByAnimationMetadataType(Unit_Type type)
 
     return NULL;
 }
-
-Animation* Blood = NULL;
 
 Animation* AnimationMetadata_GetMetadataByAnimatedButtonType(AnimatedButton_Type type) {
     switch (type) {
@@ -68,17 +83,6 @@ void AnimationMetadata_Unload(void) {
     UnloadTexture(AnimatedButton_Blood_Texture);
     free(Blood);
 }
-
-static Texture2D expression_angry_texture;
-static Texture2D expression_curious_texture;
-static Texture2D expression_yes_texture;
-static Texture2D expression_happy_texutre;
-static Texture2D expression_nervous_texture;
-static Texture2D expression_sad_texture;
-static Texture2D expression_surprised_texture;
-static Texture2D expression_thinking_texture;
-
-Animation AnimationMetadata_ExpressionMetadata[8] = { 0 };
 
 Animation* AnimationMetadata_GetMetadataByAnimatedExpressionType(Expression_Type type) {
     return &AnimationMetadata_ExpressionMetadata[type];
@@ -181,4 +185,3 @@ static void GameUnit_BarbarianMetadataLoad(void) {
     Barbarian[14] = Animation_Build(0.15f, 8, 11, barbFaintDrawable);
     Barbarian[15] = Animation_Build(0.15f, 12, 15, barbFaintDrawable);
 }
-

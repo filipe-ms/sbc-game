@@ -8,6 +8,8 @@
 #include "Button.h"
 
 #include "raylib.h"
+#include <Building.h>
+#include "DrawableMetadata.h"
 
 Texture2D buttonTex;
 DrawableButton button;
@@ -17,6 +19,8 @@ AnimatedButton button2;
 GameUnit gameUnit;
 
 Expression expression;
+
+Building building;
 
 static void OnClick(DrawableButton* owner) {
     TraceLog(LOG_INFO, "Click!");
@@ -61,10 +65,16 @@ void DebugScene_Init(void)
 
     Expression_Init(&expression, EXPRESSION_CURIOUS);
     *expression.Position = (Vector2){ 200, 100 };
+
+    // Home
+    BuildingMetadata_Load();
+    Building_Init(&building, BUILDING_TYPE_TOWN_HALL);
 }
 
 void DebugScene_Unload(void)
 {
+    AnimationMetadata_Unload();
+    BuildingMetadata_Unload();
 }
 
 void DebugScene_Update(void)
@@ -78,6 +88,8 @@ void DebugScene_Update(void)
     if (IsKeyPressed(KEY_A)) {
         Expression_Change(&expression, (Expression_Type)((expression.Type + 1) % 8));
     }
+
+    Building_Update(&building);
 }
 
 void DebugScene_Draw(void)
@@ -90,6 +102,8 @@ void DebugScene_Draw(void)
 
     GameUnit_Draw(&gameUnit);
     Expression_Draw(&expression);
+
+    Building_Draw(&building);
 
     EndDrawing();
 }

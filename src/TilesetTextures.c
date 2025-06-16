@@ -10,6 +10,9 @@ Drawable FieldGrassVariants[18];
 Drawable CleanGrassVariants[18];
 Drawable FieldRockVariants[10];
 
+Drawable Buildings[10];
+
+
 static Rectangle GetFieldFloorVariantHelper(int variant, int floortype) {
 	int offset = 192 * floortype;
 
