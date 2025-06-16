@@ -18,16 +18,18 @@ static const Color HOLOGRAM_INTENSITY_RANGE = {
 	.a = 25,
 };
 
-static const int HOLOGRAM_INTENSITY = 125;
-
-static void UpdateSnappedPosition(BuildingHologram* buildingHologram) {
+static void UpdatePosition(BuildingHologram* buildingHologram) {
 	Vector2 mousepos = GameInputManager_GetMouseToWorld2D();
 	Vector2 gridpos = GameInputManager_ConvertToGridSnapInputCoordinate(mousepos);
 
 	*buildingHologram->Position = gridpos;
 }
 
-static void UpdateImageGrid(BuildingHologram* buildingHologram) {
+static void UpdateBuildCommands() {
+
+}
+
+static void UpdateTransparencyEffect(BuildingHologram* buildingHologram) {
 	buildingHologram->ElapsedTime = fmod(buildingHologram->ElapsedTime + GetFrameTime() * PI, 2.0f * PI);
 	buildingHologram->Color->r = HOLOGRAM_GREEN.r + HOLOGRAM_INTENSITY_RANGE.r * cosf(buildingHologram->ElapsedTime);
 	buildingHologram->Color->g = HOLOGRAM_GREEN.g + HOLOGRAM_INTENSITY_RANGE.g * cosf(buildingHologram->ElapsedTime);
@@ -45,9 +47,11 @@ void BuildingHologram_Init(BuildingHologram* buildingHologram, Building_Type typ
 void BuildingHologram_Update(BuildingHologram* buildingHologram) {
 	if (!buildingHologram->IsActive) return;
 
-	UpdateSnappedPosition(buildingHologram);
-	UpdateImageGrid(buildingHologram);
+	UpdatePosition(buildingHologram);
+	UpdateTransparencyEffect(buildingHologram);
 	
+	UpdateBuildCommands(buildingHologram);
+
 	Building_Update(&buildingHologram->Building);
 }
 
