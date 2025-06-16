@@ -5,6 +5,7 @@
 #include "Constants.h"
 
 #include "raylib.h"
+#include "raymath.h"
 
 Camera2D GameCamera;
 
@@ -37,6 +38,6 @@ void GameCamera_Update(void) {
 	if (IsKeyDown(KEY_S)) update_y += displacement;
 	if (IsKeyDown(KEY_D)) update_x += displacement;
 
-	if (update_x >= 0 && update_x <= GetCameraMaxX()) GameCamera.target.x = update_x;
-	if (update_y >= 0 && update_y <= GetCameraMaxY()) GameCamera.target.y = update_y;
+	GameCamera.target.x = Clamp(update_x, 0, GetCameraMaxX());
+	GameCamera.target.y = Clamp(update_y, 0, GetCameraMaxY());
 }

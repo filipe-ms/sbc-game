@@ -70,6 +70,12 @@
     <Filter Include="Source Files\Scene\Game\Expression">
       <UniqueIdentifier>{5e5bebbc-6c8a-4ec8-a782-6c8fa49835e0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scene\Game\UI">
+      <UniqueIdentifier>{03c205a5-9df4-470f-b759-aabf36ad538c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Game\UI">
+      <UniqueIdentifier>{ada881af-197c-4800-bf2f-0fdfcf65d4bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Constants.h">
@@ -132,9 +138,6 @@
     <ClInclude Include="..\..\include\GameCamera.h">
       <Filter>Header Files\Scene\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\GameUI.h">
-      <Filter>Header Files\Scene\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\GameInputManager.h">
       <Filter>Header Files\Scene\Game</Filter>
     </ClInclude>
@@ -164,6 +167,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\Unit.h">
       <Filter>Header Files\Scene\Game\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GameUI.h">
+      <Filter>Header Files\Scene\Game\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\MiniMap.h">
+      <Filter>Header Files\Scene\Game\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -218,9 +227,6 @@
     <ClCompile Include="..\..\src\GameCamera.c">
       <Filter>Source Files\Scene\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\GameUI.c">
-      <Filter>Source Files\Scene\Game</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\GameInputManager.c">
       <Filter>Source Files\Scene\Game</Filter>
     </ClCompile>
@@ -253,6 +259,12 @@
     </ClCompile>
     <ClCompile Include="..\..\src\MathUtils.c">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GameUI.c">
+      <Filter>Source Files\Scene\Game\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MiniMap.c">
+      <Filter>Source Files\Scene\Game\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
